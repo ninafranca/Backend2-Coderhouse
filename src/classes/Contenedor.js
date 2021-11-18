@@ -1,6 +1,6 @@
 const fs = require('fs')
 const makeId = require('../utils/utils')
-const appRoot = require('app-root-path');
+const appRoot = require('app-root-path')
 
 class Contenedor {
 
@@ -8,15 +8,15 @@ class Contenedor {
         this.fileName = `${appRoot}/files/${fileName}`
     }
 
-    save({title, price, thumbnail}) {
+    save({object}) {
         return new Promise(async (resolve, reject) => {
             const dataObj = {
-                id: makeId(4), title, price, thumbnail
+                id: makeId(4), title: object.title, price: object.price, thumbnail: object.thumbnail
             }
             try {
                 const content = await fs.promises.readFile(this.fileName, 'utf-8')
                 const parsedContent = JSON.parse(content)
-                if(parsedContent.find(obj => obj.title === title) !== undefined) {
+                if(parsedContent.find(obj => obj.title === object.title) !== undefined) {
                     return {status: "error", message: "El objeto ya existe"}
                 } else {
                     const objects = [...parsedContent, dataObj]
@@ -113,4 +113,4 @@ class Contenedor {
 
 }
 
-module.exports = Contenedor;
+module.exports = Contenedor
