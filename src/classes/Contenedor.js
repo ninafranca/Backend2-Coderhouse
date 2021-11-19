@@ -8,14 +8,13 @@ class Contenedor {
         this.fileName = `${appRoot}/files/${fileName}`
     }
 
-    save({object}) {
-        return new Promise(async (resolve, reject) => {
-            const dataObj = {
-                id: makeId(4), title: object.title, price: object.price, thumbnail: object.thumbnail
-            }
+    async save({object}) {
             try {
-                const content = await fs.promises.readFile(this.fileName, 'utf-8')
+                const content = await fs.readFile(this.fileName, 'utf-8')
                 const parsedContent = JSON.parse(content)
+                const dataObj = {
+                    id: parsedContent.length, title: object.title, price: object.price, thumbnail: object.thumbnail
+                }
                 if(parsedContent.find(obj => obj.title === object.title) !== undefined) {
                     return {status: "error", message: "El objeto ya existe"}
                 } else {
@@ -35,24 +34,22 @@ class Contenedor {
                     reject(error)
                 }
             }
-        })
+        
     }
 
-    writeFile(object){
-        return new Promise ( async(resolve, reject) => {
-            try{
-                object = JSON.stringify(object, null, 2);
-                await fs.promises.writeFile(this.fileName, object)
-                resolve({status:"success",message:"Objeto creado", object})
-            } catch(error) {
-                reject({status: "error", message: "No se pudo crear el objeto: " + error})
-            }
-        })
+    async writeFile(object){
+        try{
+            object = JSON.stringify(object, null, 2);
+            await fs.writeFile(this.fileName, object)
+            resolve({status:"success",message:"Objeto creado", object})
+        } catch(error) {
+            reject({status: "error", message: "No se pudo crear el objeto: " + error})
+        }
     }
 
     async getById(id) {
         try {
-            let data =  await fs.promises.readFile(this.fileName,'utf-8')
+            let data =  await fs.readFile(this.fileName,'utf-8')
             let objects = JSON.parse(data);
             let object = objects.find(obj => obj.id === id);
             if(object) {
@@ -68,7 +65,7 @@ class Contenedor {
 
     async getAll() {
         try {
-            let data = await fs.promises.readFile(this.fileName, "utf-8")
+            let data = await fs.readFile(this.fileName, "utf-8")
             let objects = JSON.parse(data)
             if(objects !== []) {
                 console.log("Get All: ",  objects)
@@ -83,13 +80,13 @@ class Contenedor {
 
     async deleteById(id) {
         try {
-            let data =  await fs.promises.readFile(this.fileName,'utf-8')
+            let data =  await fs.readFile(this.fileName,'utf-8')
             let objects = JSON.parse(data);
             let object = objects.find(obj => obj.id === id)
             if(object) {
                 let deleteObject = objects.filter(objects => objects.id !== id)
                 objects = [...deleteObject]
-                await fs.promises.writeFile(this.fileName, JSON.stringify([deleteObject], null, 2))
+                await fs.writeFile(this.fileName, JSON.stringify([deleteObject], null, 2))
                 console.log("Delete By ID: ", objects)
                 return objects
             } else {
@@ -103,7 +100,7 @@ class Contenedor {
     async deleteAll() {
         try {
             objects = ""
-            await fs.promises.writeFile(this.fileName, [objects])
+            await fs.writeFile(this.fileName, [objects])
             console.log("Delete All: ", objects)
             return objects
         } catch(err) {
