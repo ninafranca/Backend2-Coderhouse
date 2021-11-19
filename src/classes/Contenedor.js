@@ -1,6 +1,7 @@
 const fs = require('fs')
 const makeId = require('../utils/utils')
 const appRoot = require('app-root-path')
+const { json } = require('express')
 
 class Contenedor {
 
@@ -13,7 +14,7 @@ class Contenedor {
                 const content = await fs.readFile(this.fileName, 'utf-8')
                 const parsedContent = JSON.parse(content)
                 const dataObj = {
-                    id: parsedContent.length, title: object.title, price: object.price, thumbnail: object.thumbnail
+                    id: parsedContent.length + 1, title: object.title, price: object.price, thumbnail: object.thumbnail
                 }
                 if(parsedContent.find(obj => obj.title === object.title) !== undefined) {
                     return {status: "error", message: "El objeto ya existe"}
@@ -21,29 +22,49 @@ class Contenedor {
                     const objects = [...parsedContent, dataObj]
                     try {
                         const output = await this.writeFile(objects);
-                        resolve(output);
+                        return output;
                     } catch(error) {
-                        reject(error)
+                        return {status: "error", message: "No se pudo crear el objeto"}
                     }
                 }
             } catch (error) {
                 try {
                     const output = await this.writeFile([dataObj])
-                    resolve(output);
+                    return output;
                 } catch(error) {
-                    reject(error)
+                    return {status: "error", message: "No se pudo crear el objeto"}
                 }
             }
         
     }
 
-    async writeFile(object){
-        try{
+    async writeFile(object) {
+        try {
             object = JSON.stringify(object, null, 2);
             await fs.writeFile(this.fileName, object)
-            resolve({status:"success",message:"Objeto creado", object})
+            return({status:"success",message:"Objeto creado", object})
         } catch(error) {
-            reject({status: "error", message: "No se pudo crear el objeto: " + error})
+            return({status: "error", message: "No se pudo crear el objeto: " + error})
+        }
+    }
+
+    async updateObjects(object) {
+        try {
+            const content = await fs.readFile(this.file, "utf-8")
+            const parsedContent = JSON.parse(content)
+            const newObject = parsedContent.find(obj => obj.id === id)
+            if(newObject) {
+                newObject = {
+                    ...newObject,
+                    title: object.title,
+                    price: object.price,
+                    thumbnail: object.thumbnail
+                }
+                const products = parsedContent.find(obj => obj.id !== id)
+                products = [...products, newObject]
+            }
+        } catch(error) {
+            return {status: "error", message: "No se pudo sobreescribir el producto"}
         }
     }
 
@@ -67,7 +88,7 @@ class Contenedor {
         try {
             let data = await fs.readFile(this.fileName, "utf-8")
             let objects = JSON.parse(data)
-            if(objects !== []) {
+            if(objects.length > 0) {
                 console.log("Get All: ",  objects)
                 return objects
             } else {

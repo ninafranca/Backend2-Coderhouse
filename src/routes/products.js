@@ -1,16 +1,16 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
-const Contenedor = require('../classes/Contenedor')
+const Contenedor = require('../classes/Contenedor');
 const contenedor  = new Contenedor();
 
 //GETS
-router.get('/',(req,res)=>{
+router.get('/', (req, res) => {
     contenedor.getAll().then(result => {
         res.send(result);
     })
 })
 
-router.get('/:uid',(req,res)=>{
+router.get('/:uid', (req, res)=>{
     let id= parseInt(req.params.uid);
     contenedor.getById(id).then(result => {
         res.send(result);
@@ -18,25 +18,25 @@ router.get('/:uid',(req,res)=>{
 })
 
 //POST
-router.post('/',(req,res)=>{
+router.post('/', (req, res) => {
     let prod = req.body;
     console.log(prod);
-    contenedor.save().then(result => {
+    contenedor.save(prod).then(result => {
         res.send(result);
     })
 })
 
 //PUT
-router.put('/:uid',(req,res)=>{
+router.put('/:uid', (req, res) => {
     let body = req.body;
     let id = parseInt(req.params.uid);
-    contenedor.updateUser(id,body).then(result => {
+    contenedor.updateUser(id, body).then(result => {
         res.send(result);
     })
 })
 
 //DELETE
-router.delete('/:uid',(req,res) => {
+router.delete('/:uid', (req, res) => {
     let id= parseInt(req.params.uid);
     contenedor.deleteById(id).then(result => {
         res.send(result);
