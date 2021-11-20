@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
 router.put('/:uid', (req, res) => {
     let body = req.body;
     let id = parseInt(req.params.uid);
-    contenedor.updateUser(id, body).then(result => {
+    contenedor.updateObject(id, body).then(result => {
         res.send(result);
     })
 })
