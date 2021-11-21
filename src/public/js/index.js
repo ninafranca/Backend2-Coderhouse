@@ -1,11 +1,10 @@
-document.addEventListener("submit", sendForm(e));
+document.addEventListener("submit", sendForm);
 
 function sendForm(e) {
     e.preventDefault();
-    let form = document.getElementById("product-form");
+    let form = document.querySelector("#product-form");
     let data = new FormData(form);
-    console.log("Form")
-    fetch('http://localhost:8080/api/products',{
+    fetch("http://localhost:8080/api/products", {
         method: "POST",
         body: data
     })
