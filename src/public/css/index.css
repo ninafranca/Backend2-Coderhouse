@@ -5,6 +5,9 @@ form {
     justify-content: space-between;
     padding-top: 2%;
 }
+form>h1 {
+    padding-bottom: 1%;
+}
 
 form>div {
     display: flex;
@@ -12,7 +15,7 @@ form>div {
 }
 
 form>div>label {
-    font-size: 240%;
+    font-size: 220%;
     margin-left: -25%;
     color: rgb(88, 87, 87);
 }
@@ -32,6 +35,6 @@ form>div>input {
 
 .botones>button {
     font-size: 130%;
-    padding: 6% 60% 6% 60%;
+    padding: 3% 60% 3% 60%;
     margin: 0 25% 0 25%;
 }

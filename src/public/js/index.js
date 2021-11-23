@@ -6,7 +6,8 @@ function sendForm(e) {
     let data = new FormData(form);
     fetch("http://localhost:8080/api/products", {
         method: "POST",
-        body: data
+        body: JSON.stringify(data),
+        headers: {"Content-type": "application/json"}
     })
     .then(result => {
         console.log(data);
