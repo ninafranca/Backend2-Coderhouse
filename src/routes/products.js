@@ -1,6 +1,6 @@
-const express = require('express');
+import express from "express";
 const router = express.Router();
-const Contenedor = require('../classes/Contenedor');
+import Contenedor from "../classes/Contenedor.js"
 const contenedor  = new Contenedor();
 
 //GETS
@@ -43,4 +43,4 @@ router.delete('/:uid', (req, res) => {
     })
 })
 
-module.exports = router
+export default router;
