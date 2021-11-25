@@ -60,33 +60,36 @@ class Contenedor {
       }
     }
   
-    async updateObject (id, product) {
-      try {
-        if (!id || Object.keys(product).length === 0) throw new Error('Missing or empty \'id\' or body parameter!')
-        const readFile = await fs.promises.readFile(this.fileLocation, 'utf-8')
-        if (!readFile) throw new Error('The document is empty!')
-        let products = JSON.parse(readFile)
-        const hasProduct = products.find(e => e.title === product.title)
-        if (hasProduct) throw new Error('The product already exists with the same name.')
-        let newProduct = products.find(e => e.id === id)
-        if (!newProduct) throw new Error('Product not found.')
-        products = products.filter(e => e.id !== id)
-  
-        newProduct = {
-          ...newProduct,
-          title: product.title,
-          price: product.price,
-          thumbnail: product.thumbnail
-        }
-  
-        products = [...products, newProduct]
-        await fs.promises.writeFile(this.fileLocation, JSON.stringify(products))
-        return { status: 'success', message: 'Product updated successfully.' }
-      } catch (err) {
-        console.log(`Save file error: ${err.message}`)
-        return { status: 'error', message: 'Save product error.' }
+    async updateObject(id, body) {
+      try{
+          let data = await fs.promises.readFile(this.fileLocation,'utf-8');
+          let prods = JSON.parse(data);
+          if(!prods.some(p => p.id === id)) return {status: "error", message: "No hay productos con el id especificado"}
+          let result = prods.map( prod => {
+              if(prod.id === id){
+                  if(prod) {
+                      body = Object.assign({id: prod.id, ...body});
+                      return body;
+                  }
+                  else {
+                      body = Object.assign({id: id, ...body})
+                      return body;
+                  }
+              } else {
+                  return prod;
+              }
+          })
+          try {
+              await fs.promises.writeFile(this.fileLocation, JSON.stringify(result, null, 2));
+              return {status: "success", message: "Producto actualizado"}
+          }catch{
+              return {status:"error", message:"Error al actualizar el producto"}
+          }
+      } catch(error) {
+          return {status: "error",message: "Fallo al actualizar el producto: " + error}
       }
-    }
+  }
+
   
     async deleteById (id) {
       try {
@@ -157,7 +160,7 @@ export default Contenedor;
         }
     }
 
-    async updateObject(object) {
+    async updateObject(id, object) {
         try {
             const content = await fs.promises.readFile(this.file, "utf-8")
             const parsedContent = JSON.parse(content)
