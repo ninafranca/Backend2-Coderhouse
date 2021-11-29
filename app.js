@@ -19,21 +19,21 @@ app.use(express.static('public'));
 
 //APP.ENGINE
 //Para Handlebars
-//app.engine("handlebars", engine());
+app.engine("handlebars", engine());
 
 //APP.SET
 app.set("views", "./src/views");
 //Para Handlebars
-//app.set("view engine", "handlebars");
+app.set("view engine", "handlebars");
 //Para PUG
 //app.set("view engine", "pug");
 //Para Ejs
-app.set("view engine", "ejs");
+//app.set("view engine", "ejs");
 
 //APP.GET
 
 //HANDLEBARS
-/*app.get("/productos", (req, res) => {
+app.get("/productos", (req, res) => {
     contenedor.getAll().then(result => {
         const products = result.payload;
         const objects = {products: products};
@@ -41,12 +41,13 @@ app.set("view engine", "ejs");
             res.render("Home", objects)
         } else {res.status(500).send(result)}
     })
-})*/
-
-//Prefiero usar Handlebars porque me parece el mas sencillo y con codigo mas limpio//
+})
+app.get("/", (req, res) => {
+    res.sendFile('index.html', {root: './src/public/html'});
+})
 
 //PUG Y EJS
-app.get("/productos", (req, res) => {
+/*app.get("/productos", (req, res) => {
     contenedor.getAll().then(result => {
         const products = result.payload;
         const objects = {products: products};
@@ -54,4 +55,6 @@ app.get("/productos", (req, res) => {
             res.render("products", objects)
         } else {res.status(500).send(result)}
     })
-})
+})*/
+
+//Prefiero usar Handlebars porque me parece el mas sencillo y con codigo mas limpio//
