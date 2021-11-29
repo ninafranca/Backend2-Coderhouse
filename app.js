@@ -1,12 +1,11 @@
 import express from 'express';
-//import Contenedor from "./src/classes/Contenedor.js";
+import Contenedor from "./src/classes/Contenedor.js";
 import productsRouter from "./src/routes/products.js";
-import fs from "fs";
 import {engine} from "express-handlebars";
 const app = express();
 import cors from "cors";
 const PORT = process.env.PORT || 8080;
-//const contenedor = new Contenedor();
+const contenedor = new Contenedor();
 const server = app.listen(PORT,() => {
     console.log("Listening on port: ", PORT)
 })
@@ -26,10 +25,15 @@ app.set("views", "./src/views");
 app.set("view engine", "handlebars");
 
 //APP.GET
-app.get("/productos", (req, res) => {
-    //let objects = JSON.parse(fs.promises.readFile("/files/objects.txt", "utf-8"));
-    let renderObjects = {
-        arrayObjects: objects
-    }
-    res.render("Home", renderObjects)
+app.get("/", (req, res) => {
+    //res.render("/html/index.js")
+})
+app.get("/views/productos", (req, res) => {
+    contenedor.getAll().then(result => {
+        const products = result.payload;
+        const objects = {products: products};
+        if (result.status === "success") {
+            res.render("Home", objects)
+        } else {res.status(500).send(result)}
+    })
 })

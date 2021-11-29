@@ -1,12 +1,17 @@
 <h1>Productos</h1>
-<ul>
-    {{#each arrayObjects}}
-    <li>
-        <p>
-            {{this.title}}<br>
-            {{this.price}}<br> 
-        </p>
-        <img src="{{this.thumbnail}}" alt="Product image">
-    </li>
-    {{/each}}
-</ul>
+<div>
+    {{#if products}}
+        {{#each products}}
+            <div>
+                <h2>Producto</h2>
+                <p>{{this.title}}</p>
+                <h2>Precio</h2>
+                <p>${{this.price}}</p>
+                <h2>Foto</h2>
+                <img src="{{this.thumbnail}}" alt="Product image">
+            </div>
+        {{/each}}
+    {{else}}
+        <h2>No hay productos</h2>
+    {{/if}}
+</div>

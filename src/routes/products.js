@@ -12,7 +12,6 @@ router.get('/', (req, res) => {
 
 router.get('/:uid', (req, res)=>{
     let id= parseInt(req.params.uid);
-    console.log("La pifiamos")
     contenedor.getById(id).then(result => {
         res.send(result);
     })
