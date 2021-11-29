@@ -1,0 +1,13 @@
+html
+    head
+        title="Productos"
+    body 
+        h1="Productos"
+        if products 
+            each p in products 
+                div 
+                    h2=p.title 
+                    h2=p.price 
+                    img(src=p.thumbnail)
+        else 
+            h2="No hay productos"

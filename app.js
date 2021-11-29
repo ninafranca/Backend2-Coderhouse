@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { application } from 'express';
 import Contenedor from "./src/classes/Contenedor.js";
 import productsRouter from "./src/routes/products.js";
 import {engine} from "express-handlebars";
@@ -18,22 +18,40 @@ app.use('/api/products', productsRouter);
 app.use(express.static('public'));
 
 //APP.ENGINE
-app.engine("handlebars", engine());
+//Para Handlebars
+//app.engine("handlebars", engine());
 
 //APP.SET
 app.set("views", "./src/views");
-app.set("view engine", "handlebars");
+//Para Handlebars
+//app.set("view engine", "handlebars");
+//Para PUG
+//app.set("view engine", "pug");
+//Para Ejs
+app.set("view engine", "ejs");
 
 //APP.GET
-app.get("/", (req, res) => {
-    //res.render("/html/index.js")
-})
-app.get("/views/productos", (req, res) => {
+
+//HANDLEBARS
+/*app.get("/productos", (req, res) => {
     contenedor.getAll().then(result => {
         const products = result.payload;
         const objects = {products: products};
         if (result.status === "success") {
             res.render("Home", objects)
+        } else {res.status(500).send(result)}
+    })
+})*/
+
+//Prefiero usar Handlebars porque me parece el mas sencillo y con codigo mas limpio//
+
+//PUG Y EJS
+app.get("/productos", (req, res) => {
+    contenedor.getAll().then(result => {
+        const products = result.payload;
+        const objects = {products: products};
+        if (result.status === "success") {
+            res.render("products", objects)
         } else {res.status(500).send(result)}
     })
 })
