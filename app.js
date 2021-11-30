@@ -1,7 +1,7 @@
-import express, { application } from 'express';
+import express from 'express';
 import Contenedor from "./src/classes/Contenedor.js";
 import productsRouter from "./src/routes/products.js";
-import {engine} from "express-handlebars";
+import {engine} from "express-handlebars"
 const app = express();
 import cors from "cors";
 const PORT = process.env.PORT || 8080;

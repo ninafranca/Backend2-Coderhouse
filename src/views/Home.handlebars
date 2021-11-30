@@ -3,11 +3,8 @@
     {{#if products}}
         {{#each products}}
             <div>
-                <h2>Producto</h2>
-                <p>{{this.title}}</p>
-                <h2>Precio</h2>
-                <p>${{this.price}}</p>
-                <h2>Foto</h2>
+                <h2>{{this.title}}</h2>
+                <h2>Precio ${{this.price}}</h2>
                 <img src="{{this.thumbnail}}" alt="Product image">
             </div>
         {{/each}}

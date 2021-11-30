@@ -1,6 +1,4 @@
 import fs from "fs";
-//const makeId = require('../utils/utils')
-//import appRoot from "app-root-path"
 
 class Contenedor {
     constructor () {
