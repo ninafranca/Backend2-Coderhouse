@@ -1,4 +1,5 @@
-import fs from "fs";
+const fs = require("fs");
+//import fs from "fs";
 
 class Contenedor {
     constructor () {
@@ -111,8 +112,8 @@ class Contenedor {
     }
   }
   
-
-export default Contenedor;
+module.exports = Contenedor;
+//export default Contenedor;
 
 /*class Contenedor {
 

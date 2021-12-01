@@ -1,14 +1,21 @@
-import express from 'express';
+const express = require("express");
+const Contenedor = require("./src/classes/Contenedor");
+const productsRouter = require("./src/routes/products");
+const {engine} = require("express-handlebars");
+const cors = require("cors");
+/*import express from 'express';
 import Contenedor from "./src/classes/Contenedor.js";
 import productsRouter from "./src/routes/products.js";
-import {engine} from "express-handlebars"
-const app = express();
 import cors from "cors";
+import {engine} from "express-handlebars"*/
+const app = express();
 const PORT = process.env.PORT || 8080;
 const contenedor = new Contenedor();
+const {Server} = require("socket.io");
 const server = app.listen(PORT,() => {
     console.log("Listening on port: ", PORT)
 })
+const io = new Server(server);
 
 //APP.USE
 app.use(express.json());
@@ -58,3 +65,17 @@ app.get("/", (req, res) => {
 })*/
 
 //Prefiero usar Handlebars porque me parece el mas sencillo y con codigo mas limpio//
+
+let messages = [];
+
+//CON EL SERVIDOR, CUANDO SE CONECTE EL SOCKET, HACE LO SIGUIENTE => {}
+io.on("connection", socket => {
+    console.log("Se conectó un cliente");
+    socket.emit("messagelog", messages)
+    socket.emit("welcome", {message: "Bienvenido a mi servidor"});
+    socket.on("message", data => {
+        //console.log(data)
+        messages.push(data);
+        io.emit("messagelog", messages)
+    })
+})
