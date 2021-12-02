@@ -3,7 +3,7 @@ const fs = require("fs");
 
 class Contenedor {
     constructor () {
-      this.fileLocation = "src/files/objects.txt"
+      this.fileLocation = "./files/objects.txt"
     }
   
     async getAll () {
@@ -38,20 +38,20 @@ class Contenedor {
         const readFile = await fs.promises.readFile(this.fileLocation, 'utf-8')
         let products = []
         let id = 1
-  
+
         if (readFile) {
           products = JSON.parse(readFile)
           const ids = products.map(product => product.id)
           const maxId = Math.max(...ids)
           id = maxId + 1
           const hasProduct = products.find(e => e.title === product.title)
-          if (hasProduct) throw new Error('The product already exists with the same name.')
+          if (hasProduct) throw new Error('El producto ya existe')
         }
   
         product.id = id
         products = [...products, product]
   
-        await fs.promises.writeFile(this.fileLocation, JSON.stringify(products))
+        await fs.promises.writeFile(this.fileLocation, JSON.stringify(products, null, 2))
         return { status: 'success', payload: product }
       } catch (err) {
         console.log(`Save file error: ${err.message}`)
@@ -103,7 +103,7 @@ class Contenedor {
         if (newProducts.length === 0) newProducts = ''
         else newProducts = JSON.stringify(newProducts)
   
-        await fs.promises.writeFile(this.fileLocation, newProducts)
+        await fs.promises.writeFile(this.fileLocation, JSON.stringify(newProducts, null, 2))
         return { status: 'success', message: 'Product deleted successfully.' }
       } catch (err) {
         console.log(`Save file error: ${err.message}`)

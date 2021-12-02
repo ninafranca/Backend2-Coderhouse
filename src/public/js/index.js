@@ -4,10 +4,10 @@ function sendForm(e) {
     e.preventDefault();
     let form = document.querySelector("#product-form");
     let data = new FormData(form);
-    let product = data.get("product");
+    let title = data.get("title");
     let price = data.get("price");
     let thumbnail = data.get("thumbnail");
-    let object = {product, price, thumbnail};
+    let object = {title, price, thumbnail};
     fetch("http://localhost:8080/api/products", {
         method: "POST",
         body: JSON.stringify(object),
@@ -15,6 +15,11 @@ function sendForm(e) {
     })
     .then(result => {
         console.log(object);
+        let sent = document.getElementById("sent");
+        let sentObject = `<h2 class="sent-object">Producto añadido con éxito</h2>`;
+        sent.innerHTML = sentObject;
+        let form = document.getElementById("product-form");
+        form.reset();
         return result.json();
     })
     .catch(() => {

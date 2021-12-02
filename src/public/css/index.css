@@ -15,13 +15,13 @@ form>div {
 }
 
 form>div>label {
-    font-size: 220%;
+    font-size: 200%;
     margin-left: -25%;
     color: rgb(88, 87, 87);
 }
 
 form>div>input {
-    font-size: 150%;
+    font-size: 140%;
     margin: 0 -25% 0 -25%;
     border-color: rgb(119, 119, 119);
 }
@@ -34,7 +34,19 @@ form>div>input {
 }
 
 .botones>button {
-    font-size: 130%;
-    padding: 3% 60% 3% 60%;
+    font-size: 120%;
+    padding: 2% 40% 2% 40%;
     margin: 0 25% 0 25%;
+}
+
+.sent-object {
+    text-align: center;
+    padding-top: 3%;
+}
+
+#chat {
+    padding-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

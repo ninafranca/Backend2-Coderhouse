@@ -18,7 +18,7 @@ socket.on("welcome", data => {
 socket.on("messagelog", data => {
     let p = document.getElementById("log");
     let mensajes = data.map(message => {
-        return `<div><span>${message.user} dice: ${message.message}</span></div>`
+        return `<div><span>${message.user} [${getDate()}] dice: ${message.message}</span></div>`
     }).join("");
     p.innerHTML = mensajes;
 })

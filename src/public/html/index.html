@@ -11,16 +11,16 @@
 <body>
     <form id="product-form" name="product-form">
         <div>
-            <label for="product">Producto</label>
-            <input type="text" name="product" placeholder="Nombre producto" class="border rounded shadow p-3 mb-5 bg-body" required>
+            <label for="title">Producto</label>
+            <input type="text" name="title" placeholder="Nombre producto" class="border rounded shadow mb-5 bg-body" required>
         </div>
         <div>
             <label for="price">Precio</label>
-            <input type="number" name="price" class="border rounded shadow p-3 mb-5 bg-body" required>
+            <input type="number" name="price" class="border rounded shadow mb-5 bg-body" required>
         </div>
         <div>
             <label for="thumbnail">Foto</label>
-            <input type="text" name="thumbnail" placeholder="URL foto" class="border rounded shadow p-3 mb-5 bg-body" required>
+            <input type="url" name="thumbnail" placeholder="URL foto" class="border rounded shadow mb-5 bg-body" required>
         </div>
         <div class="botones">
             <button type="reset" class="btn btn-secondary btn-lg">Borrar</button>
@@ -30,9 +30,25 @@
     <div>
         <div id="renderProducts"></div>
     </div>
-    <a href="/productos" onclick="location.href='/productos'" class="btn btn-secondary btn-lg">Ver productos</a>
+    <div id="sent"></div>
+
+    <div id="chat">
+        <h1>CHAT</h1>
+        <h2>e-mail</h2>
+        <input id="user" type="email">
+        <h2>mensaje</h2>
+        <div id="mensaje-enviar">
+            <input id="info">
+            <button>enviar</button>
+        </div>
+        <div>
+            <p id="log"></p>
+        </div>
+    </div>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="../js/index.js"></script>
+    <script src="/js/chat.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 </body>
 </html>

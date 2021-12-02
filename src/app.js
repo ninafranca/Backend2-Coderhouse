@@ -1,6 +1,6 @@
 const express = require("express");
-const Contenedor = require("./src/classes/Contenedor");
-const productsRouter = require("./src/routes/products");
+const Contenedor = require("./classes/Contenedor");
+const productsRouter = require("./routes/products");
 const {engine} = require("express-handlebars");
 const cors = require("cors");
 /*import express from 'express';
@@ -26,21 +26,27 @@ app.use(express.static('public'));
 
 //APP.ENGINE
 //Para Handlebars
-app.engine("handlebars", engine());
+//app.engine("handlebars", engine());
 
 //APP.SET
-app.set("views", "./src/views");
+app.set("views", "./views");
 //Para Handlebars
-app.set("view engine", "handlebars");
+//app.set("view engine", "handlebars");
 //Para PUG
 //app.set("view engine", "pug");
 //Para Ejs
-//app.set("view engine", "ejs");
+app.set("view engine", "ejs");
 
 //APP.GET
+app.get("/", (req, res) => {
+    res.sendFile('index.html', {root: './public/html'});
+})
+app.get("/chat", (req, res) => {
+    res.sendFile('chat.html', {root: './public/html'});
+})
 
 //HANDLEBARS
-app.get("/productos", (req, res) => {
+/*app.get("/productos", (req, res) => {
     contenedor.getAll().then(result => {
         const products = result.payload;
         const objects = {products: products};
@@ -48,13 +54,10 @@ app.get("/productos", (req, res) => {
             res.render("Home", objects)
         } else {res.status(500).send(result)}
     })
-})
-app.get("/", (req, res) => {
-    res.sendFile('index.html', {root: './src/public/html'});
-})
+})*/
 
 //PUG Y EJS
-/*app.get("/productos", (req, res) => {
+app.get("/productos", (req, res) => {
     contenedor.getAll().then(result => {
         const products = result.payload;
         const objects = {products: products};
@@ -62,9 +65,7 @@ app.get("/", (req, res) => {
             res.render("products", objects)
         } else {res.status(500).send(result)}
     })
-})*/
-
-//Prefiero usar Handlebars porque me parece el mas sencillo y con codigo mas limpio//
+})
 
 let messages = [];
 
@@ -79,3 +80,7 @@ io.on("connection", socket => {
         io.emit("messagelog", messages)
     })
 })
+
+
+
+//Prefiero usar Handlebars porque me parece el mas sencillo y con codigo mas limpio//
