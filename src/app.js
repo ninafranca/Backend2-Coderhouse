@@ -70,9 +70,9 @@ app.get("/productos", (req, res) => {
 let messages = [];
 
 //CON EL SERVIDOR, CUANDO SE CONECTE EL SOCKET, HACE LO SIGUIENTE => {}
-io.on("connection", socket => {
+io.on("connection", async socket => {
     console.log("Se conectó socket " + socket.id);
-    let products = contenedor.getAll();
+    let products = await contenedor.getAll();
     socket.emit("deliverProducts", products);
     socket.emit("welcome", {message: "Bienvenido a mi servidor"});
     socket.emit("messagelog", messages);
