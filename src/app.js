@@ -26,16 +26,16 @@ app.use(express.static('public'));
 
 //APP.ENGINE
 //Para Handlebars
-//app.engine("handlebars", engine());
+app.engine("handlebars", engine());
 
 //APP.SET
 app.set("views", "./views");
 //Para Handlebars
-//app.set("view engine", "handlebars");
+app.set("view engine", "handlebars");
 //Para PUG
 //app.set("view engine", "pug");
 //Para Ejs
-app.set("view engine", "ejs");
+//app.set("view engine", "ejs");
 
 //APP.GET
 app.get("/", (req, res) => {
@@ -46,7 +46,7 @@ app.get("/chat", (req, res) => {
 })
 
 //HANDLEBARS
-/*app.get("/productos", (req, res) => {
+app.get("/productos", (req, res) => {
     contenedor.getAll().then(result => {
         const products = result.payload;
         const objects = {products: products};
@@ -54,10 +54,10 @@ app.get("/chat", (req, res) => {
             res.render("Home", objects)
         } else {res.status(500).send(result)}
     })
-})*/
+})
 
 //PUG Y EJS
-app.get("/productos", (req, res) => {
+/*app.get("/productos", (req, res) => {
     contenedor.getAll().then(result => {
         const products = result.payload;
         const objects = {products: products};
@@ -65,22 +65,19 @@ app.get("/productos", (req, res) => {
             res.render("products", objects)
         } else {res.status(500).send(result)}
     })
-})
+})*/
 
 let messages = [];
 
 //CON EL SERVIDOR, CUANDO SE CONECTE EL SOCKET, HACE LO SIGUIENTE => {}
 io.on("connection", socket => {
-    console.log("Se conectó un cliente");
-    socket.emit("messagelog", messages)
+    console.log("Se conectó socket " + socket.id);
+    let products = contenedor.getAll();
+    socket.emit("deliverProducts", products);
     socket.emit("welcome", {message: "Bienvenido a mi servidor"});
+    socket.emit("messagelog", messages);
     socket.on("message", data => {
-        //console.log(data)
         messages.push(data);
         io.emit("messagelog", messages)
     })
 })
-
-
-
-//Prefiero usar Handlebars porque me parece el mas sencillo y con codigo mas limpio//

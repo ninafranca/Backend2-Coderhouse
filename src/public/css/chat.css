@@ -1,0 +1,38 @@
+/* CHAT STYLES */
+
+.chat {
+    padding-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user {
+    color: blue;
+    font-weight: bold;
+}
+
+.date {
+    color: rgb(119, 27, 27);
+}
+
+.message {
+    color: green;
+    font-style: italic;
+}
+
+#user {
+    width: 30%;
+    margin-bottom: 1.5%;
+}
+
+#info {
+    width: 30%;
+    padding-bottom: 5%;
+    margin-bottom: 2%;
+}
+
+#send-message {
+    margin-bottom: 2%;
+    padding: 0.2% 1.5%;
+}

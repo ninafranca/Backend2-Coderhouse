@@ -6,49 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nina Spinelli</title>
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/chat.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
     <form id="product-form" name="product-form">
         <div>
             <label for="title">Producto</label>
-            <input type="text" name="title" placeholder="Nombre producto" class="border rounded shadow mb-5 bg-body" required>
+            <input type="text" name="title" class="border rounded shadow mb-5 bg-body border-secondary" required>
         </div>
         <div>
             <label for="price">Precio</label>
-            <input type="number" name="price" class="border rounded shadow mb-5 bg-body" required>
+            <input type="number" name="price" class="border rounded shadow mb-5 bg-body border-secondary" required>
         </div>
         <div>
             <label for="thumbnail">Foto</label>
-            <input type="url" name="thumbnail" placeholder="URL foto" class="border rounded shadow mb-5 bg-body" required>
+            <input type="url" name="thumbnail" placeholder="URL foto" class="border rounded shadow mb-5 bg-body border-secondary" required>
         </div>
         <div class="botones">
             <button type="reset" class="btn btn-secondary btn-lg">Borrar</button>
             <button type="submit" id="submit-form" value="send" class="btn btn-secondary btn-lg">Enviar</button>
         </div>
     </form>
-    <div>
-        <div id="renderProducts"></div>
-    </div>
     <div id="sent"></div>
 
-    <div id="chat">
+    <div>
+        <div id="deliverProducts"></div>
+    </div>
+
+    <div class="chat">
         <h1>CHAT</h1>
         <h2>e-mail</h2>
-        <input id="user" type="email">
+        <input id="user" class="border rounded shadow mb-5 bg-body border-secondary" type="email">
         <h2>mensaje</h2>
-        <div id="mensaje-enviar">
-            <input id="info">
-            <button>enviar</button>
-        </div>
+        <input id="info" class="border rounded shadow mb-5 bg-body border-secondary">
+            <button class="btn btn-secondary btn-lg" id="send-message">enviar</button>
         <div>
             <p id="log"></p>
         </div>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script src="../js/index.js"></script>
-    <script src="/js/chat.js"></script>
+    <script src="../js/form.js"></script>
+    <script src="../js/chat.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 </body>
 </html>
