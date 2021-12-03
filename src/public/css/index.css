@@ -45,3 +45,19 @@ form>div>input {
     padding-top: 3%;
     color: rgb(88, 71, 136);
 }
+
+#title-productos {
+    padding: 3% 0% 1% 0%;
+    text-align: center;
+}
+
+.div-products {
+    display: flex;
+    justify-content: center;
+}
+
+.div-div-products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1%;
+}

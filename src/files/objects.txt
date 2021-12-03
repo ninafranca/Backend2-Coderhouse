@@ -70,5 +70,11 @@
     "price": "60",
     "thumbnail": "https://static9.depositphotos.com/1148595/1190/v/600/depositphotos_11908678-stock-illustration-eraser.jpg",
     "id": 14
+  },
+  {
+    "title": "Cuaderno",
+    "price": "400",
+    "thumbnail": "https://png.pngtree.com/png-vector/20190802/ourlarge/pngtree-notebook-icon-design-vector-png-image_1644865.jpg",
+    "id": 15
   }
 ]

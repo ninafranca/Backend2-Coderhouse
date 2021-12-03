@@ -19,9 +19,9 @@ enter.addEventListener("click", ()=> {
 })
 
 //CUANDO RECIBA EL WELCOME, CON LA DATA QUE ME HAYA PASADO, VOY A EJECUTAR X
-socket.on("welcome", data => {
+/*socket.on("welcome", data => {
     alert(data.message);
-});
+});*/
 socket.on("messagelog", data => {
     let p = document.getElementById("log");
     let date = new Date();
