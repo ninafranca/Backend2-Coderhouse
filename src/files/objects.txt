@@ -76,5 +76,11 @@
     "price": "400",
     "thumbnail": "https://png.pngtree.com/png-vector/20190802/ourlarge/pngtree-notebook-icon-design-vector-png-image_1644865.jpg",
     "id": 15
+  },
+  {
+    "title": "Lapicera",
+    "price": "580",
+    "thumbnail": "https://media.istockphoto.com/vectors/black-and-gold-pen-isolated-on-white-background-vector-business-icon-vector-id1199387145?k=20&m=1199387145&s=612x612&w=0&h=uC_ZYWm0QtQkqFPKTmkLkaG3oTNY3UyzIgRCSQmJxYo=",
+    "id": 16
   }
 ]

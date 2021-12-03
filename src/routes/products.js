@@ -2,6 +2,7 @@ const express = require("express");
 const Contenedor = require("../classes/Contenedor");
 //import Contenedor from "../classes/Contenedor.js"
 //import express from "express";
+const {io} = require("../app.js");
 const router = express.Router();
 const contenedor  = new Contenedor();
 
@@ -25,6 +26,12 @@ router.post('/', (req, res) => {
     console.log(prod);
     contenedor.save(prod).then(result => {
         res.send(result);
+        if(result.status === "success"){
+            contenedor.getAll().then(result => {
+                console.log(result);
+                io.emit("deliverProducts", result);
+            })
+        }
     })
 })
 

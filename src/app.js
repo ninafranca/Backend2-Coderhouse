@@ -14,7 +14,7 @@ const contenedor = new Contenedor();
 const {Server} = require("socket.io");
 const server = app.listen(PORT,() => {
     console.log("Listening on port: ", PORT)
-})
+});
 const io = new Server(server);
 
 //APP.USE
@@ -81,3 +81,5 @@ io.on("connection", async socket => {
         io.emit("messagelog", messages)
     })
 })
+
+module.exports = {io}
