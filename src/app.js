@@ -21,6 +21,10 @@ const io = new Server(server);
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({extended:true}));
+app.use((req, res, next) => {
+    req.io = io;
+    next();
+})
 app.use('/api/products', productsRouter);
 app.use(express.static('public'));
 
@@ -81,5 +85,3 @@ io.on("connection", async socket => {
         io.emit("messagelog", messages)
     })
 })
-
-module.exports = {io}
