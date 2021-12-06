@@ -45,8 +45,8 @@ app.set("view engine", "handlebars");
 app.get("/", (req, res) => {
     res.sendFile('index.html', {root: './public/html'});
 })
-app.get("/chat", (req, res) => {
-    res.sendFile('chat.html', {root: './public/html'});
+app.get("/carrito", (req, res) => {
+    res.sendFile('carrito.html', {root: './public/html'});
 })
 
 //HANDLEBARS

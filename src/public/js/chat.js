@@ -26,7 +26,7 @@ socket.on("messagelog", data => {
     let p = document.getElementById("log");
     let date = new Date();
     let mensajes = data.map(message => {
-        return `<div><span class="user">${message.user}</span> <span class="date">[${date}]</span><span class="message">: ${message.message}</span></div>`
+        return `<div><span class="user">${message.user}</span> <span class="date">[${date.toLocaleString()}]</span><span class="message">: ${message.message}</span></div>`
     }).join("");
     p.innerHTML = mensajes;
 })
