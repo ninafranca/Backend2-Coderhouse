@@ -1,4 +1,5 @@
 document.addEventListener("submit", sendForm);
+//INSTANCIO
 const socket = io();
 
 function sendForm(e) {

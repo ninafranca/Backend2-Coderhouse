@@ -1,6 +1,10 @@
 const express = require("express");
 const Contenedor = require("./classes/Contenedor");
+const Carrito = require("./classes/Carrito");
+const contenedor = new Contenedor();
+const carrito = new Carrito();
 const productsRouter = require("./routes/products");
+const carritoRouter = require("./routes/carrito")
 const {engine} = require("express-handlebars");
 const cors = require("cors");
 /*import express from 'express';
@@ -10,22 +14,23 @@ import cors from "cors";
 import {engine} from "express-handlebars"*/
 const app = express();
 const PORT = process.env.PORT || 8080;
-const contenedor = new Contenedor();
 const {Server} = require("socket.io");
 const server = app.listen(PORT,() => {
     console.log("Listening on port: ", PORT)
 });
 const io = new Server(server);
-
+const admin = true;
 //APP.USE
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({extended:true}));
 app.use((req, res, next) => {
     req.io = io;
+    req.auth = admin;
     next();
 })
 app.use('/api/products', productsRouter);
+app.use('/api/carrito', carritoRouter);
 app.use(express.static('public'));
 
 //APP.ENGINE
@@ -46,7 +51,11 @@ app.get("/", (req, res) => {
     res.sendFile('index.html', {root: './public/html'});
 })
 app.get("/carrito", (req, res) => {
-    res.sendFile('carrito.html', {root: './public/html'});
+    if(req.auth !== false) {
+        res.sendFile('carrito.html', {root: './public/html'})
+    } else {
+        res.status(403).send("No autorizado")
+    }
 })
 
 //HANDLEBARS

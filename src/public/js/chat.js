@@ -1,4 +1,3 @@
-//INSTANCIO EL IO
 let input = document.getElementById("info");
 let user = document.getElementById("user");
 let enter = document.getElementById("send-message");
