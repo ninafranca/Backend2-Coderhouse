@@ -41,10 +41,6 @@ app.engine("handlebars", engine());
 app.set("views", "./views");
 //Para Handlebars
 app.set("view engine", "handlebars");
-//Para PUG
-//app.set("view engine", "pug");
-//Para Ejs
-//app.set("view engine", "ejs");
 
 //APP.GET
 app.get("/", (req, res) => {
@@ -68,17 +64,6 @@ app.get("/productos", (req, res) => {
         } else {res.status(500).send(result)}
     })
 })
-
-//PUG Y EJS
-/*app.get("/productos", (req, res) => {
-    contenedor.getAll().then(result => {
-        const products = result.payload;
-        const objects = {products: products};
-        if (result.status === "success") {
-            res.render("products", objects)
-        } else {res.status(500).send(result)}
-    })
-})*/
 
 let messages = [];
 
