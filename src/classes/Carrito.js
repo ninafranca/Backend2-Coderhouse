@@ -49,7 +49,7 @@ class Carrito {
     async getCart(ticket) {
         try {
             let readCarts = await fs.promises.readFile(this.fileLocation, "utf-8");
-            let cart = JSON.parse(readCarts).filter(c => c.ticket === ticket);
+            let cart = JSON.parse(readCarts).find(c => c.ticket === ticket).products;
             if(!cart) {
                 throw new Error(`El carrito con id ${ticket} no existe`);
             } else {

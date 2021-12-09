@@ -70,10 +70,13 @@ io.on("connection", async socket => {
     console.log("Se conectó socket " + socket.id);
     let products = await contenedor.getAll();
     socket.emit("deliverProducts", products);
-    //socket.emit("welcome", {message: "Bienvenido a mi servidor"});
     socket.emit("messagelog", messages);
     socket.on("message", data => {
         messages.push(data);
         io.emit("messagelog", messages)
     })
+})
+
+app.use((req, res) => {
+    res.status(404).send({title: "Ruta no encontrada"});
 })

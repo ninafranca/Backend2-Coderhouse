@@ -6,14 +6,8 @@ const carrito  = new Carrito();
 const router = express.Router();
 
 //GET: devuelve todos los productos del carrito
-/*router.get('/', (req, res) => {
-    contenedor.getAllProds().then(result => {
-        res.send(result);
-    })
-})*/
-
-router.get('/:uid/productos', (req, res)=>{
-    let id = req.params.uid;
+router.get('/:id/productos', (req, res)=>{
+    let id = req.params.id;
     carrito.getCart(id).then(result => {
         res.send(result);
     })
