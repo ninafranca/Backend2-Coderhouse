@@ -19,14 +19,12 @@ const server = app.listen(PORT,() => {
     console.log("Listening on port: ", PORT)
 });
 const io = new Server(server);
-const admin = true;
 //APP.USE
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({extended:true}));
 app.use((req, res, next) => {
     req.io = io;
-    req.auth = admin;
     next();
 })
 app.use('/api/products', productsRouter);
@@ -44,15 +42,15 @@ app.set("view engine", "handlebars");
 
 //APP.GET
 app.get("/", (req, res) => {
-    res.sendFile('index.html', {root: './public/html'});
+    res.sendFile('index.html', {root: "./public/html"});
 })
-app.get("/carrito", (req, res) => {
+/*app.get("/carrito", (req, res) => {
     if(req.auth !== false) {
-        res.sendFile('carrito.html', {root: './public/html'})
+        res.sendFile('carrito.html', {root: "./public/html"})
     } else {
         res.status(403).send("No autorizado")
     }
-})
+})*/
 
 //HANDLEBARS
 app.get("/productos", (req, res) => {

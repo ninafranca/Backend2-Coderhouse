@@ -16,7 +16,6 @@ function sendForm(e) {
         headers: {"Content-type": "application/json"}
     })
     .then(result => {
-        console.log(object);
         let sent = document.getElementById("sent");
         let sentObject = `<h2 class="sent-object">Producto añadido con éxito</h2>`;
         sent.innerHTML = sentObject;

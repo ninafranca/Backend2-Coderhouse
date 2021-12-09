@@ -1,6 +1,7 @@
 const express = require("express");
 const Contenedor = require("../classes/Contenedor");
 const contenedor  = new Contenedor();
+const admin = true;
 //import Contenedor from "../classes/Contenedor.js"
 //import express from "express";
 const router = express.Router();
@@ -12,8 +13,8 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/:uid', (req, res)=>{
-    let id= parseInt(req.params.uid);
+router.get('/:id', (req, res)=>{
+    let id= parseInt(req.params.id);
     contenedor.getById(id).then(result => {
         res.send(result);
     })
@@ -21,35 +22,45 @@ router.get('/:uid', (req, res)=>{
 
 //POST
 router.post('/', (req, res) => {
-    let prod = req.body;
-    console.log(prod);
-    contenedor.save(prod).then(result => {
+    if(admin) {
+        let prod = req.body;
+        contenedor.save(prod).then(result => {
         res.send(result);
         if(result.status === "success"){
             contenedor.getAll().then(result => {
-                console.log(result);
                 req.io.emit("deliverProducts", result);
             })
         }
     })
+    } else {
+        res.status(403).send({ error: -1, description: "Ruta '/api/productos' metodo POST no autorizado"})
+    }
 })
 
 //PUT
-router.put('/:uid', (req, res) => {
-    let body = req.body;
-    let id = parseInt(req.params.uid);
-    contenedor.updateObject(id, body).then(result => {
-        res.send(result);
-    })
+router.put('/:id', (req, res) => {
+    if(admin) {
+        let body = req.body;
+        let id = parseInt(req.params.id);
+        contenedor.updateObject(id, body).then(result => {
+            res.send(result);
+        })
+    } else {
+        res.status(403).send({ error: -1, description: "Ruta '/api/productos/:id' metodo PUT no autorizado"})
+    }
 })
 
 //DELETE
-router.delete('/:uid', (req, res) => {
-    let id= parseInt(req.params.uid);
-    console.log(id)
-    contenedor.deleteById(id).then(result => {
-        res.send(result);
-    })
+router.delete('/:id', (req, res) => {
+    if(admin) {
+        let id= parseInt(req.params.id);
+        console.log(id)
+        contenedor.deleteById(id).then(result => {
+            res.send(result);
+        })
+    } else {
+        res.status(403).send({ error: -1, description: "Ruta '/api/productos/:id' metodo DELETE no autorizado"})
+    }
 })
 
 module.exports = router;
