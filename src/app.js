@@ -19,6 +19,7 @@ const server = app.listen(PORT,() => {
     console.log("Listening on port: ", PORT)
 });
 const io = new Server(server);
+
 //APP.USE
 app.use(express.json());
 app.use(cors());
@@ -78,5 +79,5 @@ io.on("connection", async socket => {
 })
 
 app.use((req, res) => {
-    res.status(404).send({title: "Ruta no encontrada"});
+    res.status(404).send({error: -2, message: "Ruta no implementada"});
 })

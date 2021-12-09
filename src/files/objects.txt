@@ -90,9 +90,13 @@
     "id": 19
   },
   {
+    "id": 20,
     "title": "Regla",
+    "timestamp": "9/12/2021 14:55:35",
+    "description": "Regla de 20 cm",
+    "code": "OZfjF",
     "price": "150",
     "thumbnail": "https://t3.ftcdn.net/jpg/01/05/32/66/240_F_105326673_WQkNlVNmXcccMwNNNXP64iR9875dvHCI.jpg",
-    "id": 20
+    "stock": 50
   }
 ]
