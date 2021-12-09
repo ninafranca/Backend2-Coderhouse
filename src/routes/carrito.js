@@ -34,8 +34,8 @@ router.post('/', (req, res) => {
 //POST: incorpora productos al carrito por su id de producto
 router.post('/:id/productos/:id_cart', (req, res) => {
     let prodId = Number(req.params.id);
-    let ticket = req.params.id_cart;
-    carrito.saveProdById(prodId, ticket).then(result => {
+    let cartId = req.params.id_cart;
+    carrito.saveProdById(prodId, cartId).then(result => {
         res.send(result);
     })
 })
@@ -50,10 +50,11 @@ router.delete('/:id', (req, res) => {
 })
 
 //DELETE ID: eliminar un producto por su id de producto y de carrito
-router.delete('/:uid/productos/:id_prod', (req, res) => {
-    let id= parseInt(req.params.uid);
-    console.log(id)
-    contenedor.deleteProdByCartId(id).then(result => {
+router.delete('/:id/productos/:id_prod', (req, res) => {
+    let prodId = Number(req.params.id_prod);
+    let ticket = req.params.id;
+    console.log(prodId, ticket)
+    carrito.deleteCartProd(ticket, prodId).then(result => {
         res.send(result);
     })
 })
