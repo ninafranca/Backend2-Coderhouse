@@ -12,6 +12,25 @@
   {
     "ticket": "fvLw5",
     "date": "8/12/2021 20:54:44",
-    "products": []
+    "products": [
+      {
+        "title": "Globo Terráqueo",
+        "price": 345.67,
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png",
+        "id": 2
+      },
+      {
+        "title": "Birome",
+        "price": "55",
+        "thumbnail": "https://img.freepik.com/vector-gratis/pluma-azul_1459-2299.jpg?size=338&ext=jpg",
+        "id": 12
+      },
+      {
+        "title": "Lapiz",
+        "price": "90",
+        "thumbnail": "https://img.freepik.com/vector-gratis/diseno-lapiz-escribiendo_1095-187.jpg?size=338&ext=jpg",
+        "id": 13
+      }
+    ]
   }
 ]

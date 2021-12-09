@@ -53,7 +53,6 @@ router.delete('/:id', (req, res) => {
 router.delete('/:id/productos/:id_prod', (req, res) => {
     let prodId = Number(req.params.id_prod);
     let ticket = req.params.id;
-    console.log(prodId, ticket)
     carrito.deleteCartProd(ticket, prodId).then(result => {
         res.send(result);
     })
