@@ -5,17 +5,20 @@ const admin = true;
 //import Contenedor from "../classes/Contenedor.js"
 //import express from "express";
 const router = express.Router();
+const Products = require("../services/ProductsDB");
+const productsService = new Products();
+
 
 //GETS
 router.get('/', (req, res) => {
-    contenedor.getAll().then(result => {
+    productsService.getAll().then(result => {
         res.send(result);
     })
 })
 
 router.get('/:id', (req, res)=>{
     let id= parseInt(req.params.id);
-    contenedor.getById(id).then(result => {
+    productsService.getById(id).then(result => {
         res.send(result);
     })
 })
@@ -24,10 +27,10 @@ router.get('/:id', (req, res)=>{
 router.post('/', (req, res) => {
     if(admin) {
         let prod = req.body;
-        contenedor.save(prod).then(result => {
+        productsService.save(prod).then(result => {
         res.send(result);
         if(result.status === "success"){
-            contenedor.getAll().then(result => {
+            productsService.getAll().then(result => {
                 req.io.emit("deliverProducts", result);
             })
         }
@@ -42,7 +45,7 @@ router.put('/:id', (req, res) => {
     if(admin) {
         let body = req.body;
         let id = parseInt(req.params.id);
-        contenedor.updateObject(id, body).then(result => {
+        productsService.updateObject(id, body).then(result => {
             res.send(result);
         })
     } else {
@@ -54,8 +57,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     if(admin) {
         let id= parseInt(req.params.id);
-        console.log(id)
-        contenedor.deleteById(id).then(result => {
+        productsService.deleteById(id).then(result => {
             res.send(result);
         })
     } else {

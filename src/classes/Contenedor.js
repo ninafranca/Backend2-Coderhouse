@@ -5,7 +5,7 @@ const makeId = require("../public/js/utils");
 class Contenedor {
     
     constructor () {
-        this.fileLocation = "./files/objects.txt"
+        this.fileLocation = "./src/files/objects.txt"
     }
   
     async getAll () {

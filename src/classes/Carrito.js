@@ -6,8 +6,8 @@ let carts = [];
 class Carrito {
 
     constructor () {
-        this.fileLocation = "./files/carts.txt"
-        this.productsFile = "./files/objects.txt"
+        this.fileLocation = "./src/files/carts.txt"
+        this.productsFile = "./src/files/objects.txt"
     }
 
     async newCart() {
@@ -25,6 +25,7 @@ class Carrito {
         }
     }
 
+    //HACER VALIDACION SI YA EXISTE EL PRODUCTO EN EL CARRITO
     async saveProdById(productId, ticket) {
         try {
             const fileProducts = await fs.promises.readFile(this.productsFile, "utf-8");
