@@ -36,7 +36,7 @@ class Products {
         try {
             //first() para que no siga buscando
             let product = await database.select().table("products").where("id", id).first()
-            if(user) {
+            if(product) {
             return {status: "success", payload: product}
             } else {
                 return {status: "error", message: "Producto no encontrado"}
@@ -55,8 +55,8 @@ class Products {
                 return {status: "error", message: "Producto ya existente"}
             } else {
                 console.log(3);
-                let result = await database.select().table("products").insert(product);
-                console.log(3.1);
+                let result = await database.table("products").insert(product);
+                console.log(4);
                 return {status: "success", payload: result}
             }
         } catch (error) {
@@ -64,11 +64,11 @@ class Products {
         }
     }
 
-    async updateObject(id, body) {
+    async updateObject(id, product) {
         try {
             let exists = await database.select().table("products").where("id", id).first();
             if(exists) {
-                let result = await database.select().table("products").where(exists).insert(body);
+                let result = await database.select().table("products").where(exists).update(product);
                 return {status: "success", payload: result}
             } else {
                 return {status: "error", message: "El producto no existe"}
