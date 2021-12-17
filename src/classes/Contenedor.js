@@ -3,7 +3,7 @@ const fs = require("fs");
 
 class Contenedor {
     constructor () {
-      this.fileLocation = "./files/objects.txt"
+      this.fileLocation = "./src/files/objects.txt"
     }
   
     async getAll () {

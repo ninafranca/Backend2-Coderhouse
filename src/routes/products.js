@@ -12,8 +12,8 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/:uid', (req, res)=>{
-    let id= parseInt(req.params.uid);
+router.get('/:id', (req, res)=>{
+    let id= parseInt(req.params.id);
     contenedor.getById(id).then(result => {
         res.send(result);
     })
@@ -35,17 +35,17 @@ router.post('/', (req, res) => {
 })
 
 //PUT
-router.put('/:uid', (req, res) => {
+router.put('/:id', (req, res) => {
     let body = req.body;
-    let id = parseInt(req.params.uid);
+    let id = parseInt(req.params.id);
     contenedor.updateObject(id, body).then(result => {
         res.send(result);
     })
 })
 
 //DELETE
-router.delete('/:uid', (req, res) => {
-    let id= parseInt(req.params.uid);
+router.delete('/:id', (req, res) => {
+    let id= parseInt(req.params.id);
     console.log(id)
     contenedor.deleteById(id).then(result => {
         res.send(result);

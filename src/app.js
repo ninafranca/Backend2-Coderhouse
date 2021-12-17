@@ -26,14 +26,14 @@ app.use((req, res, next) => {
     next();
 })
 app.use('/api/products', productsRouter);
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 //APP.ENGINE
 //Para Handlebars
 app.engine("handlebars", engine());
 
 //APP.SET
-app.set("views", "./views");
+app.set("views", "./src/views");
 //Para Handlebars
 app.set("view engine", "handlebars");
 //Para PUG
@@ -43,13 +43,10 @@ app.set("view engine", "handlebars");
 
 //APP.GET
 app.get("/", (req, res) => {
-    res.sendFile('index.html', {root: './public/html'});
-})
-app.get("/carrito", (req, res) => {
-    res.sendFile('carrito.html', {root: './public/html'});
+    res.sendFile('index.html', {root: __dirname + "/public/html"});
 })
 
-//HANDLEBARS
+//HANDLEBARS, PUG Y EJS
 app.get("/productos", (req, res) => {
     contenedor.getAll().then(result => {
         const products = result.payload;
@@ -59,17 +56,6 @@ app.get("/productos", (req, res) => {
         } else {res.status(500).send(result)}
     })
 })
-
-//PUG Y EJS
-/*app.get("/productos", (req, res) => {
-    contenedor.getAll().then(result => {
-        const products = result.payload;
-        const objects = {products: products};
-        if (result.status === "success") {
-            res.render("products", objects)
-        } else {res.status(500).send(result)}
-    })
-})*/
 
 let messages = [];
 
