@@ -84,14 +84,14 @@ io.on("connection", async socket => {
         chatMessages.saveMessage(data)
         .then(result => console.log(result))
         .then(() => {
-            chatMessages.getMessages().then(result => {
+            chatMessages.getAllMessages().then(result => {
             if (result.status === "success") {
                 io.emit("message", result.payload)
             }
             })
         })
-        //messages.push(data);
-        //io.emit("messagelog", messages)
+        messages.push(data);
+        io.emit("messagelog", messages)
     })
 })
 

@@ -1,19 +1,21 @@
 //import database from ("../db/ecommerce.sqlite");
 const database = require("../public/js/config");
+const makeId = require("../public/js/utils");
 
 class Products {
+
     constructor() {
         database.schema.hasTable("products").then(res => {
             if (!res) {
                 database.schema.createTable("products", table => {
-                    table.increments(),
-                    table.string("title").notNullable(),
-                    table.integer("price").notNullable(),
-                    table.timestamp("true, true"),
-                    table.string("description").defaultTo("Sin descripción."),
-                    table.string("code"),
-                    table.string("thumbnail").defaultTo("https://media.istockphoto.com/vectors/image-place-holder-with-a-gray-camera-icon-vector-id1226328537?k=20&m=1226328537&s=612x612&w=0&h=2klft8QdMSyDj3oAmFyRyD24Mogj2OygLWrX9Lk6oGQ="),
-                    table.integer("stock").defaultTo(0)
+                    table.increments();
+                    table.string("title").notNullable();
+                    table.integer("price").notNullable();
+                    table.timestamps(true, true);
+                    table.string("description").defaultTo("Sin descripción.");
+                    table.string("code").defaultTo(makeId(5));
+                    table.string("thumbnail").defaultTo("https://media.istockphoto.com/vectors/image-place-holder-with-a-gray-camera-icon-vector-id1226328537?k=20&m=1226328537&s=612x612&w=0&h=2klft8QdMSyDj3oAmFyRyD24Mogj2OygLWrX9Lk6oGQ=");
+                    table.integer("stock").defaultTo(0);
                 }).then(res => {
                     console.log("Tabla de productos creada");
                 }).catch( res => {
@@ -48,19 +50,16 @@ class Products {
 
     async save(product) {
         try {
+
             let exists = await database.select().table("products").where("title", product.title).first();
-            console.log(1);
             if(exists) {
-                console.log(2);
                 return {status: "error", message: "Producto ya existente"}
             } else {
-                console.log(3);
-                let result = await database.table("products").insert(product);
-                console.log(4);
+                let result = await database.select().table("products").insert(product);
                 return {status: "success", payload: result}
             }
         } catch (error) {
-            return {status: "error", message: "Error guardando el producto"}
+            return {status: "error", message: error.message}
         }
     }
 
@@ -91,6 +90,7 @@ class Products {
             return {status: "error", message: "Error borrando el producto"}
         }
     }
+    
 }
 
 module.exports = Products;

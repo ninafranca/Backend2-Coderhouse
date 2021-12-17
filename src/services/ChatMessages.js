@@ -8,7 +8,7 @@ class ChatMessages {
                 database.schema.createTable("chats", table => {
                     table.increments(),
                     table.string("email").notNullable(),
-                    table.timestamp("true, true"),
+                    table.timestamps(true, true),
                     table.string("message").notNullable()
                 }).then(res => {
                     console.log("Tabla de chats creada");
@@ -34,11 +34,11 @@ class ChatMessages {
             if(!chat) {
                 return {status: "error", message: "Error con el chat"}
             } else {
-                let result = chat.insert(message);
-                return {status: "success", payload: result}
+                await database.select().table("chats").insert(message);
+                return {status: "success", payload: message}
             }
         } catch (error) {
-            return {status: "error", message: "Error al guardar mensaje"}
+            return {status: "error", message: error.message}
         }
     }
 }

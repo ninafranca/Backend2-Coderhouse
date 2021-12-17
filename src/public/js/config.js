@@ -5,8 +5,7 @@ const knex = require("knex");
 
 const database = knex({
     client: "sqlite3",
-    connection: {filename: "./src/db/ecommerce.sqlite"},
-    useNullAsDefault: true
+    connection: {filename: "./src/db/ecommerce.sqlite"}
 });
 
 module.exports = database;
