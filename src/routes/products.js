@@ -1,14 +1,12 @@
-const express = require("express");
-const Contenedor = require("../contenedor/Contenedor");
-const contenedor  = new Contenedor();
-const admin = true;
-//import Contenedor from "../contenedor/Contenedor.js"
-//import express from "express";
-const router = express.Router();
-const Products = require("../services/ProductsDB");
-const productsService = new Products();
-const {products} = require("../daos/index")
+import express from "express";
+import Contenedor from "../contenedor/Contenedor.js";
+//import Products from "../services/ProductsDB.js";
+import {products} from "../daos/index.js";
 
+//const contenedor  = new Contenedor();
+const admin = true;
+const router = express.Router();
+//const productsService = new Products();
 
 //GETS
 router.get('/', (req, res) => {
@@ -19,7 +17,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res)=>{
     let id= parseInt(req.params.id);
-    productsService.getById(id).then(result => {
+    products.getById(id).then(result => {
         res.send(result);
     })
 })
@@ -28,10 +26,10 @@ router.get('/:id', (req, res)=>{
 router.post('/', (req, res) => {
     if(admin) {
         let prod = req.body;
-        productsService.save(prod).then(result => {
+        products.save(prod).then(result => {
         res.send(result);
         if(result.status === "success"){
-            productsService.getAll().then(result => {
+            products.getAll().then(result => {
                 req.io.emit("deliverProducts", result);
             })
         }
@@ -46,7 +44,7 @@ router.put('/:id', (req, res) => {
     if(admin) {
         let body = req.body;
         let id = parseInt(req.params.id);
-        productsService.updateObject(id, body).then(result => {
+        products.updateObject(id, body).then(result => {
             res.send(result);
         })
     } else {
@@ -58,7 +56,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     if(admin) {
         let id= parseInt(req.params.id);
-        productsService.deleteById(id).then(result => {
+        products.deleteById(id).then(result => {
             res.send(result);
         })
     } else {
@@ -66,5 +64,4 @@ router.delete('/:id', (req, res) => {
     }
 })
 
-module.exports = router;
-//export default router;
+export default router;

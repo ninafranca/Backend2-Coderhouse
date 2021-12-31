@@ -1,5 +1,5 @@
-const admin = require("firebase-admin");
-const serviceAccount = require("../../db/ecommerce-f628b-firebase-adminsdk-h2evm-45e406a98c.json");
+import admin from "firebase-admin";
+import serviceAccount from "../../db/ecommerce-f628b-firebase-adminsdk-h2evm-45e406a98c.json";
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),

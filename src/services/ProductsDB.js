@@ -1,6 +1,5 @@
-//import database from ("../db/ecommerce.sqlite");
-const database = require("../public/js/config");
-const makeId = require("../public/js/utils");
+/*import database from "../public/js/config.js";
+import makeId from "../public/js/utils.js";
 
 class Products {
 
@@ -93,4 +92,4 @@ class Products {
     
 }
 
-module.exports = Products;
+export default Products;*/

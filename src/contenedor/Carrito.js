@@ -1,6 +1,5 @@
-const { Console } = require("console");
-const fs = require("fs");
-const makeId = require("../public/js/utils");
+import fs from "fs";
+import makeId from "../utils.js";
 let carts = [];
 
 class Carrito {
@@ -97,4 +96,4 @@ class Carrito {
 }
 
 
-module.exports = Carrito;
+export default Carrito;

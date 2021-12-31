@@ -1,8 +1,6 @@
-const express = require("express");
-const Carrito = require("../contenedor/Carrito");
+import express from "express";
+import Carrito from "../contenedor/Carrito.js";
 const carrito  = new Carrito();
-//import Contenedor from "../contenedor/Contenedor.js"
-//import express from "express";
 const router = express.Router();
 
 //GET: devuelve todos los productos del carrito
@@ -52,4 +50,4 @@ router.delete('/:id_cart/productos/:id_prod', (req, res) => {
     })
 })
 
-module.exports = router;
+export default router;

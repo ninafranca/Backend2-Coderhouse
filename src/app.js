@@ -1,27 +1,29 @@
-/*import express from 'express';
-import Contenedor from "./src/contenedor/Contenedor.js";
-import Carrito from "./src/contenedor/Carrito.js";
-import productsRouter from "./src/routes/products.js";
-import carritoRouter from "./src/routes/carrito.js";
-import __dirname from "./src/public/js/utils.js";
-import {engine} from "express-handlebars"
+//const express = require("express");
+//const Contenedor = require("./contenedor/Contenedor");
+//const Carrito = require("./contenedor/Carrito");
+//const ChatMessages = require("./services/ChatMessages")
+//const productsRouter = require("./routes/products");
+//const carritoRouter = require("./routes/carrito");
+//const {Server} = require("socket.io");
+//const {engine} = require("express-handlebars");
+//const cors = require("cors");
+
+import __dirname from "./utils.js";
+import express from "express";
+import Contenedor from "./contenedor/Contenedor.js";
+import Carrito from "./contenedor/Carrito.js";
+//import ChatMessages from "./services/ChatMessages.js";
+import productsRouter from "./routes/products.js";
+import carritoRouter from "./routes/carrito.js";
+import {Server} from "socket.io";
+import {engine} from "express-handlebars";
 import cors from "cors";
-*/
-const express = require("express");
-const Contenedor = require("./contenedor/Contenedor");
-const Carrito = require("./contenedor/Carrito");
-const ChatMessages = require("./services/ChatMessages")
+
 const contenedor = new Contenedor();
-const chatMessages = new ChatMessages();
+//const chatMessages = new ChatMessages();
 const carrito = new Carrito();
-const productsRouter = require("./routes/products");
-const carritoRouter = require("./routes/carrito");
-//const __dirname = require("./public/js/utils");
-const {engine} = require("express-handlebars");
-const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 8080;
-const {Server} = require("socket.io");
 const server = app.listen(PORT,() => {
     console.log("Listening on port: ", PORT)
 });
@@ -37,7 +39,7 @@ app.use((req, res, next) => {
 })
 app.use('/api/productos', productsRouter);
 app.use('/api/carrito', carritoRouter);
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + "/public"));
 
 //APP.ENGINE
 //Para Handlebars
@@ -52,13 +54,6 @@ app.set("view engine", "handlebars");
 app.get("/", (req, res) => {
     res.sendFile('index.html', {root: __dirname + "/public/html"});
 })
-/*app.get("/carrito", (req, res) => {
-    if(req.auth !== false) {
-        res.sendFile('carrito.html', {root: "./public/html"})
-    } else {
-        res.status(403).send("No autorizado")
-    }
-})*/
 
 //HANDLEBARS
 app.get("/productos", (req, res) => {
@@ -72,7 +67,6 @@ app.get("/productos", (req, res) => {
 })
 
 let messages = [];
-
 //CON EL SERVIDOR, CUANDO SE CONECTE EL SOCKET, HACE LO SIGUIENTE => {}
 io.on("connection", async socket => {
     console.log("Se conectó socket " + socket.id);

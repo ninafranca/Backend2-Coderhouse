@@ -1,7 +1,7 @@
-//import database from ("../db/ecommerce.sqlite");
-const database = require("../public/js/config");
+/*import database from "../public/js/config.js";
 
 class ChatMessages {
+    
     constructor() {
         database.schema.hasTable("chats").then(res => {
             if (!res) {
@@ -43,4 +43,4 @@ class ChatMessages {
     }
 }
 
-module.exports = ChatMessages;
+export default ChatMessages;*/

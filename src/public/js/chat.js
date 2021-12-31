@@ -18,9 +18,6 @@ enter.addEventListener("click", ()=> {
 })
 
 //CUANDO RECIBA EL WELCOME, CON LA DATA QUE ME HAYA PASADO, VOY A EJECUTAR X
-/*socket.on("welcome", data => {
-    alert(data.message);
-});*/
 socket.on("messagelog", data => {
     let p = document.getElementById("log");
     let date = new Date();
@@ -29,11 +26,3 @@ socket.on("messagelog", data => {
     }).join("");
     p.innerHTML = mensajes;
 })
-
-/*socket.on("log", data => {
-    let div = document.getElementById("log");
-    if(div.firstChild) div.removeChild(div.firstChild);
-    let p = document.createElement("p");
-    p.innerHTML = data;
-    div.appendChild(p);
-})*/

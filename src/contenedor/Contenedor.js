@@ -1,6 +1,5 @@
-const fs = require("fs");
-const makeId = require("../public/js/utils");
-//import fs from "fs";
+import fs from "fs";
+import makeId from "../utils.js";
 
 class Contenedor {
     
@@ -114,7 +113,6 @@ class Contenedor {
             return {status: "error", message: "Error al borrar producto"}
         }
     }
-  }
+}
   
-module.exports = Contenedor;
-//export default Contenedor;
+export default Contenedor;

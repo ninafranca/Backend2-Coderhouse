@@ -1,12 +1,10 @@
-//import {fileURLToPath} from 'url';
-//import {dirname} from 'path';
-//const {fileURLToPath} = require("url");
-//const {dirname} = require("path");
-//const filename = fileURLToPath(import.meta.url);
-//const __dirname = dirname(filename);
+import {fileURLToPath} from 'url';
+import {dirname} from 'path';
 
+const filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(filename);
 
-function makeId(length) {
+export function makeId(length) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
@@ -16,4 +14,4 @@ function makeId(length) {
     return result;
 }
 
-module.exports = makeId;
+export default __dirname;

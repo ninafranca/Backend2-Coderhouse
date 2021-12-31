@@ -1,4 +1,4 @@
-const FileContainer = require("../../contenedor/FileContainer");
+import FileContainer from "../../contenedor/FileContainer.js";
 
 class ProductFileSystem extends FileContainer {
 
@@ -7,4 +7,4 @@ class ProductFileSystem extends FileContainer {
     }
 }
 
-module.exports = ProductFileSystem;
+export default ProductFileSystem;
