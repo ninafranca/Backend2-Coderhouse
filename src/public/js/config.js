@@ -8,4 +8,10 @@ const database = knex({
     connection: {filename: "./src/db/ecommerce.sqlite"}
 });
 
-module.exports = database;
+const fileSystem = {
+    fileSystem: {
+        baseUrl: "../../files"
+    }
+}
+
+module.exports = database, fileSystem;

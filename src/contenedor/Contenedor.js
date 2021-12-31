@@ -4,11 +4,11 @@ const makeId = require("../public/js/utils");
 
 class Contenedor {
     
-    constructor () {
+    constructor() {
         this.fileLocation = "./src/files/objects.txt"
     }
   
-    async getAll () {
+    async getAll() {
         try {
             const readFile = await fs.promises.readFile(this.fileLocation, 'utf-8')
             if (!readFile) {
@@ -21,41 +21,41 @@ class Contenedor {
         }
     }
   
-    async getById (id) {
+    async getById(id) {
         try {
-            if (!id) throw new Error("Falta parámetro")
+            if(!id) throw new Error("Falta parámetro")
             const readFile = await fs.promises.readFile(this.fileLocation, "utf-8")
-            if (!readFile) {
+            if(!readFile) {
                 throw new Error("No hay productos")
             } else {
                 const data = JSON.parse(readFile).find(e => e.id === id)
-                if (!data) {
+                if(!data) {
                     throw new Error("Producto no encontrado")
                 } else {
                     return {status: "success", payload: data}
                 }
             }
-        } catch (err) {
+        } catch(err) {
             return {status: "error", message: "Error buscando el producto"}
         }
     }
   
-    async save (product) {
+    async save(product) {
         try {
-            if (Object.keys(product).length === 0) {
+            if(Object.keys(product).length === 0) {
                 throw new Error("Falta parámetro")
             }
             const readFile = await fs.promises.readFile(this.fileLocation, "utf-8")
             let products = []
             let id = 1
             let timestamp = new Date().toLocaleString()
-            if (readFile) {
+            if(readFile) {
             products = JSON.parse(readFile)
             const ids = products.map(product => product.id)
             const maxId = Math.max(...ids)
             id = maxId + 1
             const hasProduct = products.find(e => e.title === product.title)
-            if (hasProduct) throw new Error("El producto ya existe")
+            if(hasProduct) throw new Error("El producto ya existe")
             }
             let dataObj = {
                 id: id,
@@ -70,7 +70,7 @@ class Contenedor {
             products = [...products, dataObj]
             await fs.promises.writeFile(this.fileLocation, JSON.stringify(products, null, 2))
             return {status: "success", payload: product}
-        } catch (err) {
+        } catch(err) {
             return {status: "error", message: "Error al guardar producto"}
         }
     }
@@ -105,12 +105,12 @@ class Contenedor {
             const readFile = await fs.promises.readFile(this.fileLocation, "utf-8")
             let products = JSON.parse(readFile)
             const idFound = products.find(e => e.id === id)
-            if (!idFound) throw new Error(`ID '${id}' no encontrado`)
+            if(!idFound) throw new Error(`ID '${id}' no encontrado`)
             let newProducts = products.filter(e => e.id !== id)
-            if (newProducts.length === 0) newProducts = ''
+            if(newProducts.length === 0) newProducts = ''
             await fs.promises.writeFile(this.fileLocation, JSON.stringify(newProducts, null, 2))
             return {status: "success", message: "Producto borrado"}
-        } catch (err) {
+        } catch(err) {
             return {status: "error", message: "Error al borrar producto"}
         }
     }

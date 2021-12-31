@@ -1,7 +1,7 @@
 const express = require("express");
-const Carrito = require("../classes/Carrito");
+const Carrito = require("../contenedor/Carrito");
 const carrito  = new Carrito();
-//import Contenedor from "../classes/Contenedor.js"
+//import Contenedor from "../contenedor/Contenedor.js"
 //import express from "express";
 const router = express.Router();
 

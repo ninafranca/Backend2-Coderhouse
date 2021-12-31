@@ -1,6 +1,6 @@
 /*import express from 'express';
-import Contenedor from "./src/classes/Contenedor.js";
-import Carrito from "./src/classes/Carrito.js";
+import Contenedor from "./src/contenedor/Contenedor.js";
+import Carrito from "./src/contenedor/Carrito.js";
 import productsRouter from "./src/routes/products.js";
 import carritoRouter from "./src/routes/carrito.js";
 import __dirname from "./src/public/js/utils.js";
@@ -8,8 +8,8 @@ import {engine} from "express-handlebars"
 import cors from "cors";
 */
 const express = require("express");
-const Contenedor = require("./classes/Contenedor");
-const Carrito = require("./classes/Carrito");
+const Contenedor = require("./contenedor/Contenedor");
+const Carrito = require("./contenedor/Carrito");
 const ChatMessages = require("./services/ChatMessages")
 const contenedor = new Contenedor();
 const chatMessages = new ChatMessages();
@@ -35,7 +35,7 @@ app.use((req, res, next) => {
     req.io = io;
     next();
 })
-app.use('/api/products', productsRouter);
+app.use('/api/productos', productsRouter);
 app.use('/api/carrito', carritoRouter);
 app.use(express.static(__dirname + '/public'));
 

@@ -1,17 +1,18 @@
 const express = require("express");
-const Contenedor = require("../classes/Contenedor");
+const Contenedor = require("../contenedor/Contenedor");
 const contenedor  = new Contenedor();
 const admin = true;
-//import Contenedor from "../classes/Contenedor.js"
+//import Contenedor from "../contenedor/Contenedor.js"
 //import express from "express";
 const router = express.Router();
 const Products = require("../services/ProductsDB");
 const productsService = new Products();
+const {products} = require("../daos/index")
 
 
 //GETS
 router.get('/', (req, res) => {
-    productsService.getAll().then(result => {
+    products.getAll().then(result => {
         res.send(result);
     })
 })
