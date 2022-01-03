@@ -1,6 +1,7 @@
 let products;
 let carts;
-let persistance = "fileSystem";
+// persistance según la persistencia que quiera usar (fileSystem, mongo o firebase)
+let persistance = "mongo";
 
 switch(persistance) {
     case "fileSystem":
@@ -9,6 +10,11 @@ switch(persistance) {
         products = new ProductFileSystem();
         carts = new CartFileSystem();
         break;
+    case "mongo":
+        const {default: ProductsMongo} = await import("./products/productsMongo.js");
+        const {default: CartsMongo} = await import("./carts/cartsMongo.js");
+        products = new ProductsMongo();
+        carts = new CartsMongo();
     default: 
 }
 

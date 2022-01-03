@@ -3,7 +3,7 @@ import serviceAccount from "../../db/ecommerce-f628b-firebase-adminsdk-h2evm-45e
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    //"https://BASE.firebaseio.com" <-- en BASE vael nombre de mi coleccion
+    //"https://BASE.firebaseio.com" <-- en BASE va el nombre de mi coleccion
     databaseURL: "https://ecommerce-f628b.firebaseio.com"
 });
 

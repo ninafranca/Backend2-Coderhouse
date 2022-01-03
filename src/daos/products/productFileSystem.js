@@ -5,6 +5,7 @@ class ProductFileSystem extends FileContainer {
     constructor() {
         super("objects.txt")
     }
+    
 }
 
 export default ProductFileSystem;

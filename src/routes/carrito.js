@@ -1,22 +1,24 @@
 import express from "express";
-import Carrito from "../contenedor/Carrito.js";
-const carrito  = new Carrito();
+import {carts} from "../daos/index.js";
+//import Carrito from "../contenedor/Carrito.js";
+
+//const carrito  = new Carrito();
 const router = express.Router();
 
 //GET: devuelve todos los productos del carrito
 router.get('/:id/productos', (req, res)=>{
     let id = req.params.id;
-    carrito.getCart(id).then(result => {
+    carts.getCart(id).then(result => {
         res.send(result);
     })
 })
 
 //POST: crea un carrito y devuelve su id
 router.post('/', (req, res) => {
-    carrito.newCart().then(result => {
+    carts.newCart().then(result => {
         res.send(result);
         if(result.status === "success"){
-            carrito.getAll().then(result => {
+            carts.getAll().then(result => {
                 console.log(result);
             })
         }
@@ -27,7 +29,7 @@ router.post('/', (req, res) => {
 router.post('/:id_cart/productos/:id_prod', (req, res) => {
     let prodId = Number(req.params.id_prod);
     let cartId = req.params.id_cart;
-    carrito.saveProdById(prodId, cartId).then(result => {
+    carts.saveProdById(prodId, cartId).then(result => {
         res.send(result);
     })
 })
@@ -36,7 +38,7 @@ router.post('/:id_cart/productos/:id_prod', (req, res) => {
 router.delete('/:id', (req, res) => {
     let id = req.params.id;
     //console.log(id)
-    carrito.deleteCartById(id).then(result => {
+    carts.deleteCartById(id).then(result => {
         res.send(result);
     })
 })
@@ -45,7 +47,7 @@ router.delete('/:id', (req, res) => {
 router.delete('/:id_cart/productos/:id_prod', (req, res) => {
     let prodId = Number(req.params.id_prod);
     let cartId = req.params.id_cart;
-    carrito.deleteCartProd(cartId, prodId).then(result => {
+    carts.deleteCartProd(cartId, prodId).then(result => {
         res.send(result);
     })
 })

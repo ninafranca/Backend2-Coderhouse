@@ -1,11 +1,11 @@
 import express from "express";
-import Contenedor from "../contenedor/Contenedor.js";
-//import Products from "../services/ProductsDB.js";
 import {products} from "../daos/index.js";
+//import Contenedor from "../contenedor/Contenedor.js";
+//import Products from "../services/ProductsDB.js";
 
-//const contenedor  = new Contenedor();
 const admin = true;
 const router = express.Router();
+//const contenedor  = new Contenedor();
 //const productsService = new Products();
 
 //GETS

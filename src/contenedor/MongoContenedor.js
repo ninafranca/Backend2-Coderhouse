@@ -1,21 +1,19 @@
-import fs from "fs";
+import mongoose from "mongoose";
 import config from "../public/js/config.js";
 
-class FileContainer {
+mongoose.connect(config.mongo.baseUrl, {useNewUrlParser: true, useUnifiedTopology: true});
 
-    constructor(file_endpoint) {
-        this.url = `${config.fileSystem.baseUrl}${file_endpoint}`
+export default class MongoContenedor {
+
+    constructor(collection, schema, timestamps) {
+        this.collection = mongoose.model(collection, new mongoose.Schema(schema, timestamps))
     }
 
     //MÉTODOS PRODUCTOS
     async getAll() {
         try {
-            const readFile = await fs.promises.readFile(this.url, "utf-8")
-            if (!readFile) {
-                throw new Error("No hay productos")
-            } else {   
-                return {status: "success", payload: JSON.parse(readFile)}
-            }
+            const readFile = await this.collection.find();
+            return {status: "success", payload: readFile}
         } catch(error) {
             return {status: "error", message: "Error buscando productos"}
         }
@@ -23,55 +21,27 @@ class FileContainer {
 
     async getById(id) {
         try {
-            if(!id) throw new Error("Falta parámetro")
-            const readFile = await fs.promises.readFile(this.url, "utf-8")
-            if(!readFile) {
-                throw new Error("No hay productos")
+            const product = await this.collection.findOne({id: {$eq: id}});
+            if(!product) {
+                return {status: "error", message: "Producto no encontrado"}
             } else {
-                const data = JSON.parse(readFile).find(e => e.id === id)
-                if(!data) {
-                    throw new Error("Producto no encontrado")
-                } else {
-                    return {status: "success", payload: data}
-                }
+                return {status: "success", payload: product}
             }
         } catch(error) {
             return {status: "error", message: "Error buscando el producto"}
         }
     }
-  
+
     async save(product) {
         try {
-            if(Object.keys(product).length === 0) {
-                throw new Error("Falta parámetro")
+            let exists = await this.collection.findOne({title: {$eq: product.title}})
+            if (exists) {
+                return {status: "error", message: "El producto ya existe"}
             }
-            const readFile = await fs.promises.readFile(this.url, "utf-8")
-            let products = []
-            let id = 1
-            let timestamp = new Date().toLocaleString()
-            if(readFile) {
-            products = JSON.parse(readFile)
-            const ids = products.map(product => product.id)
-            const maxId = Math.max(...ids)
-            id = maxId + 1
-            const hasProduct = products.find(e => e.title === product.title)
-            if(hasProduct) throw new Error("El producto ya existe")
-            }
-            let dataObj = {
-                id: id,
-                title : product.title,
-                timestamp: timestamp,
-                description: product.description,
-                code: makeId(5),
-                price: product.price,
-                thumbnail: product.thumbnail,
-                stock: product.stock? product.stock : 0
-            }
-            products = [...products, dataObj]
-            await fs.promises.writeFile(this.url, JSON.stringify(products, null, 2))
-            return {status: "success", payload: product}
+            let newProduct = await this.collection.create(product);
+            return {status: "success", payload: newProduct}
         } catch(error) {
-            return {status: "error", message: "Error al guardar producto"}
+            return {status: "error", message: error}
         }
     }
   
@@ -200,5 +170,3 @@ class FileContainer {
     }
 
 }
-
-export default FileContainer;
