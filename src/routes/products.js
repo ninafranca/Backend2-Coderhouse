@@ -16,7 +16,8 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:id', (req, res)=>{
-    let id= parseInt(req.params.id);
+    //let id= parseInt(req.params.id);
+    let id = req.params.id;
     products.getById(id).then(result => {
         res.send(result);
     })
@@ -43,7 +44,8 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     if(admin) {
         let body = req.body;
-        let id = parseInt(req.params.id);
+        //let id = parseInt(req.params.id);
+        let id = req.params.id;
         products.updateObject(id, body).then(result => {
             res.send(result);
         })
@@ -55,7 +57,8 @@ router.put('/:id', (req, res) => {
 //DELETE
 router.delete('/:id', (req, res) => {
     if(admin) {
-        let id= parseInt(req.params.id);
+        //let id= parseInt(req.params.id);
+        let id = req.params.id;
         products.deleteById(id).then(result => {
             res.send(result);
         })

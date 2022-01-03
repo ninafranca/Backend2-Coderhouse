@@ -21,49 +21,38 @@ export default class MongoContenedor {
 
     async getById(id) {
         try {
-            const product = await this.collection.findOne({id: {$eq: id}});
+            const product = await this.collection.findById(id);
             if(!product) {
                 return {status: "error", message: "Producto no encontrado"}
             } else {
                 return {status: "success", payload: product}
             }
         } catch(error) {
-            return {status: "error", message: "Error buscando el producto"}
+            return {status: "error", message: "Error buscando el producto" + error}
         }
     }
 
     async save(product) {
         try {
-            let exists = await this.collection.findOne({title: {$eq: product.title}})
+            let exists = await this.collection.findOne({title: {$eq: product.title}});
             if (exists) {
                 return {status: "error", message: "El producto ya existe"}
             }
             let newProduct = await this.collection.create(product);
             return {status: "success", payload: newProduct}
         } catch(error) {
-            return {status: "error", message: error}
+            return {status: "error", message: "Error al guardar producto"}
         }
     }
-  
+
     async updateObject(id, body) {
         try {
-            let data = await fs.promises.readFile(this.url,"utf-8");
-            let prods = JSON.parse(data);
-            if(!prods.some(p => p.id === id)) return {status: "error", message: "No hay productos con el id especificado"}
-            let result = prods.map(prod => {
-                if(prod.id === id){
-                    body = Object.assign({id: id, ...body})
-                    return body;
-                } else {
-                    return prod;
-                }
-            })
-            try {
-                await fs.promises.writeFile(this.url, JSON.stringify(result, null, 2));
-                return {status: "success", message: "Producto actualizado"}
-            } catch {
-                return {status:"error", message: "Error al actualizar el producto"}
+            let product = await this.collection.findById(id);
+            if(product) {
+                let updatedProduct = await product.updateOne(body);
+                return {status: "success", message: "Producto actualizado exitosamente"};
             }
+            return {status: "error", message: "No hay productos con el id especificado"}
         } catch(error) {
             return {status: "error", message: "Fallo al actualizar el producto: " + error}
         }
@@ -71,16 +60,15 @@ export default class MongoContenedor {
 
     async deleteById(id) {
         try {
-            const readFile = await fs.promises.readFile(this.url, "utf-8")
-            let products = JSON.parse(readFile)
-            const idFound = products.find(e => e.id === id)
-            if(!idFound) throw new Error(`ID '${id}' no encontrado`)
-            let newProducts = products.filter(e => e.id !== id)
-            if(newProducts.length === 0) newProducts = ''
-            await fs.promises.writeFile(this.url, JSON.stringify(newProducts, null, 2))
-            return {status: "success", message: "Producto borrado"}
+            let products = await this.collection.find();
+            let product = await this.collection.findById(id)
+            if(product) {
+                let deletedProduct = await this.collection.findByIdAndDelete(id);
+                return {status: "success", payload: product}
+            }
+            return {status: "error", message: "Producto no encontrado"}
         } catch(error) {
-            return {status: "error", message: "Error al borrar producto"}
+            return {status: "error", message: error}
         }
     }
 
