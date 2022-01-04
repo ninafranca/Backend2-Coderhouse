@@ -1,10 +1,13 @@
 import fs from "fs";
 import config from "../public/js/config.js";
+import {makeId} from "../utils.js";
+import __dirname from "../utils.js";
 
 class FileContainer {
 
     constructor(file_endpoint) {
-        this.url = `${config.fileSystem.baseUrl}${file_endpoint}`
+        this.url = `${config.fileSystem.baseUrl}${file_endpoint}`,
+        this.prodFile = __dirname + "/files/objects.txt"
     }
 
     //MÉTODOS PRODUCTOS
@@ -23,12 +26,11 @@ class FileContainer {
 
     async getById(id) {
         try {
-            if(!id) throw new Error("Falta parámetro")
             const readFile = await fs.promises.readFile(this.url, "utf-8")
             if(!readFile) {
                 throw new Error("No hay productos")
             } else {
-                const data = JSON.parse(readFile).find(e => e.id === id)
+                const data = JSON.parse(readFile).filter(p => p.id === id)
                 if(!data) {
                     throw new Error("Producto no encontrado")
                 } else {
@@ -62,7 +64,7 @@ class FileContainer {
                 title : product.title,
                 timestamp: timestamp,
                 description: product.description,
-                code: makeId(5),
+                code: product.code,
                 price: product.price,
                 thumbnail: product.thumbnail,
                 stock: product.stock? product.stock : 0
@@ -71,7 +73,7 @@ class FileContainer {
             await fs.promises.writeFile(this.url, JSON.stringify(products, null, 2))
             return {status: "success", payload: product}
         } catch(error) {
-            return {status: "error", message: "Error al guardar producto"}
+            return {status: "error", message: "Error al guardar el producto"}
         }
     }
   
@@ -95,7 +97,7 @@ class FileContainer {
                 return {status:"error", message: "Error al actualizar el producto"}
             }
         } catch(error) {
-            return {status: "error", message: "Fallo al actualizar el producto: " + error}
+            return {status: "error", message: "Fallo al actualizar el producto: "}
         }
     }
 
@@ -116,6 +118,8 @@ class FileContainer {
 
     //METODOS CARRITO
     async newCart() {
+        let readCarts = await fs.promises.readFile(this.url, "utf-8");
+        let carts = JSON.parse(readCarts)
         try {
             const newCart = {
                 id: makeId(5),
@@ -133,39 +137,38 @@ class FileContainer {
     //Agrego validación si ya existe el producto en el carrito
     async saveProdById(productId, id) {
         try {
-            const fileProducts = await fs.promises.readFile(this.productsFile, "utf-8");
+            const fileProducts = await fs.promises.readFile(this.prodFile, "utf-8");
             const products = JSON.parse(fileProducts);
             const productToAdd = products.find(p => p.id === productId);
             const fileCarts = await fs.promises.readFile(this.url, "utf-8");
             const allCarts = JSON.parse(fileCarts);
-            let carts = allCarts.find(c => c.id === id);
+            let cart = allCarts.find(c => c.id === id);
             let otherCarts = allCarts.filter(c => c.id !== id);
-            let cartProduct = carts.products.find(p => p.id === productId);
-            console.log(cartProduct);
+            let cartProduct = cart.products.find(p => p.id === productId);
             if(cartProduct) {
                 return "Producto ya existente en carrito"
             } else {
-                carts.products = [...carts.products, productToAdd];
-                carts = [...otherCarts, carts]
+                cart.products = [...cart.products, {"id": productToAdd.id}];
+                let carts = [...otherCarts, cart]
                 await fs.promises.writeFile(this.url, JSON.stringify(carts, null, 2));
-                return carts;
+                return {status: "success", payload: cart};
             }
         } catch(err) {
-            return { status: "error", message: "Error al añadir producto" };
+            return { status: "error", message: "Error al guardar producto en carrito" };
         }
     }
 
     async getCart(id) {
         try {
             let readCarts = await fs.promises.readFile(this.url, "utf-8");
-            let cart = JSON.parse(readCarts).find(c => c.id === id).products;
+            let cart = JSON.parse(readCarts).find(c => c.id === id);
             if(!cart) {
-                throw new Error(`El carrito con id ${id} no existe`);
+                throw new Error("El carrito no existe");
             } else {
-                return cart;
+                return {satus: "success", payload: cart}
             }
         } catch(error) {
-            return {status: "error", message: "Error al obtener carrito"}
+            return {status: "error", message: "Error al obtener carrito"};
         }
     }
 
@@ -189,13 +192,13 @@ class FileContainer {
             let carts = JSON.parse(fileCarts);
             let cart = carts.find(c => c.id === id);
             let otherCarts = carts.filter(c => c.id !== id);
-            let products = cart.products.filter(c => c.id !== productId);
-            cart.products = products;
+            let prods = cart.products.filter(c => c.id !== productId);
+            cart.products = prods;
             carts = [...otherCarts, cart];
             await fs.promises.writeFile(this.url, JSON.stringify(carts, null, 2));
-            return carts
+            return {status: "success", payload: cart.products}
         } catch(error) {
-            return { status: "error", message: "Error al borrar producto"}
+            return { status: "error", message: error.message}
         }
     }
 

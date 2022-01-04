@@ -1,10 +1,11 @@
 import express from "express";
-import {products} from "../daos/index.js";
+import {products, persistance} from "../daos/index.js";
 //import Contenedor from "../contenedor/Contenedor.js";
 //import Products from "../services/ProductsDB.js";
 
 const admin = true;
 const router = express.Router();
+const fileSystem = "fileSystem";
 //const contenedor  = new Contenedor();
 //const productsService = new Products();
 
@@ -16,11 +17,17 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:id', (req, res)=>{
-    //let id= parseInt(req.params.id);
-    let id = req.params.id;
-    products.getById(id).then(result => {
-        res.send(result);
-    })
+    if(persistance === fileSystem) {
+        let id= parseInt(req.params.id);
+        products.getById(id).then(result => {
+            res.send(result);
+        })
+    } else {
+        let id = req.params.id;
+        products.getById(id).then(result => {
+            res.send(result);
+        })
+    }
 })
 
 //POST
@@ -44,11 +51,17 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     if(admin) {
         let body = req.body;
-        //let id = parseInt(req.params.id);
-        let id = req.params.id;
-        products.updateObject(id, body).then(result => {
-            res.send(result);
-        })
+        if(persistance === fileSystem) {
+            let id = parseInt(req.params.id);
+            products.updateObject(id, body).then(result => {
+                res.send(result);
+            })
+        } else {
+            let id = req.params.id;
+            products.updateObject(id, body).then(result => {
+                res.send(result);
+            })
+        }
     } else {
         res.status(403).send({ error: -1, description: "Ruta '/api/productos/:id' metodo PUT no autorizado"})
     }
@@ -57,11 +70,17 @@ router.put('/:id', (req, res) => {
 //DELETE
 router.delete('/:id', (req, res) => {
     if(admin) {
-        //let id= parseInt(req.params.id);
-        let id = req.params.id;
-        products.deleteById(id).then(result => {
-            res.send(result);
-        })
+        if(persistance === fileSystem) {
+            let id= parseInt(req.params.id);
+            products.deleteById(id).then(result => {
+                res.send(result);
+            })
+        } else {
+            let id = req.params.id;
+            products.deleteById(id).then(result => {
+                res.send(result);
+            })
+        }
     } else {
         res.status(403).send({ error: -1, description: "Ruta '/api/productos/:id' metodo DELETE no autorizado"})
     }

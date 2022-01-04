@@ -16,7 +16,8 @@ const db = admin.firestore();
 export default class FBContenedor {
 
     constructor(collection) {
-        this.collection = db.collection(collection)
+        this.collection = db.collection(collection);
+        this.productsColl = db.collection("productos");
     }
 
     //MÉTODOS PRODUCTOS
@@ -79,95 +80,119 @@ export default class FBContenedor {
                 return {status: "success", message: "El producto se ha actualizado exitosamente"};
             }
         } catch(error) {
-            return {status: "error", message: "Error al actualizar producto"}
+            return {status: "error", message: "Error al actualizar producto"};
         }
     }
 
     async deleteById(id) {
         try {
-            const collection = this.collection.doc(id)
+            const collection = this.collection.doc(id);
             const result = await collection.get();
             const product = result.data();
             if(!product) {
                 return {status: "error", message: "El producto no existe"};
             } else {
                 await collection.delete();
-                return {status: "success", message: "El producto se ha borrado exitosamente"}
+                return {status: "success", message: "El producto se ha borrado exitosamente"};
             }
         } catch(error) {
-            return {status: "error", message: error.message}
+            return {status: "error", message: error.message};
         }
     }
 
     //METODOS CARRITO
     async newCart() {
         try {
-            let cart = await this.collection.create({products: []});
-            return {status: "success", payload: cart}
+            const cart = await this.collection.add({products: []});
+            return {status: "success", message: "El carrito ha sido creado con éxito"}
         } catch(error) {
-            return {status: "error", message: "Error al crear carrito"}
+            return {status: "error", message: "Eror al crear carrito"}
         }
     }
 
-    //Agrego validación si ya existe el producto en el carrito
     async saveProdById(productId, id) {
         try {
-            let cartProduct = await this.collection.findById(id).findOne({products: productId});
-            if(cartProduct) {
-                return {status: "error", message: "Producto ya existente en carrito"}
+            const collection = await this.collection.doc(id).get();
+            let cart = collection.data();
+            if(!cart) {
+                return {status: "error", message: "El carrito no existe"};
             } else {
-                await this.collection.findByIdAndUpdate(id, {$push: {products: productId }});
-                return {status: "success", message: "El producto se ha guardado exitosamente"};
+                let productData = await this.productsColl.doc(productId).get();
+                let product = productData.data();
+                if (!product) {
+                    return {status: "error", message: "El producto no existe"};
+                } else {
+                    product.id = productId;
+                    let prodInCart = cart.products.find(p => p.id === productId);
+                    if(prodInCart) {
+                        return {status: "error", message: "El producto ya existe en el carrito"};
+                    } else {
+                        const products = [
+                            ...cart.products,
+                            product.id
+                        ];
+                        await this.collection.doc(id).set({products: products});
+                        return {status: "success", message: "El producto se ha guardado exitosamente"};
+                    }
+                }
             }
         } catch(error) {
-            return {status: "error", message: "Error al añadir producto"};
+            return {status: "error", message: error.message};
         }
     }
 
     async getCart(id) {
         try {
-            let cart = await this.collection.findById(id);
+            const collection = await this.collection.doc(id).get();
+            const cart = collection.data();
             if(!cart) {
-                return {status: "error", message: "El carrito no existe"}
+                return {status: "error", message: "El carrito no existe"};
             } else {
-                return {status: "error", payload: cart};
+                const products = cart.products;
+                return {status: 'success', payload: products};
             }
         } catch(error) {
-            return {status: "error", message: "Error al obtener carrito" + error}
+            return {status: "error", message: "Error al obtener producto"};
         }
     }
 
     async deleteCartById(cartId) {
         try {
-            let cart = await this.collection.findById(cartId);
+            const collection = this.collection.doc(cartId);
+            const cartObject = await collection.get();
+            const cart = cartObject.data();
             if (!cart) {
                 return {status: "error", message: "El carrito no existe"};
             } else {
-                await this.collection.findByIdAndDelete(cartId);
-                return {status: "success", message: "El carrito se ha borrado exitosamente"};
+                await collection.delete();
+                return {status: "success", message: "El carrito ha sido borrado exitosamente"};
             }
         } catch(error) {
-            return {status: "error", message: "Error al borrar carrito"};
+            return { status: 'error', message: "Error al borrar el carrito" }
         }
     }
+    
 
     async deleteCartProd(cartId, productId) {
         try {
-            let cart = await this.collection.findById(cartId);
+            const collection = await this.collection.doc(cartId).get();
+            let cart = collection.data();
             if (!cart) {
-                return {status: "error", message: "No existe el carrito especificado"};
+                return {status: "error", message: "El carrito no existe"};
             } else {
-                const product = await this.collection.findById(cartId).findOne({products: productId});
-                if (!product) {
+                let product = cart.products.filter(p => p.id === productId);
+                if(!product) {
                     return {status: "error", message: "El producto no existe en el carrito"};
                 } else {
-                    await this.collection.findByIdAndUpdate(cartId, {$pull: { products: productId}})
-                    return {status: "success", message: "El producto se ha borrado exitosamente del carrito"}
+                    let notProduct = cart.products.filter(p => p.id !== productId);
+                    console.log(notProduct);
+                    await this.collection.doc(cartId).set({products: notProduct});
+                    return {status: "success", message: "El producto se ha borrado del carrito"};
                 }
             }
-        } catch(error) {
-        return {status: 'error', message: "Error al borrar producto del carrito"}
-        }
+          } catch(error) {
+                return {status: "error", message: error.message}
+          }
     }
 
 }
@@ -257,6 +282,4 @@ class ContenedorFirebase {
 
     async desconectar() {
     }
-}
-
-export default ContenedorFirebase*/
+}*/

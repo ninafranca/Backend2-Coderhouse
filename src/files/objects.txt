@@ -98,5 +98,15 @@
     "price": "150",
     "thumbnail": "https://t3.ftcdn.net/jpg/01/05/32/66/240_F_105326673_WQkNlVNmXcccMwNNNXP64iR9875dvHCI.jpg",
     "stock": 50
+  },
+  {
+    "id": 21,
+    "title": "One Million",
+    "description": "One Million Parfum by Paco Rabanne",
+    "price": 85,
+    "thumbnail": "https://res.cloudinary.com/nanette/image/upload/v1640056868/backend-ecommerce/one_million_-_Paco_Rabanne_uz17l4.webp",
+    "stock": 35,
+    "code": "one-million_paco-rabanne",
+    "brand": "Paco Rabanne"
   }
 ]

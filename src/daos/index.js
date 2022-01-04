@@ -1,7 +1,7 @@
 let products;
 let carts;
 // persistance según la persistencia que quiera usar (fileSystem, mongo o firebase)
-let persistance = "firebase";
+let persistance = "fileSystem";
 
 switch(persistance) {
     case "fileSystem":
@@ -23,4 +23,4 @@ switch(persistance) {
     default: 
 }
 
-export {products, carts};
+export {products, carts, persistance};
