@@ -28,7 +28,7 @@ export default class MongoContenedor {
                 return {status: "success", payload: product}
             }
         } catch(error) {
-            return {status: "error", message: "Error buscando el producto" + error}
+            return {status: "error", message: "Error buscando el producto"}
         }
     }
 
@@ -49,40 +49,33 @@ export default class MongoContenedor {
         try {
             let product = await this.collection.findById(id);
             if(product) {
-                let updatedProduct = await product.updateOne(body);
+                await product.updateOne(body);
                 return {status: "success", message: "Producto actualizado exitosamente"};
             }
             return {status: "error", message: "No hay productos con el id especificado"}
         } catch(error) {
-            return {status: "error", message: "Fallo al actualizar el producto: " + error}
+            return {status: "error", message: "Fallo al actualizar el producto: "}
         }
     }
 
     async deleteById(id) {
         try {
-            let products = await this.collection.find();
             let product = await this.collection.findById(id)
             if(product) {
-                let deletedProduct = await this.collection.findByIdAndDelete(id);
-                return {status: "success", payload: product}
+                await this.collection.findByIdAndDelete(id);
+                return {status: "success", message: "Producto borrado exitosamente"}
             }
-            return {status: "error", message: "Producto no encontrado"}
+            return {status: "error", message: "Producto inexistente"}
         } catch(error) {
-            return {status: "error", message: error}
+            return {status: "error", message: "Error borrando producto"}
         }
     }
 
     //METODOS CARRITO
     async newCart() {
         try {
-            const newCart = {
-                id: makeId(5),
-                date: new Date().toLocaleString(),
-                products: []
-            };
-            carts = [...carts, newCart];
-            await fs.promises.writeFile(this.url, JSON.stringify(carts, null, 2));
-            return newCart;
+            let cart = await this.collection.create({products: []});
+            return {status: "success", payload: cart}
         } catch(error) {
             return {status: "error", message: "Error al crear carrito"}
         }
@@ -91,69 +84,61 @@ export default class MongoContenedor {
     //Agrego validación si ya existe el producto en el carrito
     async saveProdById(productId, id) {
         try {
-            const fileProducts = await fs.promises.readFile(this.productsFile, "utf-8");
-            const products = JSON.parse(fileProducts);
-            const productToAdd = products.find(p => p.id === productId);
-            const fileCarts = await fs.promises.readFile(this.url, "utf-8");
-            const allCarts = JSON.parse(fileCarts);
-            let carts = allCarts.find(c => c.id === id);
-            let otherCarts = allCarts.filter(c => c.id !== id);
-            let cartProduct = carts.products.find(p => p.id === productId);
-            console.log(cartProduct);
+            let cartProduct = await this.collection.findById(id).findOne({products: productId});
             if(cartProduct) {
-                return "Producto ya existente en carrito"
+                return {status: "error", message: "Producto ya existente en carrito"}
             } else {
-                carts.products = [...carts.products, productToAdd];
-                carts = [...otherCarts, carts]
-                await fs.promises.writeFile(this.url, JSON.stringify(carts, null, 2));
-                return carts;
+                await this.collection.findByIdAndUpdate(id, {$push: {products: productId }});
+                return {status: "success", message: "El producto se ha guardado exitosamente"};
             }
-        } catch(err) {
-            return { status: "error", message: "Error al añadir producto" };
+        } catch(error) {
+            return {status: "error", message: "Error al añadir producto"};
         }
     }
 
     async getCart(id) {
         try {
-            let readCarts = await fs.promises.readFile(this.url, "utf-8");
-            let cart = JSON.parse(readCarts).find(c => c.id === id).products;
+            let cart = await this.collection.findById(id);
             if(!cart) {
-                throw new Error(`El carrito con id ${id} no existe`);
+                return {status: "error", message: "El carrito no existe"}
             } else {
-                return cart;
+                return {status: "error", payload: cart};
             }
         } catch(error) {
-            return {status: "error", message: "Error al obtener carrito"}
+            return {status: "error", message: "Error al obtener carrito" + error}
         }
     }
 
     async deleteCartById(cartId) {
         try {
-            let readCarts = await fs.promises.readFile(this.url, "utf-8");
-            let carts = JSON.parse(readCarts);
-            const notId = carts.filter(c => c.id !== cartId);
-            carts = [...notId];
-            if (notId.length === 0) notId = "";
-            await fs.promises.writeFile(this.url, JSON.stringify(carts, null, 2));
-            return notId;
+            let cart = await this.collection.findById(cartId);
+            if (!cart) {
+                return {status: "error", message: "El carrito no existe"};
+            } else {
+                await this.collection.findByIdAndDelete(cartId);
+                return {status: "success", message: "El carrito se ha borrado exitosamente"};
+            }
         } catch(error) {
-            return {status: "error", message: "Error al borrar carrito"}
+            return {status: "error", message: "Error al borrar carrito"};
         }
     }
 
-    async deleteCartProd(id, productId) {
+    async deleteCartProd(cartId, productId) {
         try {
-            let fileCarts = await fs.promises.readFile(this.url, "utf-8");
-            let carts = JSON.parse(fileCarts);
-            let cart = carts.find(c => c.id === id);
-            let otherCarts = carts.filter(c => c.id !== id);
-            let products = cart.products.filter(c => c.id !== productId);
-            cart.products = products;
-            carts = [...otherCarts, cart];
-            await fs.promises.writeFile(this.url, JSON.stringify(carts, null, 2));
-            return carts
+            let cart = await this.collection.findById(cartId);
+            if (!cart) {
+                return {status: "error", message: "No existe el carrito especificado"};
+            } else {
+                const product = await this.collection.findById(cartId).findOne({products: productId});
+                if (!product) {
+                    return {status: "error", message: "El producto no existe en el carrito"};
+                } else {
+                    await this.collection.findByIdAndUpdate(cartId, {$pull: { products: productId}})
+                    return {status: "success", message: "El producto se ha borrado exitosamente del carrito"}
+                }
+            }
         } catch(error) {
-            return { status: "error", message: "Error al borrar producto"}
+        return {status: 'error', message: "Error al borrar producto del carrito"}
         }
     }
 
