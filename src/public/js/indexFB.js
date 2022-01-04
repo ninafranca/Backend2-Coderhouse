@@ -1,4 +1,4 @@
-import admin from "firebase-admin";
+/*import admin from "firebase-admin";
 import serviceAccount from "../../db/ecommerce-f628b-firebase-adminsdk-h2evm-45e406a98c.json";
 
 admin.initializeApp({
@@ -32,7 +32,7 @@ async function CRUD() {
         //.data() para que me extraiga los datos de manera más legible//
         //console.log(product.data());
 
-        //ACTUALIZO UN REGISTRO CON UPDATE(REFERENCIA)//Si lo hago son .set() se borran todos los campos que no pasé// 
+        //ACTUALIZO UN REGISTRO CON UPDATE(REFERENCIA)//Si lo hago con .set() se borran todos los campos que no pasé// 
         //let id = "WKXsTmdhx2KsXeSYJSNT";
         //const doc = currentCollection.doc(id);
         //Solo paso el campo que necesito actualizar//
@@ -46,4 +46,4 @@ async function CRUD() {
     } catch (error) {
         return {status: error, message: error.message}
     }
-}
+}*/
