@@ -1,7 +1,7 @@
 let products;
 let carts;
-// persistance según la persistencia que quiera usar (fileSystem, mongo o firebase)
-let persistance = "fileSystem";
+//Cambio el valor de la variable según la persistencia que quiera usar (fileSystem, mongo o firebase):
+let persistance = "mongo";
 
 switch(persistance) {
     case "fileSystem":
@@ -15,11 +15,13 @@ switch(persistance) {
         const {default: CartsMongo} = await import("./carts/cartsMongo.js");
         products = new ProductsMongo();
         carts = new CartsMongo();
+        break;
     case "firebase":
         const {default: ProductsFB} = await import("./products/productsFB.js");
         const {default: CartsFB} = await import("./carts/cartsFB.js");
         products = new ProductsFB;
         carts = new CartsFB;
+        break;
     default: 
 }
 

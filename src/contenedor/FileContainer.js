@@ -97,7 +97,7 @@ class FileContainer {
                 return {status:"error", message: "Error al actualizar el producto"}
             }
         } catch(error) {
-            return {status: "error", message: "Fallo al actualizar el producto: "}
+            return {status: "error", message: "Fallo al actualizar el producto"}
         }
     }
 
@@ -144,11 +144,11 @@ class FileContainer {
             const allCarts = JSON.parse(fileCarts);
             let cart = allCarts.find(c => c.id === id);
             let otherCarts = allCarts.filter(c => c.id !== id);
-            let cartProduct = cart.products.find(p => p.id === productId);
+            let cartProduct = cart.products.find(p => p === productId);
             if(cartProduct) {
                 return "Producto ya existente en carrito"
             } else {
-                cart.products = [...cart.products, {"id": productToAdd.id}];
+                cart.products = [...cart.products, productToAdd.id];
                 let carts = [...otherCarts, cart]
                 await fs.promises.writeFile(this.url, JSON.stringify(carts, null, 2));
                 return {status: "success", payload: cart};
@@ -180,7 +180,7 @@ class FileContainer {
             carts = [...notId];
             if (notId.length === 0) notId = "";
             await fs.promises.writeFile(this.url, JSON.stringify(carts, null, 2));
-            return notId;
+            return {status: "success", message: "El carrito ha sido borrado exitosamente"}
         } catch(error) {
             return {status: "error", message: "Error al borrar carrito"}
         }
@@ -192,13 +192,18 @@ class FileContainer {
             let carts = JSON.parse(fileCarts);
             let cart = carts.find(c => c.id === id);
             let otherCarts = carts.filter(c => c.id !== id);
-            let prods = cart.products.filter(c => c.id !== productId);
-            cart.products = prods;
-            carts = [...otherCarts, cart];
-            await fs.promises.writeFile(this.url, JSON.stringify(carts, null, 2));
-            return {status: "success", payload: cart.products}
+            let prod = cart.products.find(p => p === productId);
+            if(!prod) {
+                return {status: "error", message: "El producto no existe en el carrito"};
+            } else {
+                let prods = cart.products.filter(c => c !== productId);
+                cart.products = prods;
+                carts = [...otherCarts, cart];
+                await fs.promises.writeFile(this.url, JSON.stringify(carts, null, 2));
+                return {status: "success", payload: cart.products};
+            }
         } catch(error) {
-            return { status: "error", message: error.message}
+            return { status: "error", message: "El producto ha sido borrado exitosamente del carrito"}
         }
     }
 

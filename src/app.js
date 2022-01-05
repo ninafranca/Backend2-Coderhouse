@@ -1,26 +1,16 @@
-//const express = require("express");
-//const Contenedor = require("./contenedor/Contenedor");
-//const Carrito = require("./contenedor/Carrito");
-//const ChatMessages = require("./services/ChatMessages")
-//const productsRouter = require("./routes/products");
-//const carritoRouter = require("./routes/carrito");
-//const {Server} = require("socket.io");
-//const {engine} = require("express-handlebars");
-//const cors = require("cors");
-
+//import ChatMessages from "./services/ChatMessages.js";
 import __dirname from "./utils.js";
 import express from "express";
 import Contenedor from "./contenedor/Contenedor.js";
 import Carrito from "./contenedor/Carrito.js";
-//import ChatMessages from "./services/ChatMessages.js";
 import productsRouter from "./routes/products.js";
 import carritoRouter from "./routes/carrito.js";
 import {Server} from "socket.io";
 import {engine} from "express-handlebars";
 import cors from "cors";
 
-const contenedor = new Contenedor();
 //const chatMessages = new ChatMessages();
+const contenedor = new Contenedor();
 const carrito = new Carrito();
 const app = express();
 const PORT = process.env.PORT || 8080;

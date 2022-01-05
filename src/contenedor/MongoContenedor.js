@@ -35,7 +35,7 @@ export default class MongoContenedor {
     async save(product) {
         try {
             let exists = await this.collection.findOne({title: {$eq: product.title}});
-            if (exists) {
+            if(exists) {
                 return {status: "error", message: "El producto ya existe"}
             }
             let newProduct = await this.collection.create(product);
@@ -102,7 +102,7 @@ export default class MongoContenedor {
             if(!cart) {
                 return {status: "error", message: "El carrito no existe"}
             } else {
-                return {status: "error", payload: cart};
+                return {status: "success", payload: cart};
             }
         } catch(error) {
             return {status: "error", message: "Error al obtener carrito" + error}
