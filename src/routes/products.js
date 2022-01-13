@@ -1,13 +1,9 @@
 import express from "express";
 import {products, persistance} from "../daos/index.js";
-//import Contenedor from "../contenedor/Contenedor.js";
-//import Products from "../services/ProductsDB.js";
 
 const admin = true;
 const router = express.Router();
 const fileSystem = "fileSystem";
-//const contenedor  = new Contenedor();
-//const productsService = new Products();
 
 //GETS
 router.get('/', (req, res) => {

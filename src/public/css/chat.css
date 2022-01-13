@@ -21,7 +21,7 @@
     font-style: italic;
 }
 
-#user {
+#user, #age, #avatar, #alias, #first_name, #last_name {
     width: 30%;
     margin-bottom: 1.5%;
 }

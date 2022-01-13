@@ -1,10 +1,4 @@
-import knex from "knex";
 import __dirname from "../../utils.js";
-
-const database = knex({
-    client: "sqlite3",
-    connection: {filename: "./src/db/ecommerce.sqlite"}
-});
 
 export default {
     fileSystem: {
@@ -17,5 +11,3 @@ export default {
         baseUrl: "https://ecommerce-f628b.firebaseio.com"
     }
 }
-
-//export default database;

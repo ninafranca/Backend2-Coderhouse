@@ -34,17 +34,27 @@
         <div id="deliverProducts"></div>
     </div>
 
-    <div class="chat">
+    <form name="chat-form" class="chat">
         <h1>CHAT</h1>
-        <h2>e-mail</h2>
+        <label for="id">e-mail</label>
         <input id="user" class="border rounded shadow mb-5 bg-body border-secondary" type="email">
-        <h2>mensaje</h2>
+        <label for="first_name">nombre</label>
+        <input id="first_name" class="border rounded shadow mb-5 bg-body border-secondary" type="text">
+        <label for="last_name">apellido</label>
+        <input id="last_name" class="border rounded shadow mb-5 bg-body border-secondary" type="text">
+        <label for="alias">alias</label>
+        <input id="alias" class="border rounded shadow mb-5 bg-body border-secondary" type="text">
+        <label for="avatar">avatar</label>
+        <input id="avatar" class="border rounded shadow mb-5 bg-body border-secondary" type="url">
+        <label for="age">edad</label>
+        <input id="age" class="border rounded shadow mb-5 bg-body border-secondary" type="number">
+        <label for="message">mensaje</label>
         <input id="info" class="border rounded shadow mb-5 bg-body border-secondary">
-            <button class="btn btn-secondary btn-lg" id="send-message">enviar</button>
+        <button class="btn btn-secondary btn-lg" type="submit" value="send" id="send-message">enviar</button>
         <div>
             <p id="log"></p>
         </div>
-    </div>
+    </form>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="../js/form.js"></script>

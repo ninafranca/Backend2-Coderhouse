@@ -71,7 +71,7 @@ export default class MongoContenedor {
         }
     }
 
-    //METODOS CARRITO
+    //MÉTODOS CARRITO
     async newCart() {
         try {
             let cart = await this.collection.create({products: []});
@@ -139,6 +139,35 @@ export default class MongoContenedor {
             }
         } catch(error) {
         return {status: 'error', message: "Error al borrar producto del carrito"}
+        }
+    }
+
+    //MÉTODOS CHAT
+    async getAllMessages() {
+        try {
+            const readFile = await this.collection.find();
+            if(!readFile) {
+                return {status: "error", message: "No hay mensajes"};
+            } else {
+                return {status: "success", payload: readFile};
+            } 
+        } catch(error) {
+            return {status: "error", message: "Error leyendo los mensajes"};
+        }
+    }
+
+    async saveMessage(message) {
+        try {
+            const readFile = await this.collection.find();
+            if(!readFile) {
+                let newChat = await this.collection.create();
+                let newMessage = await this.collection.create(message);
+            } else {
+                let newMessage = await this.collection.create(message);
+                return {status: "success", payload: newMessage};
+            } 
+        } catch(error) {
+            return {status: "error", message: error.message};
         }
     }
 

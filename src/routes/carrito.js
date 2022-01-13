@@ -1,8 +1,6 @@
 import express from "express";
 import {carts, persistance} from "../daos/index.js";
-//import Carrito from "../contenedor/Carrito.js";
 
-//const carrito  = new Carrito();
 const router = express.Router();
 const fileSystem = "fileSystem";
 

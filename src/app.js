@@ -1,16 +1,19 @@
-//import ChatMessages from "./services/ChatMessages.js";
 import __dirname from "./utils.js";
 import express from "express";
 import Contenedor from "./contenedor/Contenedor.js";
 import Carrito from "./contenedor/Carrito.js";
+//import ChatsMongo from "./daos/chats/chatsMongo.js";
+import {chats} from "./daos/index.js";
 import productsRouter from "./routes/products.js";
 import carritoRouter from "./routes/carrito.js";
+import chatsRouter from "./routes/chats.js";
+import {generate} from "./utils.js";
 import {Server} from "socket.io";
 import {engine} from "express-handlebars";
 import cors from "cors";
 
-//const chatMessages = new ChatMessages();
 const contenedor = new Contenedor();
+//const chatsMongo = new ChatsMongo();
 const carrito = new Carrito();
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -27,8 +30,9 @@ app.use((req, res, next) => {
     req.io = io;
     next();
 })
-app.use('/api/productos', productsRouter);
-app.use('/api/carrito', carritoRouter);
+app.use("/api/productos", productsRouter);
+app.use("/api/carrito", carritoRouter);
+app.use("/api/chats", chatsRouter);
 app.use(express.static(__dirname + "/public"));
 
 //APP.ENGINE
@@ -42,7 +46,12 @@ app.set("view engine", "handlebars");
 
 //APP.GET
 app.get("/", (req, res) => {
-    res.sendFile('index.html', {root: __dirname + "/public/html"});
+    res.sendFile("index.html", {root: __dirname + "/public/html"});
+})
+app.get("/api/productos-test", (req, res) => {
+    let quantity = req.query.quantity ? parseInt(req.query.quantity) : 10;
+    let products = generate(quantity);
+    res.render("ProductsTest", {prods: products});
 })
 
 //HANDLEBARS
@@ -64,11 +73,11 @@ io.on("connection", async socket => {
     socket.emit("deliverProducts", products);
     socket.emit("messagelog", messages);
     socket.on("message", data => {
-        //ACA INSERTAR METODOS PARA MENSAJES
-        chatMessages.saveMessage(data)
+        //ACA INSERTAR MÉTODOS PARA MENSAJES
+        chats.saveMessage(data)
         .then(result => console.log(result))
         .then(() => {
-            chatMessages.getAllMessages().then(result => {
+            chats.getAllMessages().then(result => {
             if (result.status === "success") {
                 io.emit("message", result.payload)
             }
