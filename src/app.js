@@ -11,6 +11,7 @@ import {generate} from "./utils.js";
 import {Server} from "socket.io";
 import {engine} from "express-handlebars";
 import cors from "cors";
+//import bodyParser from "body-parser";
 
 const contenedor = new Contenedor();
 //const chatsMongo = new ChatsMongo();
@@ -34,6 +35,7 @@ app.use("/api/productos", productsRouter);
 app.use("/api/carrito", carritoRouter);
 app.use("/api/chats", chatsRouter);
 app.use(express.static(__dirname + "/public"));
+//app.use(bodyParser.urlencoded({extended: true}));
 
 //APP.ENGINE
 //Para Handlebars

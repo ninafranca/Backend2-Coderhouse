@@ -1,8 +1,8 @@
 import express from "express";
 import {chats} from "../daos/index.js";
+import ChatsMongo from "../daos/chats/chatsMongo.js";
 
 const router = express.Router();
-const fileSystem = "fileSystem";
 
 //GET: devuelve todos los mensajes del chat
 router.get('/', (req, res)=>{
@@ -13,8 +13,16 @@ router.get('/', (req, res)=>{
 
 //POST: guarda un mensaje al chat
 router.post('/', (req, res) => {
-    let message = req.body;
-    chats.saveMessage(message).then(result => {
+    let chat = new ChatsMongo({
+        id: req.body.user,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        alias: req.body.alias,
+        avatar: req.body.avatar,
+        age: req.body.age,
+        message: req.body.input
+    })
+    chat.saveMessage(message).then(result => {
         console.log(result);
     })
 })
