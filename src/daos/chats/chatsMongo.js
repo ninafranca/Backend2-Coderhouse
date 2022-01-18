@@ -2,6 +2,7 @@ import Schema from "mongoose";
 import MongoContenedor from "../../contenedor/MongoContenedor.js";
 
 export default class ChatsMongo extends MongoContenedor {
+
     constructor() {
         super(
             "chats",
@@ -28,4 +29,5 @@ export default class ChatsMongo extends MongoContenedor {
             {timestamps: true}
         )
     }
+    
 }

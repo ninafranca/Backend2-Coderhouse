@@ -163,9 +163,11 @@ export default class MongoContenedor {
                 let newChat = await this.collection.create();
                 let newMessage = await this.collection.create(message);
             } else {
+                console.log(1);
                 let newMessage = await this.collection.create(message);
+                console.log(2);
                 return {status: "success", payload: newMessage};
-            } 
+            }
         } catch(error) {
             return {status: "error", message: error.message};
         }

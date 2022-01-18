@@ -11,10 +11,8 @@ import {generate} from "./utils.js";
 import {Server} from "socket.io";
 import {engine} from "express-handlebars";
 import cors from "cors";
-//import bodyParser from "body-parser";
 
 const contenedor = new Contenedor();
-//const chatsMongo = new ChatsMongo();
 const carrito = new Carrito();
 const app = express();
 const PORT = process.env.PORT || 8080;

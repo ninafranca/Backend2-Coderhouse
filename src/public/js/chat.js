@@ -1,29 +1,12 @@
 let input = document.getElementById("info");
 let email = document.getElementById("user");
-let firstName = document.getElementById("first_name");
-let lastName = document.getElementById("last_name");
-let alias = document.getElementById("alias");
-let avatar = document.getElementById("avatar");
-let age = document.getElementById("age");
 let enter = document.getElementById("send-message");
+let chatForm = document.getElementById("chat-form");
 
 input.addEventListener("keyup", (e) => {
     if(e.key === "Enter") {
         if(e.target.value && email.value) {
-            socket.emit('message', 
-                {
-                    author: {
-                        id: email.value,
-                        first_name: firstName.value,
-                        las_name: lastName.value,
-                        alias: alias.value,
-                        avatar: avatar.value,
-                        age: age.value
-                    },
-                    message: e.target.value, 
-                    date: date.toLocaleString()
-                }
-            );
+            socket.emit('message', {email: email.value, message: e.target.value});
             input.value = "";
         }
     }
@@ -34,6 +17,27 @@ enter.addEventListener("click", ()=> {
         socket.emit('message', {email: email.value, message: input.value});
         input.value = "";
     }
+})
+
+chatForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let info = new FormData(chatForm);
+    let sendObject = {
+        id: email,
+        first_name: info.get("first_name"),
+        last_name: info.get("last_name"),
+        alias: info.get("alias"),
+        avatar: info.get("avatar"),
+        age: info.get("age"),
+        text: input
+    }
+    fetch("/api/chats", {
+        method: "POST",
+        body: JSON.stringify(sendObject),
+        headers: {"Content-Type":"application/json"}
+    }).then(result => result.json()).then(json => {
+        chatForm.reset();
+    })
 })
 
 //CUANDO RECIBA EL WELCOME, CON LA DATA QUE ME HAYA PASADO, VOY A EJECUTAR X
