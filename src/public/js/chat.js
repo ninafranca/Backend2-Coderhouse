@@ -3,33 +3,19 @@ let email = document.getElementById("user");
 let enter = document.getElementById("send-message");
 let chatForm = document.getElementById("chat-form");
 
-input.addEventListener("keyup", (e) => {
-    if(e.key === "Enter") {
-        if(e.target.value && email.value) {
-            socket.emit('message', {email: email.value, message: e.target.value});
-            input.value = "";
-        }
-    }
-})
 
-enter.addEventListener("click", ()=> {
-    if(input.value && email.value) {
-        socket.emit('message', {email: email.value, message: input.value});
-        input.value = "";
-    }
-})
 
 chatForm.addEventListener("submit", (e) => {
     e.preventDefault();
     let info = new FormData(chatForm);
     let sendObject = {
-        id: email,
+        email: info.get("email"),
         first_name: info.get("first_name"),
         last_name: info.get("last_name"),
         alias: info.get("alias"),
         avatar: info.get("avatar"),
         age: info.get("age"),
-        text: input
+        text: info.get("text")
     }
     fetch("/api/chats", {
         method: "POST",

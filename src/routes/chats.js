@@ -13,8 +13,9 @@ router.get("/", (req, res)=>{
 //POST: guarda un mensaje en el chat
 router.post("/", async (req, res) => {
     let chat = req.body;
-    let result = await chats.saveMessage(chat);
-    res.send({message: "Mensaje guardado", chat: result})
+    chats.saveMessage(chat).then(result => {
+        res.send(result)
+    })
 })
 
 export default router;
