@@ -14,10 +14,12 @@
 .user {
     color: blue;
     font-weight: bold;
+    padding-right: 1%;
 }
 
 .date {
     color: rgb(119, 27, 27);
+    padding-right: 1%;
 }
 
 .message {
@@ -27,17 +29,29 @@
 
 #user, #age, #avatar, #alias, #first_name, #last_name {
     width: 30%;
-    margin-bottom: 1.5%;
+    margin-bottom: 2% !important;
 }
 
 #info {
     width: 30%;
     padding-bottom: 5%;
-    margin-bottom: 2%;
+    margin-bottom: 2.5% !important;
 }
 
 #send-message {
     margin-bottom: 2%;
     padding: 0.2% 1.5%;
     font-size: 100%;
+}
+
+.sent-msg {
+    display: flex;
+    align-items: center;
+    margin: 0 0 1.5% 20%;
+
+}
+
+.sent-msg>img {
+    width: 10%;
+    padding-right: 2%;
 }

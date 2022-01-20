@@ -1,0 +1,40 @@
+#login-form {
+    background-color: rgb(189, 187, 187);
+    display: flex;
+    justify-content: center;
+}
+
+.login-div {
+    display: flex;
+    align-items: start;
+}
+
+.login-div2 {
+    padding-left: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 30vw;
+}
+
+.login-div2>h1 {
+    font-size: 200%;
+}
+
+.login-div2>label {
+    font-size: 130%;
+    padding-bottom: 2%;
+    font-style: italic;
+}
+
+.login-div2>input {
+    height: 5.5vh;
+    width: 28vw;
+}
+
+.login-div2>button {
+    font-size: 90%;
+    height: 6vh !important;
+    width: 20% !important;
+    margin: -7% 0 3% 0;
+}

@@ -32,9 +32,10 @@ chatForm.addEventListener("submit", (e) => {
 //CUANDO RECIBA EL WELCOME, CON LA DATA QUE ME HAYA PASADO, VOY A EJECUTAR X
 socket.on("messagelog", data => {
     let p = document.getElementById("log");
+    let avatar = document.getElementById("avatar").value;
     let date = new Date();
     let mensajes = data.map(message => {
-        return `<div><span class="user">${message.email}</span> <span class="date">[${date.toLocaleString()}]</span><span class="message">: ${message.message}</span></div>`
+        return `<div class="sent-msg"><img src="${avatar}" alt="Avatar"><span class="user">${message.email}</span> <span class="date">[${date.toLocaleString()}] </span><span class="message">${message.message}</span></div>`
     }).join("");
     p.innerHTML = mensajes;
 
