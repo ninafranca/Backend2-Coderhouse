@@ -3,11 +3,13 @@ let email = document.getElementById("user");
 let enter = document.getElementById("send-message");
 let chatForm = document.getElementById("chat-form");
 
-
-
 chatForm.addEventListener("submit", (e) => {
     e.preventDefault();
     let info = new FormData(chatForm);
+    if(input.value && email.value) {
+        socket.emit('message', {email: email.value, message: input.value});
+        input.value = "";
+    }
     let sendObject = {
         email: info.get("email"),
         first_name: info.get("first_name"),
@@ -22,7 +24,8 @@ chatForm.addEventListener("submit", (e) => {
         body: JSON.stringify(sendObject),
         headers: {"Content-Type":"application/json"}
     }).then(result => result.json()).then(json => {
-        chatForm.reset();
+        input.value = ""; 
+
     })
 })
 
@@ -34,4 +37,5 @@ socket.on("messagelog", data => {
         return `<div><span class="user">${message.email}</span> <span class="date">[${date.toLocaleString()}]</span><span class="message">: ${message.message}</span></div>`
     }).join("");
     p.innerHTML = mensajes;
+
 })

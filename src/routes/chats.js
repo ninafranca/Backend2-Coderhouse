@@ -13,9 +13,8 @@ router.get("/", (req, res)=>{
 //POST: guarda un mensaje en el chat
 router.post("/", async (req, res) => {
     let chat = req.body;
-    chats.saveMessage(chat).then(result => {
-        res.send(result)
-    })
+    let data = await chats.saveMessage(chat);
+    res.send({status: "success", payload: data})
 })
 
 export default router;
