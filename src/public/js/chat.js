@@ -11,12 +11,14 @@ chatForm.addEventListener("submit", (e) => {
         input.value = "";
     }
     let sendObject = {
-        email: info.get("email"),
-        first_name: info.get("first_name"),
-        last_name: info.get("last_name"),
-        alias: info.get("alias"),
-        avatar: info.get("avatar"),
-        age: info.get("age"),
+        author: {
+            email: info.get("email"),
+            first_name: info.get("first_name"),
+            last_name: info.get("last_name"),
+            alias: info.get("alias"),
+            avatar: info.get("avatar"),
+            age: info.get("age")
+        },
         text: info.get("text")
     }
     fetch("/api/chats", {
@@ -38,5 +40,4 @@ socket.on("messagelog", data => {
         return `<div class="sent-msg"><img src="${avatar}" alt="Avatar"><span class="user">${message.email}</span> <span class="date">[${date.toLocaleString()}] </span><span class="message">${message.message}</span></div>`
     }).join("");
     p.innerHTML = mensajes;
-
 })
