@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import config from "../public/js/config.js";
+import {normalize, denormalize, schema} from "normalizr";
 
 mongoose.connect(config.mongo.baseUrl, {useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -164,11 +165,29 @@ export default class MongoContenedor {
                 await this.collection.create(message);
             } else {
                 let newMessage = await this.collection.create(message);
-                return {status: "success", payload: newMessage};
+                let id=1
+                for (let message of readFile) {
+                    message.id=id
+                    id++
+                }
+                const data= {
+                    "id": id,
+                    "mensajes": JSON.parse(JSON.stringify(readFile))
+                }
+                const authorSchema= new schema.Entity("authors")
+                const messageSchema= new schema.Entity("messages",{
+                    author: authorSchema
+                })
+                const chatSchema= new schema.Entity("chats",{
+                    author: authorSchema,
+                    mensajes: [messageSchema]
+                })
+                const normalizedData= normalize(data,chatSchema)
+                //const denormalizedData = denormalize(data.result, chatSchema, data.entities);
+                return {status: "success", payload: normalizedData};
             }
         } catch(error) {
-            console.log("soy saveMessage y trueno");
-            return {status: "error", message: error.message};
+            return {status: "error", message: "No se ha podido guardar el mensaje"};
         }
     }
 
