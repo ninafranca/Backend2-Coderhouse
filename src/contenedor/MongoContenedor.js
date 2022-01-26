@@ -191,4 +191,54 @@ export default class MongoContenedor {
         }
     }
 
+    //MÉTODOS USERS
+    async getUsers() {
+        try {
+            const readFile = await this.collection.find();
+            if(!readFile) {
+                return {status: "error", message: "No hay usuarios"};
+            } else {
+                return {status: "success", payload: readFile};
+            } 
+        } catch(error) {
+            return {status: "error", message: "Error leyendo los usuarios"};
+        }
+    }
+
+    async saveUser(user) {
+        try {
+            const readFile = await this.collection.find();
+            if(!readFile) {
+                await this.collection.create();
+                let exists = this.collection.findOne({email: user.email});
+                if(exists) return {status: "error", message: "Ya existe usuario con mismo e-mail"};
+                await this.collection.create(user);
+            } else {
+                let exists = this.collection.findOne({email: user.email});
+                if(exists) {
+                    return {status: "error", message: "Ya existe usuario con mismo e-mail"};
+                } else {
+                    let newUser = await this.collection.create(user);
+                    return {status: "success", payload: newUser};
+                }
+            }
+        } catch(error) {
+            return {status: "error", message: error.message};
+        }
+    }
+
+    async getByName(name) {
+        try {
+            const userFound = await this.collection.findOne({name: name});
+            console.log(userFound);
+            if(!userFound) {
+                return {status: "error", message: "No existe el usuario"};
+            } else {
+                return {status: "success", payload: userFound};
+            } 
+        } catch(error) {
+            return {status: "error", message: error.message};
+        }
+    }
+
 }

@@ -1,4 +1,7 @@
 /* FORM STYLES */
+.product-form_title {
+    text-align: center;
+}
 
 form {
     display: flex;

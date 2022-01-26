@@ -26,8 +26,7 @@ chatForm.addEventListener("submit", (e) => {
         body: JSON.stringify(sendObject),
         headers: {"Content-Type":"application/json"}
     }).then(result => result.json()).then(json => {
-        input.value = ""; 
-
+        input.value = "";
     })
 })
 
