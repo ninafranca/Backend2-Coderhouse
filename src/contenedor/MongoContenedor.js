@@ -164,7 +164,7 @@ export default class MongoContenedor {
                 await this.collection.create();
                 await this.collection.create(message);
             } else {
-                let newMessage = await this.collection.create(message);
+                await this.collection.create(message);
                 let id=1
                 for (let message of readFile) {
                     message.id=id
@@ -215,6 +215,7 @@ export default class MongoContenedor {
                 await this.collection.create(user);
             } else {
                 let exists = await this.collection.findOne({email: user.email});
+                console.log(exists);
                 if(exists) {
                     return {status: "error", message: "Ya existe usuario con mismo e-mail"};
                 } else {
@@ -229,7 +230,7 @@ export default class MongoContenedor {
 
     async getByName(name) {
         try {
-            const userFound = await this.collection.find({name: name});
+            const userFound = await this.collection.findOne({name: name});
             console.log(userFound);
             if(!userFound) {
                 return {status: "error", message: "No existe el usuario"};

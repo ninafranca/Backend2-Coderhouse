@@ -13,8 +13,9 @@ router.get("/", (req, res) => {
 //POST
 router.post("/", async (req, res) => {
     let user = req.body;
+    console.log(user);
     let data = await users.saveUser(user)
-    res.send({status: "success", payload: data})
+    res.send({user: data})
 })
 
 export default router;

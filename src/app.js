@@ -35,13 +35,14 @@ app.use((req, res, next) => {
 app.use("/api/productos", productsRouter);
 app.use("/api/carrito", carritoRouter);
 app.use("/api/chats", chatsRouter);
-app.use("/api/users", usersRouter);
+app.use("/register", usersRouter);
 app.use(express.static(__dirname + "/public"));
 app.use(session({
     store: MongoStore.create({mongoUrl: "mongodb+srv://Nina:123@ecommerce.b23tg.mongodb.net/sessions?retryWrites=true&w=majority"}),
     secret: "nin4",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {maxAge: 1000}
 }))
 
 //APP.ENGINE
@@ -57,6 +58,15 @@ app.set("view engine", "handlebars");
 app.get("/", (req, res) => {
     res.sendFile("index.html", {root: __dirname + "/public/pages"});
 })
+app.get('/login', (req, res) => {
+    res.sendFile("login.html", {root: __dirname + "/public/pages"});
+})
+app.get('/register', (req, res) => {
+    res.sendFile("register.html", {root: __dirname + "/public/pages"});
+})
+app.get('/logged', (req, res) => {
+    res.sendFile("logged.html", {root: __dirname + "/public/pages"});
+})
 app.get("/api/productos-test", (req, res) => {
     let quantity = req.query.quantity ? parseInt(req.query.quantity) : 10;
     let products = generate(quantity);
@@ -69,15 +79,6 @@ app.get("/logged", (req, res) => {
     } else {
         res.send({ status: "error", message: "Error al loguearse" })
     }
-})
-app.get('/login', (req, res) => {
-    res.sendFile("login.html", {root: __dirname + "/public/pages"});
-})
-app.get('/register', (req, res) => {
-    res.sendFile("register.html", {root: __dirname + "/public/pages"});
-})
-app.get('/logged', (req, res) => {
-    res.sendFile("logged.html", {root: __dirname + "/public/pages"});
 })
 
 //APP.POST
@@ -102,7 +103,7 @@ app.post("/login", async (req, res) => {
 app.post("/logout", (req, res) => {
     const user = req.session.user;
     req.session.user = null;
-    res.send({ status: "success", message: "Te has deslogueado" });
+    res.send({ status: "success", message: "Hasta luego" });
 });
 
 //HANDLEBARS
