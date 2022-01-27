@@ -210,11 +210,11 @@ export default class MongoContenedor {
             const readFile = await this.collection.find();
             if(!readFile) {
                 await this.collection.create();
-                let exists = this.collection.findOne({email: user.email});
+                let exists = await this.collection.findOne({email: user.email});
                 if(exists) return {status: "error", message: "Ya existe usuario con mismo e-mail"};
                 await this.collection.create(user);
             } else {
-                let exists = this.collection.findOne({email: user.email});
+                let exists = await this.collection.findOne({email: user.email});
                 if(exists) {
                     return {status: "error", message: "Ya existe usuario con mismo e-mail"};
                 } else {
@@ -229,7 +229,7 @@ export default class MongoContenedor {
 
     async getByName(name) {
         try {
-            const userFound = await this.collection.findOne({name: name});
+            const userFound = await this.collection.find({name: name});
             console.log(userFound);
             if(!userFound) {
                 return {status: "error", message: "No existe el usuario"};

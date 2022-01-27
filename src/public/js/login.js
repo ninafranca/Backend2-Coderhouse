@@ -1,7 +1,25 @@
 let userEmail = document.getElementById("user_email");
 let userName = document.getElementById("user_name");
-
 const login = document.getElementById("login");
+
+const sendLogin = document.getElementById("login-form");
+sendLogin.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let info = new FormData(sendLogin);
+    let sendObject = {
+        name: info.get("login_name").toUpperCase(),
+        email: info.get("login_email")
+    }
+    fetch("/login", {
+        method: "POST",
+        body: JSON.stringify(sendObject),
+        headers: {"Content-Type":"application/json"}
+    }).then(result => result.json()).then(json => {
+        console.log(sendObject);
+        location.replace("../pages/logged.html")
+    })
+})
+
 /*
 let renderLogin = `
     <form id="login-form" name="login-form">
@@ -18,26 +36,9 @@ let renderLogin = `
 login.innerHTML = renderLogin;
 login.style.visibility = "hidden";
 login.style.height = "0vh";*/
-const sendLogin = document.getElementById("login-form");
-sendLogin.addEventListener("submit", (e) => {
-    console.log("soy eventListener de login");
-    e.preventDefault();
-    let info = new FormData(sendLogin);
-    let sendObject = {
-        name: info.get("login_name").toUpperCase(),
-        email: info.get("login_email")
-    }
-    fetch("/api/login", {
-        method: "POST",
-        body: JSON.stringify(sendObject),
-        headers: {"Content-Type":"application/json"}
-    }).then(result => result.json()).then(json => {
-        console.log(1);
-        location.replace("../pages/logged.html")
-    })
-})
 
-const register = document.getElementById("registration");
+
+
 /*let renderRegistration = `
     <div class="div-registration">
         <h1>Registro de Usuario</h1>
@@ -56,24 +57,11 @@ loginSpan.addEventListener("click", () => {
     location.replace("login")
 })*/
 
-const registrationForm = document.getElementById("registration-form");
-registrationForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    let info = new FormData(registrationForm);
-    let sendObject = {
-        user: {
-            email: info.get("user_email"),
-            name: info.get("user_name").toUpperCase()
-        }
-    }
-    fetch("/api/users", {
-        method: "POST",
-        body: JSON.stringify(sendObject),
-        headers: {"Content-Type":"application/json"}
-    }).then(result => result.json()).then(json => {
-        location.replace("../pages/logged.html")
-    })
-})
+
+
+
+
+
 
 
 
@@ -106,22 +94,17 @@ sendLogin.addEventListener("submit", (e) => {
         name: info.get("login_name").toUpperCase(),
     }
     console.log(0);
-    fetch("/api/login", {
+    fetch("/login", {
         method: "POST",
         body: JSON.stringify(sendObject),
         headers: {"Content-Type":"application/json"}
     }).then(result => result.json()).then(json => {
-        console.log(1);
         login.remove();
-        console.log(2);
         let name = info.get("login_name");
-        console.log(3);
         let welcomeLogged = document.getElementById("welcome");
-        console.log(4);
         let renderWelcome = `
             <h1>Biemvenido ${name}</h1>
         `;
-        console.log(5);
         welcomeLogged.innerHTML = renderWelcome;
     })
 })

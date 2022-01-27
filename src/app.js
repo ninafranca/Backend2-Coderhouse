@@ -2,7 +2,7 @@ import __dirname from "./utils.js";
 import express from "express";
 import Contenedor from "./contenedor/Contenedor.js";
 //import Carrito from "./contenedor/Carrito.js";
-import {chats} from "./daos/index.js";
+import {chats, users} from "./daos/index.js";
 import productsRouter from "./routes/products.js";
 import carritoRouter from "./routes/carrito.js";
 import chatsRouter from "./routes/chats.js";
@@ -14,7 +14,6 @@ import {engine} from "express-handlebars";
 import cors from "cors";
 import session from "express-session";
 import MongoStore from "connect-mongo";
-import usersMongo from "./daos/users/usersMongo.js";
 
 const contenedor = new Contenedor();
 //const carrito = new Carrito();
@@ -37,14 +36,12 @@ app.use("/api/productos", productsRouter);
 app.use("/api/carrito", carritoRouter);
 app.use("/api/chats", chatsRouter);
 app.use("/api/users", usersRouter);
-//app.use("/api/login", loginRouter);
 app.use(express.static(__dirname + "/public"));
-//app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
     store: MongoStore.create({mongoUrl: "mongodb+srv://Nina:123@ecommerce.b23tg.mongodb.net/sessions?retryWrites=true&w=majority"}),
     secret: "nin4",
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false
 }))
 
 //APP.ENGINE
@@ -65,7 +62,7 @@ app.get("/api/productos-test", (req, res) => {
     let products = generate(quantity);
     res.render("ProductsTest", {prods: products});
 })
-app.get("/api/login", (req, res) => {
+app.get("/logged", (req, res) => {
     if(req.session.user) {
         res.send(req.session.user)
         res.sendFile("logged.html", {root: __dirname + "/public/pages"})
@@ -73,41 +70,40 @@ app.get("/api/login", (req, res) => {
         res.send({ status: "error", message: "Error al loguearse" })
     }
 })
-
 app.get('/login', (req, res) => {
     res.sendFile("login.html", {root: __dirname + "/public/pages"});
 })
-  
 app.get('/register', (req, res) => {
     res.sendFile("register.html", {root: __dirname + "/public/pages"});
 })
-
 app.get('/logged', (req, res) => {
     res.sendFile("logged.html", {root: __dirname + "/public/pages"});
 })
 
 //APP.POST
-app.post("/api/login", async (req, res) => {
+app.post("/login", async (req, res) => {
     try {
-        console.log("Soy login route");
-        let name = req.body;
-        console.log(name);
-        if(!name) {
-            return res.satus(400).send({error: "Completa el nombre"})
+        let {name, email} = req.body;
+        if(!name || !email) {
+            return res.satus(400).send({error: "Completa los campos"})
         }
-        const user = await usersMongo.getByName(name);
-        console.log("mongo user");
+        let user = await users.getByName(name);
+        console.log(user);
         if (!user) return {status: "error", message: "Usuario no encontrado"};
         req.session.user = {
             name: user.name,
             email: user.email
         }
-        console.log("casi llego al final del try");
-        res.send({status:"Logged"})
+        res.send({status:"Logged"});
     } catch(error) {
         return {status: "error", message: error.message};
     }
 })
+app.post("/logout", (req, res) => {
+    const user = req.session.user;
+    req.session.user = null;
+    res.send({ status: "success", message: "Te has deslogueado" });
+});
 
 //HANDLEBARS
 app.get("/productos", (req, res) => {
