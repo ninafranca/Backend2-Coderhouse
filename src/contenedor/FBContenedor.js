@@ -7,7 +7,7 @@ const serviceAccount = require("../db/ecommerce-f628b-firebase-adminsdk-h2evm-45
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     //"https://BASE.firebaseio.com" <-- en BASE va el nombre de mi coleccion
-    databaseURL: "https://ecommerce-f628b.firebaseio.com"
+    databaseURL: `${process.env.FIREBASE}`
 });
 
 const db = admin.firestore();
