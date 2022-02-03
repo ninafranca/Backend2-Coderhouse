@@ -7,6 +7,7 @@ import productsRouter from "./routes/products.js";
 import carritoRouter from "./routes/carrito.js";
 import chatsRouter from "./routes/chats.js";
 import usersRouter from "./routes/users.js";
+import randomsRouter from "./routes/randoms.js";
 //import loginRouter from "./routes/login.js";
 import {generate} from "./utils.js";
 import {Server} from "socket.io";
@@ -17,6 +18,7 @@ import MongoStore from "connect-mongo";
 import initializePassportConfig from "./public/js/passport-config.js";
 import passport from "passport";
 import config from "./public/js/envConfig.js";
+import {cwd, pid, version, title, platform, memoryUsage} from "process";
 
 const contenedor = new Contenedor();
 //const carrito = new Carrito();
@@ -39,6 +41,7 @@ app.use("/api/productos", productsRouter);
 app.use("/api/carrito", carritoRouter);
 app.use("/api/chats", chatsRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/randoms", randomsRouter);
 app.use(express.static(__dirname + "/public"));
 app.use(session({
     secret: "nin4",
@@ -73,6 +76,19 @@ app.get("/login", (req, res) => {
 });
 app.get("/logged", (req, res) => {
     res.sendFile("logged.html", {root: __dirname + "/public/pages"});
+});
+app.get("/info", (req, res) => {
+    let info = {
+        arguments: process.argv,
+        cwd: cwd(),
+        pid: pid,
+        version: version,
+        title: title,
+        platform: platform,
+        memory: memoryUsage()
+    }
+    console.log(info);
+    res.send(info);
 });
 
 app.get("/api/productos-test", (req, res) => {
