@@ -4,9 +4,12 @@ import {fork} from "child_process";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    const random = fork("../Desafio Rutas/src/public/js/randomsCalc.js");
-    random.on("message", (data) => {
-        res.send(`Número random ${data}`)
+    const child = fork("../Desafio Rutas/src/public/js/randomsCalc.js");
+    let quantity = Number(req.query.cant);
+    child.send(quantity);
+    child.on("message", (numbers) => {
+        console.log(numbers);
+        res.send(`Número/s random ${numbers}`)
     })
 })
 

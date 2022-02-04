@@ -17,13 +17,25 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import initializePassportConfig from "./public/js/passport-config.js";
 import passport from "passport";
-import config from "./public/js/envConfig.js";
+//import config from "./public/js/envConfig.js";
 import {cwd, pid, version, title, platform, memoryUsage} from "process";
+import minimist from "minimist";
 
+let minimizedArgs = minimist(process.argv.slice(2), {
+    integer: ["PORT"],
+    alias: {
+        PORT: 'p'
+    },
+    default: {
+        PORT: 8080
+    }
+});
+
+let PORT = minimizedArgs.PORT;
 const contenedor = new Contenedor();
 //const carrito = new Carrito();
 const app = express();
-const PORT = process.env.PORT || 8080;
+//const PORT = process.env.PORT || 8080;
 const server = app.listen(PORT,() => {
     console.log("Listening on port: ", PORT)
 });

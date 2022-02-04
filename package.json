@@ -22,6 +22,7 @@
     "faker": "^5.5.3",
     "firebase-admin": "^10.0.1",
     "knex": "^0.95.14",
+    "minimist": "^1.2.5",
     "mongoose": "^6.1.4",
     "normalizr": "^3.6.1",
     "passport": "^0.5.2",
