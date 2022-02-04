@@ -6,6 +6,8 @@ const router = express.Router();
 router.get("/", (req, res) => {
     const child = fork("../Desafio Rutas/src/public/js/randomsCalc.js");
     let quantity = Number(req.query.cant);
+    if (!(quantity >= 0)) quantity = 100000000;
+    console.log(quantity);
     child.send(quantity);
     child.on("message", (numbers) => {
         console.log(numbers);
