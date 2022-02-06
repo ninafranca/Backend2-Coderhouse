@@ -7,7 +7,7 @@ const facebookStrategy = fbStrategy.Strategy;
 const initializePassportConfig = () => {
 
     passport.use("facebook", new facebookStrategy({
-        clientID: 617219482683854,
+        clientID: config.FACEBOOK_ID,
         clientSecret: config.FACEBOOK_SECRET,
         callbackURL: config.NGROK_CALLBACK,
         profileFields: ["emails", "displayName", "photos"]

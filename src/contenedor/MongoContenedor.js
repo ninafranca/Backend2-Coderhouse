@@ -228,7 +228,10 @@ export default class MongoContenedor {
 
     async getByName(name) {
         try {
+            console.log(0);
+            console.log(this.collection)
             const userFound = await this.collection.findOne({name: name});
+            console.log(1);
             console.log(userFound);
             if(!userFound) {
                 return {status: "error", message: "No existe el usuario"};

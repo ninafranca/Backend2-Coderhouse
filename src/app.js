@@ -17,7 +17,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import initializePassportConfig from "./public/js/passport-config.js";
 import passport from "passport";
-//import config from "./public/js/envConfig.js";
+import config from "./public/js/envConfig.js";
 import {cwd, pid, version, title, platform, memoryUsage} from "process";
 import minimist from "minimist";
 
@@ -57,7 +57,7 @@ app.use("/api/randoms", randomsRouter);
 app.use(express.static(__dirname + "/public"));
 app.use(session({
     secret: "nin4",
-    store: MongoStore.create({mongoUrl: "mongodb+srv://Nina:123@ecommerce.b23tg.mongodb.net/sessions?retryWrites=true&w=majority"}),
+    store: MongoStore.create({mongoUrl: config.MONGO_SESSIONS}),
     resave: false,
     saveUninitialized: false,
     cookie: {maxAge: 10000}
@@ -129,15 +129,13 @@ app.get("/auth/facebook/callback", passport.authenticate("facebook", {failureRed
 app.post("/login", async (req, res) => {
     try {
         let {name, email} = req.body;
-        if(!name || !email) {
-            return res.satus(400).send({error: "Completa los campos"})
-        }
         let user = await users.getByName(name);
+        console.log("soy /login");
         console.log(user);
         if (!user) return {status: "error", message: "Usuario no encontrado"};
         req.session.user = {
-            name: user.payload.user.name,
-            email: user.payload.user.email
+            name: user.name,
+            email: user.email
         }
         res.send({status:"Logged"});
     } catch(error) {
