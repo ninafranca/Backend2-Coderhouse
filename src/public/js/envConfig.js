@@ -9,4 +9,7 @@ export default {
     NGROK_CALLBACK: process.env.NGROK_CALLBACK,
     FACEBOOK_ID: process.env.FACEBOOK_ID,
     FACEBOOK_SECRET: process.env.FACEBOOK_SECRET,
+    GMAIL_PASS: process.env.GMAIL_PASS,
+    TWILIO_TRIAL: process.env.TWILIO_TRIAL,
+    TWILIO_VERIFIED: process.env.TWILIO_VERIFIED
 }

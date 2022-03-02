@@ -34,6 +34,7 @@ const initializePassportConfig = () => {
     passport.deserializeUser((id, done) => {
         users.findById(id, done)
     });
+    
 }
 
 export default initializePassportConfig;
