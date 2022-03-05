@@ -1,9 +1,13 @@
 import {fileURLToPath} from 'url';
 import {dirname} from 'path';
 import faker from 'faker';
+import bcrypt from "bcrypt";
 
 const filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(filename);
+
+export const hashPassword = password => bcrypt.hashSync(password,bcrypt.genSaltSync(10));
+export const validPassword = (user, password) => bcrypt.compareSync(password, user.password);
 
 export function makeId(length) {
     let result = '';

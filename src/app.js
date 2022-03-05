@@ -15,11 +15,12 @@ import {engine} from "express-handlebars";
 import cors from "cors";
 import session from "express-session";
 import MongoStore from "connect-mongo";
-import initializePassportConfig from "./public/js/passport-config.js";
+import initializePassport from "./public/js/passport.js";
 import passport from "passport";
 import config from "./public/js/envConfig.js";
 import {cwd, pid, version, title, platform, memoryUsage} from "process";
 import minimist from "minimist";
+import upload from "./public/js/upload.js";
 
 let minimizedArgs = minimist(process.argv.slice(2), {
     integer: ["PORT"],
@@ -62,7 +63,7 @@ app.use(session({
     saveUninitialized: false,
     cookie: {maxAge: 10000}
 }));
-initializePassportConfig();
+initializePassport();
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -80,15 +81,12 @@ app.set("view engine", "handlebars");
 app.get("/", (req, res) => {
     res.sendFile("index.html", {root: __dirname + "/public/pages"});
 });
-app.get("/register", (req, res) => {
-    res.sendFile("register.html", {root: __dirname + "/public/pages"});
-});
 app.get("/login", (req, res) => {
     res.sendFile("login.html", {root: __dirname + "/public/pages"});
 });
-app.get("/logged", (req, res) => {
-    res.sendFile("logged.html", {root: __dirname + "/public/pages"});
-});
+// app.get("/logged", (req, res) => {
+//     res.sendFile("logged.html", {root: __dirname + "/public/pages"});
+// });
 app.get("/info", (req, res) => {
     let info = {
         arguments: process.argv,
@@ -116,14 +114,9 @@ app.get("/logged", (req, res) => {
         res.send({status: "error", message: "Error al loguearse"})
     }
 });
-app.get("/login/fb", (req, res) => {
-    res.sendFile("fblogin.html", {root: __dirname + "/public/pages"});
-});
-app.get("/auth/facebook", passport.authenticate("facebook", {scope: ["emails"]}), (req, res) => {
-});
-app.get("/auth/facebook/callback", passport.authenticate("facebook", {failureRedirect:'/login-failure'}), (req, res) => {
-    res.send({message:"Logueado"})
-});
+app.get("/failed-register", (req, res)=> {
+    res.send({status: "Error"})
+})
 
 //APP.POST
 app.post("/login", async (req, res) => {
@@ -147,6 +140,10 @@ app.post("/logout", (req, res) => {
     req.session.user = null;
     res.send({status: "success", message: "Hasta luego"});
 });
+app.post("/register", upload.single("avatar"), passport.authenticate("register", {failureRedirect: "/failed-register"}), async (req, res) => {
+    logger.info(`Método: ${req.method} Ruta: ${req.url}`)
+    res.send({status: "success", message: "Usuario registrado con éxito"})
+})
 
 //HANDLEBARS
 app.get("/productos", (req, res) => {

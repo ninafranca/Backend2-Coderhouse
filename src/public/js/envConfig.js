@@ -11,5 +11,7 @@ export default {
     FACEBOOK_SECRET: process.env.FACEBOOK_SECRET,
     GMAIL_PASS: process.env.GMAIL_PASS,
     TWILIO_TRIAL: process.env.TWILIO_TRIAL,
-    TWILIO_VERIFIED: process.env.TWILIO_VERIFIED
+    TWILIO_VERIFIED: process.env.TWILIO_VERIFIED,
+    TWILIO_TOKEN: process.env.TWILIO_TOKEN,
+    TWILIO_SID: process.env.TWILIO_SID,
 }

@@ -1,19 +1,18 @@
-document.addEventListener("submit", sendForm);
 //INSTANCIO
 const socket = io();
+const productForm = document.querySelector("#product-form");
 
-function sendForm(e) {
+productForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    let form = document.querySelector("#product-form");
-    let data = new FormData(form);
+    let data = new FormData(productForm); productForm
     let object = {
-                title: data.get("title"),
-                brand: "brand",
-                code: "code",
-                price: data.get("price"),
-                stock: "code",
-                description: "description",
-                thumbnail: data.get("thumbnail"),
+        title: data.get("title"),
+        brand: "brand",
+        code: "code",
+        price: data.get("price"),
+        stock: "code",
+        description: "description",
+        thumbnail: data.get("thumbnail")
     };
     fetch("http://localhost:8080/api/productos", {
         method: "POST",
@@ -25,8 +24,7 @@ function sendForm(e) {
         let sent = document.getElementById("sent");
         let sentObject = `<h2 class="sent-object">Producto añadido con éxito</h2>`;
         sent.innerHTML = sentObject;
-        let form = document.getElementById("product-form");
-        form.reset();
+        productForm.reset();
         setTimeout(() => {
             sent.innerHTML = "";
         }, 1500)
@@ -36,6 +34,9 @@ function sendForm(e) {
     .catch(() => {
         return {status: "error", message: "Error al enviar el producto"}
     })
+})
+function sendForm(e) {
+    
 }
 
 socket.on("deliverProducts", data => {

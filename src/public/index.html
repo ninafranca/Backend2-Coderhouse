@@ -13,10 +13,29 @@
 
 <body>
 
-    <div id="registration"></div>
-    <div id="login"></div>
-    <div id="logged"></div>
-    <div id="welcome"></div>
+    <div id="user-auth" style="background-color: rgb(230, 225, 220);">
+        <form id="register-form" name="register-form" class="no-flex-container">
+            <h2>Registrar usuario nuevo</h2>
+            <input id="register-user-id" name="email" type="email" placeholder="E-mail" required><br>
+            <input id="register-user-name" name="name" type="text" placeholder="Nombre" required><br>
+            <input id="register-user-age" name="age" type="number" placeholder="Edad" required><br>
+            <input id="register-user-adress" name="address" type="text" placeholder="Domicilio" required><br>
+            <input id="register-user-phone" name="phone" type="text" placeholder="Telefono" required><br>
+            <label for="avatar">Foto</label><br>
+            <input id="register-user-avatar" name="avatar" type="file" placeholder="Foto" required><br>
+            <input id="register-user-password" name="password" type="password" placeholder="Contraseña" required><br>
+            <input id="register-user-repeat-password" name="repeat-password" type="password" placeholder="Repetir contraseña" required><br>
+            <button type="button submit" value="send" class="btn btn-secondary">Registrarse</button>
+        </form>
+        <form id="loginForm" name="loginForm" class="no-flex-container">
+            <h2>Login usuario existente</h2>
+            <label for="login-user-id">Email</label><br>
+            <input name="login-user-id" type="text" required><br>
+            <label for="login-user-password">Contraseña</label><br>
+            <input name="login-user-password" type="password" required><br>
+            <button type="button submit" class="btn btn-secondary">Ingresar</button><br>
+        </form>
+    </div>
 
     <h1 class="product-form_title">Cargar productos</h1>
     <form id="product-form" name="product-form">
@@ -62,6 +81,7 @@
     <script src="../js/form.js"></script>
     <script src="../js/chat.js"></script>
     <script src="../js/login.js"></script>
+    <script src="../js/register.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
 
