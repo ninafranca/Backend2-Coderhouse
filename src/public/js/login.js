@@ -1,6 +1,9 @@
+import createLogger from "./winston.js";
+
 let userEmail = document.getElementById("user_email");
 let userName = document.getElementById("user_name");
 const login = document.getElementById("login");
+const logger = createLogger(process.env.NODE_ENV)
 
 const sendLogin = document.getElementById("login-form");
 sendLogin.addEventListener("submit", (e) => {
@@ -16,7 +19,8 @@ sendLogin.addEventListener("submit", (e) => {
         headers: {"Content-Type":"application/json"}
     }).then(result => result.json()).then(json => {
         if (json.status === "success") {
-            console.log(sendObject);
+            logger.info(`Login: ${sendObject}`);
+            //console.log(sendObject);
             location.replace("../pages/logged.html")
             return result.json();
         }

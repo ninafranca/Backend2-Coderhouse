@@ -21,6 +21,7 @@ import config from "./public/js/envConfig.js";
 import {cwd, pid, version, title, platform, memoryUsage} from "process";
 import minimist from "minimist";
 import upload from "./public/js/upload.js";
+import createLogger from "./public/js/winston.js";
 
 let minimizedArgs = minimist(process.argv.slice(2), {
     integer: ["PORT"],
@@ -41,6 +42,7 @@ const server = app.listen(PORT,() => {
     console.log("Listening on port: ", PORT)
 });
 const io = new Server(server);
+const logger = createLogger(process.env.NODE_ENV);
 
 //APP.USE
 app.use(express.json());
@@ -132,6 +134,7 @@ app.post("/login", async (req, res) => {
         }
         res.send({status:"Logged"});
     } catch(error) {
+        logger.error("Error al loguearse");
         return {status: "error", message: error.message};
     }
 })
@@ -180,5 +183,6 @@ io.on("connection", async socket => {
 })
 
 app.use((req, res) => {
+    logger.warn(`${req.method} method not available in path ${req.path}`);
     res.status(404).send({error: -2, message: "Ruta no implementada"});
 })

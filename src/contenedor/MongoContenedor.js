@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 import config from "../public/js/config.js";
 import {normalize, denormalize, schema} from "normalizr";
+import createLogger from "../public/js/winston.js";
+
+const logger = createLogger(process.env.NODE_ENV);
 
 export default class MongoContenedor {
 
@@ -12,8 +15,10 @@ export default class MongoContenedor {
     async getAll() {
         try {
             const readFile = await this.collection.find();
-            return {status: "success", payload: readFile}
+            logger.info(`Productos: ${readFile}`);
+            //return {status: "success", payload: readFile}
         } catch(error) {
+            logger.error("Error buscando productos");
             return {status: "error", message: "Error buscando productos"}
         }
     }
@@ -22,11 +27,14 @@ export default class MongoContenedor {
         try {
             const product = await this.collection.findById(id);
             if(!product) {
+                logger.error("Producto no encontrado");
                 return {status: "error", message: "Producto no encontrado"}
             } else {
-                return {status: "success", payload: product}
+                logger.info(`Producto: ${product}`);
+                //return {status: "success", payload: product}
             }
         } catch(error) {
+            logger.error("Error buscando el producto");
             return {status: "error", message: "Error buscando el producto"}
         }
     }
@@ -35,11 +43,14 @@ export default class MongoContenedor {
         try {
             let exists = await this.collection.findOne({title: {$eq: product.title}});
             if(exists) {
+                logger.error("No es posible guardar el producto porque ya existe");
                 return {status: "error", message: "El producto ya existe"}
             }
             let newProduct = await this.collection.create(product);
-            return {status: "success", payload: newProduct}
+            logger.info(`Producto guardado: ${newProduct}`);
+            //return {status: "success", payload: newProduct}
         } catch(error) {
+            logger.error("Error al guardar el producto");
             return {status: "error", message: "Error al guardar producto"}
         }
     }
@@ -49,11 +60,14 @@ export default class MongoContenedor {
             let product = await this.collection.findById(id);
             if(product) {
                 await product.updateOne(body);
-                return {status: "success", message: "Producto actualizado exitosamente"};
+                logger.info(`Producto actualizado: ${product}`);
+                //return {status: "success", message: "Producto actualizado exitosamente"};
             }
+            logger.error("No hay productos con el id especificado");
             return {status: "error", message: "No hay productos con el id especificado"}
         } catch(error) {
-            return {status: "error", message: "Fallo al actualizar el producto: "}
+            logger.error("Fallo al actualizar el producto");
+            return {status: "error", message: "Fallo al actualizar el producto: " + id}
         }
     }
 
@@ -62,11 +76,14 @@ export default class MongoContenedor {
             let product = await this.collection.findById(id)
             if(product) {
                 await this.collection.findByIdAndDelete(id);
-                return {status: "success", message: "Producto borrado exitosamente"}
+                logger.info(`Producto borrado: ${product}`);
+                //return {status: "success", message: "Producto borrado exitosamente"}
             }
+            logger.error("Producto inexistente");
             return {status: "error", message: "Producto inexistente"}
         } catch(error) {
-            return {status: "error", message: "Error borrando producto"}
+            logger.error("Error borrando el producto");
+            return {status: "error", message: "Error borrando el producto"}
         }
     }
 
@@ -74,8 +91,10 @@ export default class MongoContenedor {
     async newCart() {
         try {
             let cart = await this.collection.create({products: []});
-            return {status: "success", payload: cart}
+            logger.info(`Nuevo carrito: ${cart}`);
+            //return {status: "success", payload: cart}
         } catch(error) {
+            logger.error("Error al crear carrito");
             return {status: "error", message: "Error al crear carrito"}
         }
     }
@@ -85,12 +104,15 @@ export default class MongoContenedor {
         try {
             let cartProduct = await this.collection.findById(id).findOne({products: productId});
             if(cartProduct) {
+                logger.error("Producto ya existente en carrito");
                 return {status: "error", message: "Producto ya existente en carrito"}
             } else {
-                await this.collection.findByIdAndUpdate(id, {$push: {products: productId }});
-                return {status: "success", message: "El producto se ha guardado exitosamente"};
+                let product = await this.collection.findByIdAndUpdate(id, {$push: {products: productId }});
+                logger.info(`Producto guardado exitosamente: ${product}`);
+                //return {status: "success", message: "El producto se ha guardado exitosamente"};
             }
         } catch(error) {
+            logger.error("Error al añadir producto");
             return {status: "error", message: "Error al añadir producto"};
         }
     }
@@ -99,11 +121,14 @@ export default class MongoContenedor {
         try {
             let cart = await this.collection.findById(id);
             if(!cart) {
+                logger.error("El carrito no existe");
                 return {status: "error", message: "El carrito no existe"}
             } else {
-                return {status: "success", payload: cart};
+                logger.info(`Carrito: ${cart}`);
+                //return {status: "success", payload: cart};
             }
         } catch(error) {
+            logger.error("Error al obtener carrito");
             return {status: "error", message: "Error al obtener carrito" + error}
         }
     }
@@ -112,12 +137,15 @@ export default class MongoContenedor {
         try {
             let cart = await this.collection.findById(cartId);
             if (!cart) {
+                logger.error("El carrito no existe");
                 return {status: "error", message: "El carrito no existe"};
             } else {
                 await this.collection.findByIdAndDelete(cartId);
-                return {status: "success", message: "El carrito se ha borrado exitosamente"};
+                logger.info(`Carrito borrado exitosamente: ${cart}`);
+                //return {status: "success", message: "El carrito se ha borrado exitosamente"};
             }
         } catch(error) {
+            logger.error("Error al borrar carrito");
             return {status: "error", message: "Error al borrar carrito"};
         }
     }
@@ -126,17 +154,21 @@ export default class MongoContenedor {
         try {
             let cart = await this.collection.findById(cartId);
             if (!cart) {
+                logger.error("No existe el carrito especificado");
                 return {status: "error", message: "No existe el carrito especificado"};
             } else {
                 const product = await this.collection.findById(cartId).findOne({products: productId});
                 if (!product) {
+                    logger.error("El product no existe en el carrito");
                     return {status: "error", message: "El producto no existe en el carrito"};
                 } else {
-                    await this.collection.findByIdAndUpdate(cartId, {$pull: { products: productId}})
-                    return {status: "success", message: "El producto se ha borrado exitosamente del carrito"}
+                    await this.collection.findByIdAndUpdate(cartId, {$pull: { products: productId}});
+                    logger.info(`El producto ${product} se ha borrado exitosamente del carrito ${cartId}`);
+                    //return {status: "success", message: "El producto se ha borrado exitosamente del carrito"}
                 }
             }
         } catch(error) {
+            logger.error("Error al borrar producto del carrito");
         return {status: 'error', message: "Error al borrar producto del carrito"}
         }
     }
@@ -146,11 +178,14 @@ export default class MongoContenedor {
         try {
             const readFile = await this.collection.find();
             if(!readFile) {
+                logger.error("No hay mensajes");
                 return {status: "error", message: "No hay mensajes"};
             } else {
-                return {status: "success", payload: readFile};
+                logger.info(`Mensajes: ${readFile}`);
+                //return {status: "success", payload: readFile};
             } 
         } catch(error) {
+            logger.error("Error leyendo los mensajes");
             return {status: "error", message: "Error leyendo los mensajes"};
         }
     }
@@ -182,9 +217,11 @@ export default class MongoContenedor {
                 })
                 const normalizedData= normalize(data,chatSchema)
                 //const denormalizedData = denormalize(data.result, chatSchema, data.entities);
-                return {status: "success", payload: normalizedData};
+                logger.info(`Nuevo mensaje: ${normalizedData}`);
+                //return {status: "success", payload: normalizedData};
             }
         } catch(error) {
+            logger.error("No se ha podido guardar el mensaje");
             return {status: "error", message: "No se ha podido guardar el mensaje"};
         }
     }
@@ -194,11 +231,14 @@ export default class MongoContenedor {
         try {
             const readFile = await this.collection.find();
             if(!readFile) {
+                logger.error("No hay usuarios");
                 return {status: "error", message: "No hay usuarios"};
             } else {
-                return {status: "success", payload: readFile};
+                logger.info(`Usuarios: ${readFile}`);
+                //return {status: "success", payload: readFile};
             } 
         } catch(error) {
+            logger.error("Error leyendo los usuarios");
             return {status: "error", message: "Error leyendo los usuarios"};
         }
     }
@@ -209,16 +249,19 @@ export default class MongoContenedor {
             if(!readFile) {
                 await this.collection.create();
                 let exists = await this.collection.findOne({email: user.email});
+                logger.error("Ya existe usuario con mismo e-mail");
                 if(exists) return {status: "error", message: "Ya existe usuario con mismo e-mail"};
                 await this.collection.create(user);
             } else {
                 let exists = await this.collection.findOne({email: user.email});
                 console.log(exists);
                 if(exists) {
+                    logger.error("Ya existe usuario con mismo e-mail");
                     return {status: "error", message: "Ya existe usuario con mismo e-mail"};
                 } else {
                     let newUser = await this.collection.create(user);
-                    return {status: "success", payload: newUser};
+                    logger.info(`Usuario nuevo: ${newUser}`);
+                    //return {status: "success", payload: newUser};
                 }
             }
         } catch(error) {
@@ -234,12 +277,15 @@ export default class MongoContenedor {
             console.log(1);
             console.log(userFound);
             if(!userFound) {
+                logger.error("No existe el usuario");
                 return {status: "error", message: "No existe el usuario"};
             } else {
-                return {status: "success", payload: userFound};
+                logger.info(`Usuario encontrado: ${userFound}`);
+                //return {status: "success", payload: userFound};
             } 
         } catch(error) {
-            return {status: "error", message: error.message};
+            logger.error("Error obteniendo usuario");
+            return {status: "error", message: "Error obteniendo usuario"};
         }
     }
 
