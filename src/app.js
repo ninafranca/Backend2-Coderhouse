@@ -14,15 +14,21 @@ import {engine} from "express-handlebars";
 import cors from "cors";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import createLogger from "./public/js/logger.js";
+import {cwd, pid, version, title, platform, memoryUsage} from "process";
+import passport from "passport";
+import initializePassport from "./public/js/passport.js";
+import upload from "./public/js/upload.js";
 
 const contenedor = new Contenedor();
 //const carrito = new Carrito();
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = parseInt(process.env.PORT) || 8080;
 const server = app.listen(PORT,() => {
     console.log("Listening on port: ", PORT)
 });
 const io = new Server(server);
+const logger = createLogger(process.env.NODE_ENV);
 
 //APP.USE
 app.use(express.json());
@@ -44,6 +50,9 @@ app.use(session({
     saveUninitialized: false,
     cookie: {maxAge: 1000}
 }))
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session());
 
 //APP.ENGINE
 //Para Handlebars
@@ -80,6 +89,19 @@ app.get("/logged", (req, res) => {
         res.send({ status: "error", message: "Error al loguearse" })
     }
 })
+app.get("/info", (req, res) => {
+    let info = {
+        arguments: process.argv,
+        cwd: cwd(),
+        pid: pid,
+        version: version,
+        title: title,
+        platform: platform,
+        memory: memoryUsage()
+    }
+    logger.info(info)
+    res.send(info);
+});
 
 //APP.POST
 app.post("/login", async (req, res) => {
@@ -101,10 +123,14 @@ app.post("/login", async (req, res) => {
     }
 })
 app.post("/logout", (req, res) => {
-    const user = req.session.user;
-    req.session.user = null;
+    const userSession = req.session.user;
+    userSession = null;
     res.send({ status: "success", message: "Hasta luego" });
 });
+app.post("/register", upload.single("avatar"), passport.authenticate("register", {failureRedirect: "/failed-register"}), (req, res) => {
+    logger.info(`Método: ${req.method} Ruta: ${req.url}`)
+    res.send({status: "success", message: "Usuario registrado con éxito"})
+})
 
 //HANDLEBARS
 app.get("/productos", (req, res) => {
@@ -141,5 +167,6 @@ io.on("connection", async socket => {
 })
 
 app.use((req, res) => {
+    logger.warn(`Método ${req.method} no disponible en ruta ${req.path}`)
     res.status(404).send({error: -2, message: "Ruta no implementada"});
 })
