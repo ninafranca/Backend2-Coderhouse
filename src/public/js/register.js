@@ -8,7 +8,7 @@ registrationForm.addEventListener("submit", (e) => {
             email: info.get("email"),
             name: info.get("name"),
             age: info.get("age"),
-            adress: info.get("address"),
+            address: info.get("address"),
             phone: info.get("phone"),
             avatar: info.get("avatar"),
             password: info.get("password")

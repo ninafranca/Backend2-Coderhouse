@@ -176,7 +176,9 @@ export default class MongoContenedor {
     //MÉTODOS CHAT
     async getAllMessages() {
         try {
-            const readFile = await this.collection.find();
+            console.log("chat");
+            let readFile = await this.collection.find();
+            console.log(readFile)
             if(!readFile) {
                 logger.error("No hay mensajes");
                 return {status: "error", message: "No hay mensajes"};

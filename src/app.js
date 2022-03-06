@@ -99,7 +99,7 @@ app.get("/info", (req, res) => {
         platform: platform,
         memory: memoryUsage()
     }
-    console.log(info);
+    logger.info(info)
     res.send(info);
 });
 

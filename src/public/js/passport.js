@@ -7,21 +7,24 @@ const localStrategy = local.Strategy
 const initializePassport = () => {
 
     passport.use("register", new localStrategy({
-        passReqToCallback: true
-    }, async (req, email, password, done) => {
+        passReqToCallback: true, 
+        usernameField: "email"
+    }, async (req, username, password, done) => {
         console.log("passport0");
+        let {email, name, address, age, phone} = req.body;
         try {
             console.log("passport");
-            let user = await users.findOne({email: email});
+            let user = await users.findOne({email: username});
             if(user) return done(null, false, {message: "El usuario ya existe"});
             const newUser = {
-                email: email,
-                name: req.body.name,
+                email,
+                name,
                 password: hashPassword(password),
-                address: req.body.address,
-                age: req.body.age,
-                phone: req.body.phone,
-                avatar: "no disponible"
+                address,
+                age,
+                phone,
+                avatar: "no disponible",
+                carts: []
             }
             try {
                 let result = await users.create(newUser);
