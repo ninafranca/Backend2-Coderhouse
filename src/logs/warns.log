@@ -1,10 +1,1 @@
-{"level":"warn","message":"GET method not available in path /hhh","timestamp":"2022-03-05T17:28:27.720Z"}
-{"level":"warn","message":"GET method not available in path /asd","timestamp":"2022-03-05T17:34:22.086Z"}
-{"level":"warn","message":"GET method not available in path /register","timestamp":"2022-03-05T22:34:12.369Z"}
-{"level":"warn","message":"GET method not available in path /api/products","timestamp":"2022-03-05T23:06:14.304Z"}
-{"level":"warn","message":"GET method not available in path /asd","timestamp":"2022-03-06T01:21:17.068Z"}
-{"level":"warn","message":"GET method not available in path /asd","timestamp":"2022-03-06T01:28:56.182Z"}
-{"level":"warn","message":"GET method not available in path /api/carrito","timestamp":"2022-03-06T01:29:32.672Z"}
-{"level":"warn","message":"GET method not available in path /api/carrito","timestamp":"2022-03-06T01:29:36.106Z"}
-{"level":"warn","message":"GET method not available in path /productos-test","timestamp":"2022-03-06T01:48:56.942Z"}
-{"level":"warn","message":"GET method not available in path /register","timestamp":"2022-03-06T01:49:45.697Z"}
+{"level":"warn","message":"GET method not available in path /productosjhk","timestamp":"2022-03-06T03:53:41.998Z"}
