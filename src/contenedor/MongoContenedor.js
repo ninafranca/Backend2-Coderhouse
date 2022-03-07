@@ -215,7 +215,7 @@ export default class MongoContenedor {
                 await this.collection.create(user);
             } else {
                 let exists = await this.collection.findOne({email: user.email});
-                console.log(exists);
+                //console.log(exists);
                 if(exists) {
                     return {status: "error", message: "Ya existe usuario con mismo e-mail"};
                 } else {
@@ -228,9 +228,9 @@ export default class MongoContenedor {
         }
     }
 
-    async getByName(name) {
+    async getByEmail(email) {
         try {
-            const userFound = await this.collection.findOne({name: name});
+            const userFound = await this.collection.findOne({email: email});
             console.log(userFound);
             if(!userFound) {
                 return {status: "error", message: "No existe el usuario"};

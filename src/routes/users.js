@@ -11,11 +11,11 @@ router.get("/", (req, res) => {
 })
 
 //POST
-router.post("/", async (req, res) => {
-    let user = req.body;
-    console.log(user);
-    let data = await users.saveUser(user)
-    res.send({user: data})
-})
+// router.post("/", async (req, res) => {
+//     let user = req.body;
+//     console.log(user);
+//     let data = await users.saveUser(user)
+//     res.send({user: data})
+// })
 
 export default router;

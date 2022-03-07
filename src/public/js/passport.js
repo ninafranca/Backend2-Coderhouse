@@ -10,12 +10,14 @@ const initializePassport = () => {
         passReqToCallback: true, 
         usernameField: "email"
     }, async (req, username, password, done) => {
-        console.log("passport0");
         let {email, name, address, age, phone} = req.body;
         try {
             console.log("passport");
-            let user = await users.findOne({email: username});
-            if(user) return done(null, false, {message: "El usuario ya existe"});
+            //if(!req.file) return done(null, false, {messages: "No se pudo subir la imágen"});
+            //let user = await users.getByEmail(username);
+            console.log(1);
+            //if(user) return done(null, false, {message: "El usuario ya existe"});
+            console.log(2);
             const newUser = {
                 email,
                 name,
@@ -23,11 +25,13 @@ const initializePassport = () => {
                 address,
                 age,
                 phone,
-                avatar: req.file.filename,
+                avatar: "NA",
                 carts: []
             }
             try {
-                let result = await users.create(newUser);
+                console.log(3);
+                let result = await users.saveUser(newUser);
+                console.log(result);
                 done(null, result)
             } catch(error) {
                 return done(error)
@@ -49,11 +53,12 @@ const initializePassport = () => {
     }))
 
     passport.serializeUser((user, done) => {
-        done(null, users._id)
+        done(null, user._id)
     })
 
-    passport.deserializeUser((id, done)=> {
-        users.findById(id, done)
+    passport.deserializeUser(async (id, done) => {
+        let result = await users.findById(id);
+        done(null, result)
     })
 
 }

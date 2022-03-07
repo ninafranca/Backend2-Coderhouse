@@ -19,6 +19,7 @@ import {cwd, pid, version, title, platform, memoryUsage} from "process";
 import passport from "passport";
 import initializePassport from "./public/js/passport.js";
 import upload from "./public/js/upload.js";
+import {passportCall} from "./public/js/middlewares.js";
 
 const contenedor = new Contenedor();
 //const carrito = new Carrito();
@@ -70,9 +71,9 @@ app.get("/", (req, res) => {
 app.get('/login', (req, res) => {
     res.sendFile("login.html", {root: __dirname + "/public/pages"});
 })
-app.get('/register', (req, res) => {
-    res.sendFile("register.html", {root: __dirname + "/public/pages"});
-})
+// app.get('/register', (req, res) => {
+//     res.sendFile("register.html", {root: __dirname + "/public/pages"});
+// })
 app.get('/logged', (req, res) => {
     res.sendFile("logged.html", {root: __dirname + "/public/pages"});
 })
@@ -127,8 +128,11 @@ app.post("/logout", (req, res) => {
     userSession = null;
     res.send({ status: "success", message: "Hasta luego" });
 });
-app.post("/register", upload.single("avatar"), passport.authenticate("register", {failureRedirect: "/failed-register"}), (req, res) => {
-    logger.info(`Método: ${req.method} Ruta: ${req.url}`)
+app.post("/register", upload.single("avatar"), passportCall("register", 
+    {
+        successRedirect: "/logged",
+        failureRedirect: "/login"
+    }), (req, res) => {
     res.send({status: "success", message: "Usuario registrado con éxito"})
 })
 
