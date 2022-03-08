@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 app.use("/api/productos", productsRouter);
 app.use("/api/carrito", carritoRouter);
 app.use("/api/chats", chatsRouter);
-app.use("/register", usersRouter);
+//app.use("/register", usersRouter);
 app.use(express.static(__dirname + "/public"));
 app.use(session({
     store: MongoStore.create({mongoUrl: "mongodb+srv://Nina:123@ecommerce.b23tg.mongodb.net/sessions?retryWrites=true&w=majority"}),
@@ -71,9 +71,9 @@ app.get("/", (req, res) => {
 app.get('/login', (req, res) => {
     res.sendFile("login.html", {root: __dirname + "/public/pages"});
 })
-// app.get('/register', (req, res) => {
-//     res.sendFile("register.html", {root: __dirname + "/public/pages"});
-// })
+app.get('/register', (req, res) => {
+    res.sendFile("register.html", {root: __dirname + "/public/pages"});
+})
 app.get('/logged', (req, res) => {
     res.sendFile("logged.html", {root: __dirname + "/public/pages"});
 })
@@ -105,23 +105,28 @@ app.get("/info", (req, res) => {
 });
 
 //APP.POST
-app.post("/login", async (req, res) => {
-    try {
-        let {name, email} = req.body;
-        if(!name || !email) {
-            return res.satus(400).send({error: "Completa los campos"})
-        }
-        let user = await users.getByName(name);
-        console.log(user);
-        if (!user) return {status: "error", message: "Usuario no encontrado"};
-        req.session.user = {
-            name: user.name,
-            email: user.email
-        }
-        res.send({status:"Logged"});
-    } catch(error) {
-        return {status: "error", message: error.message};
-    }
+// app.post("/login", async (req, res) => {
+//     try {
+//         let {name, email} = req.body;
+//         if(!name || !email) {
+//             return res.satus(400).send({error: "Completa los campos"})
+//         }
+//         let user = await users.getByName(name);
+//         console.log(user);
+//         if (!user) return {status: "error", message: "Usuario no encontrado"};
+//         req.session.user = {
+//             name: user.name,
+//             email: user.email
+//         }
+//         res.send({status:"Logged"});
+//     } catch(error) {
+//         return {status: "error", message: error.message};
+//     }
+// })
+app.post("/login", passportCall("login"), (req, res) => {
+    let user;
+    console.log("user: " + user);
+    res.send(user);
 })
 app.post("/logout", (req, res) => {
     const userSession = req.session.user;
@@ -133,7 +138,11 @@ app.post("/register", upload.single("avatar"), passportCall("register",
         successRedirect: "/logged",
         failureRedirect: "/login"
     }), (req, res) => {
-    res.send({status: "success", message: "Usuario registrado con éxito"})
+    if(res.status === "success") {
+        res.send({status: "success", message: "Usuario registrado con éxito"})
+    } else {
+        res.send({status: "error", message: "El usuario ya existe"})
+    }
 })
 
 //HANDLEBARS

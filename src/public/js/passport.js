@@ -41,9 +41,12 @@ const initializePassport = () => {
         }
     }))
 
-    passport.use("login", new localStrategy(async (username, password, done) => {
+    passport.use("login", new localStrategy(({usernameField: "email"}), async (username, password, done) => {
         try {
-            let user = await users.findOne({id: username});
+            console.log(username);
+            console.log(password);
+            let user = await users.getByEmail(username);
+            console.log("usuario: " + user);
             if(!user) return done(null, false, {message: "Usuario no encontrado"});
             if(!validPassword(user, password)) return done(null, false, {message: "Contraseña inválida"});
             return done(null, user)
