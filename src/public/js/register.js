@@ -23,7 +23,7 @@ registrationForm.addEventListener("submit", (e) => {
             if (result.status === 200) {
                 console.log("success");
                 //registrationForm.reset()
-                location.replace("../pages/logged.html")
+                location.replace("../pages/registered.html")
             } else {
                 location.replace("../pages/registration-error.html")
             }

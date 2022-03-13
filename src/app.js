@@ -132,7 +132,7 @@ app.get("/current", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res)
 // })
 app.post("/login", passportCall("login"), (req, res) => {
     let user = req.user;
-    console.log("user: " + JSON.stringify(user));
+    console.log("user: ", user);
     let token = jwt.sign(user, process.env.JWT_SECRET);
     res.cookie("JWT_COOKIE", token, {
         httpOnly: true,
@@ -142,16 +142,19 @@ app.post("/login", passportCall("login"), (req, res) => {
 })
 app.post("/logout", (req, res) => {
     res.clearCookie("JWT_COOKIE");
-    // res.send({message: "Se ha cerrado sesión"});
-    res.send({ status: "success", message: "Hasta luego" });
+    res.send({ status: "success", message: "Se ha cerrado sesión" });
 })
 app.post("/register", upload.single("avatar"), passportCall("register"), (req, res) => {
         const file = req.file;
-        // res.send(file);
-        // console.log(file);
         if(res.status === "error") {
             res.send({status: "error", message: "Usuario ya existente"})
         } else {
+            // let user = req.user;
+            // let token = jwt.sign(user, process.env.JWT_SECRET);
+            // res.cookie("JWT_COOKIE", token, {
+            //     httpOnly: true,
+            //     maxAge: 1000*60*60
+            // })
             res.send({status: "success", message: "Usuario registrado con éxito"})
         }
 })

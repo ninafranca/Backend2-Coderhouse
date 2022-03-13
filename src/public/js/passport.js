@@ -18,17 +18,13 @@ const initializePassport = () => {
         let {email, name, address, age, phone} = req.body;
         try {
             //if(!req.file) return done(null, false, {messages: "No se pudo subir la imágen"});
-            console.log("req.file", req.file);
+            //console.log("req.file", req.file);
             //const filename = await req.file;
             let user = await users.getByEmail(username);
             console.log(user);
-            // console.log("user ", user);
-            // console.log(username);
             if(user.status === "success") {
-                console.log(1);
                 return done("error");
             } else {
-                console.log(3);
                 const newUser = {
                     email,
                     name,
@@ -56,10 +52,7 @@ const initializePassport = () => {
 
     passport.use("login", new localStrategy(({usernameField: "email"}), async (username, password, done) => {
         try {
-            console.log(username);
-            console.log(password);
             let user = await users.getByEmail(username);
-            console.log("usuario: " + JSON.stringify(user));
             if(!user) return done(null, false, {message: "Usuario no encontrado"});
             //if(!validPassword(user, password)) return done(null, false, {message: "Contraseña inválida"});
             return done(null, user)

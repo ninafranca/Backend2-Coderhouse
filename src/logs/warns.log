@@ -19,3 +19,4 @@
 {"level":"warn","message":"Método GET no disponible en ruta /api/carts","timestamp":"2022-03-13T01:51:47.021Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /api/carrito","timestamp":"2022-03-13T01:51:55.764Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-03-13T02:06:06.790Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /pages/register","timestamp":"2022-03-13T05:16:46.590Z"}
