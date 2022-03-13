@@ -19,7 +19,9 @@ import {cwd, pid, version, title, platform, memoryUsage} from "process";
 import passport from "passport";
 import initializePassport from "./public/js/passport.js";
 import upload from "./public/js/upload.js";
-import {passportCall} from "./public/js/middlewares.js";
+import {passportCall, checkAuth} from "./public/js/middlewares.js";
+import jwt from "jsonwebtoken";
+import cookieParser from "cookie-parser";
 
 const contenedor = new Contenedor();
 //const carrito = new Carrito();
@@ -54,6 +56,7 @@ app.use(session({
 initializePassport();
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cookieParser())
 
 //APP.ENGINE
 //Para Handlebars
@@ -74,8 +77,8 @@ app.get('/login', (req, res) => {
 app.get('/register', (req, res) => {
     res.sendFile("register.html", {root: __dirname + "/public/pages"});
 })
-app.get('/logged', (req, res) => {
-    res.sendFile("logged.html", {root: __dirname + "/public/pages"});
+app.get('/registration-error', (req, res) => {
+    res.sendFile("registration-error.html", {root: __dirname + "/public/pages"});
 })
 app.get("/api/productos-test", (req, res) => {
     let quantity = req.query.quantity ? parseInt(req.query.quantity) : 10;
@@ -103,6 +106,10 @@ app.get("/info", (req, res) => {
     logger.info(info)
     res.send(info);
 });
+app.get("/current", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res) => {
+    let user = req.user;
+    res.send(user);
+})
 
 //APP.POST
 // app.post("/login", async (req, res) => {
@@ -124,25 +131,29 @@ app.get("/info", (req, res) => {
 //     }
 // })
 app.post("/login", passportCall("login"), (req, res) => {
-    let user;
-    console.log("user: " + user);
-    res.send(user);
+    let user = req.user;
+    console.log("user: " + JSON.stringify(user));
+    let token = jwt.sign(user, process.env.JWT_SECRET);
+    res.cookie("JWT_COOKIE", token, {
+        httpOnly: true,
+        maxAge: 1000*60*60
+    })
+    res.send({status: "scuccess", message: "Logueado"});
 })
 app.post("/logout", (req, res) => {
-    const userSession = req.session.user;
-    userSession = null;
+    res.clearCookie("JWT_COOKIE");
+    // res.send({message: "Se ha cerrado sesión"});
     res.send({ status: "success", message: "Hasta luego" });
-});
-app.post("/register", upload.single("avatar"), passportCall("register", 
-    {
-        successRedirect: "/logged",
-        failureRedirect: "/login"
-    }), (req, res) => {
-    if(res.status === "success") {
-        res.send({status: "success", message: "Usuario registrado con éxito"})
-    } else {
-        res.send({status: "error", message: "El usuario ya existe"})
-    }
+})
+app.post("/register", upload.single("avatar"), passportCall("register"), (req, res) => {
+        const file = req.file;
+        // res.send(file);
+        // console.log(file);
+        if(res.status === "error") {
+            res.send({status: "error", message: "Usuario ya existente"})
+        } else {
+            res.send({status: "success", message: "Usuario registrado con éxito"})
+        }
 })
 
 //HANDLEBARS

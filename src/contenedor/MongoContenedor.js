@@ -215,7 +215,6 @@ export default class MongoContenedor {
                 await this.collection.create(user);
             } else {
                 let exists = await this.collection.findOne({email: user.email});
-                //console.log(exists);
                 if(exists) {
                     return {status: "error", message: "Ya existe usuario con mismo e-mail"};
                 } else {

@@ -14,7 +14,7 @@ export default class ChatsMongo extends MongoContenedor {
                     alias: {type: String, required: false},
                     avatar: {type: String, required: false}
                 },
-                text: {type: String},
+                text: {type: String}
             },
             {timestamps: true}
         )

@@ -8,13 +8,19 @@ const __dirname = dirname(filename);
 
 export const hashPassword = password => bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 export const validPassword = (user, password) => bcrypt.compareSync(password, user.password);
+export const cookieExtractor = req => {
+    let token = null;
+    if(req && req.cookies) {
+        token = req.cookies["JWT_COOKIES"]
+    }
+}
 
 export function makeId(length) {
     let result = '';
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let charactersLength = characters.length;
     for ( let i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
 }

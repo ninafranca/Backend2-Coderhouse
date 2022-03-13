@@ -14,7 +14,7 @@
 <body>
 
     <div id="user-auth" style="background-color: rgb(230, 225, 220);">
-        <form id="register-form" name="register-form" class="no-flex-container">
+        <form id="register-form" name="register-form" action="/register" accept=".jpg,.jpeg,.png" method="post" enctype="multipart/form-data" class="no-flex-container">
             <h2>Registrar usuario nuevo</h2>
             <input id="register-user-id" name="email" type="email" placeholder="E-mail" required><br>
             <input id="register-user-name" name="name" type="text" placeholder="Nombre" required><br>
@@ -27,14 +27,7 @@
             <input id="register-user-repeat-password" name="repeat-password" type="password" placeholder="Repetir contraseña" required><br>
             <button type="button submit" value="send" class="btn btn-secondary">Registrarse</button>
         </form>
-        <form id="loginForm" name="loginForm" class="no-flex-container">
-            <h2>Login usuario existente</h2>
-            <label for="login-user-id">Email</label><br>
-            <input name="login-user-id" type="text" required><br>
-            <label for="login-user-password">Contraseña</label><br>
-            <input name="login-user-password" type="password" required><br>
-            <button type="button submit" class="btn btn-secondary">Ingresar</button><br>
-        </form>
+        <a href="../pages/login.html"><button class="btn btn-secondary">¿Ya estás registrado?</button></a>
     </div>
 
     <script src="../js/register.js"></script>
