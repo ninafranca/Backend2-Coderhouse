@@ -20,3 +20,12 @@
 {"level":"warn","message":"Método GET no disponible en ruta /api/carrito","timestamp":"2022-03-13T01:51:55.764Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-03-13T02:06:06.790Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /pages/register","timestamp":"2022-03-13T05:16:46.590Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-03-13T16:17:03.613Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logged","timestamp":"2022-03-13T16:26:18.296Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logged","timestamp":"2022-03-13T16:26:46.852Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logged","timestamp":"2022-03-13T16:26:48.357Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logged","timestamp":"2022-03-13T16:26:49.367Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logged","timestamp":"2022-03-13T16:56:33.738Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-03-13T20:58:23.364Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logged","timestamp":"2022-03-14T00:11:58.069Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logged","timestamp":"2022-03-14T02:42:34.001Z"}

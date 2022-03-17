@@ -14,6 +14,6 @@ sendLogin.addEventListener("submit", (e) => {
         headers: {"Content-Type":"application/json"}
     }).then(result => result.json()).then(json => {
         console.log(sendObject);
-        location.replace("../pages/logged.html")
+        location.replace("/current")
     })
 })

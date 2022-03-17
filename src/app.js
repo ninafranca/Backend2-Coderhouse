@@ -22,6 +22,7 @@ import upload from "./public/js/upload.js";
 import {passportCall, checkAuth} from "./public/js/middlewares.js";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
+import {envConfig} from "./public/js/envConfig.js";
 
 const contenedor = new Contenedor();
 //const carrito = new Carrito();
@@ -48,7 +49,7 @@ app.use("/api/chats", chatsRouter);
 app.use(express.static(__dirname + "/public"));
 app.use(session({
     store: MongoStore.create({mongoUrl: "mongodb+srv://Nina:123@ecommerce.b23tg.mongodb.net/sessions?retryWrites=true&w=majority"}),
-    secret: "nin4",
+    secret: "123456789",
     resave: false,
     saveUninitialized: false,
     cookie: {maxAge: 1000}
@@ -85,13 +86,20 @@ app.get("/api/productos-test", (req, res) => {
     let products = generate(quantity);
     res.render("ProductsTest", {prods: products});
 })
-app.get("/logged", (req, res) => {
-    if(req.session.user) {
-        res.send(req.session.user)
-        res.sendFile("logged.html", {root: __dirname + "/public/pages"})
-    } else {
-        res.send({ status: "error", message: "Error al loguearse" })
-    }
+// app.get("/logged", passportCall("jwt"),  (req, res) => {
+//     res.sendFile("logged.html", {root: __dirname + "/public/pages"});
+// })
+app.get("/logged", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res) => {
+    console.log("logged");
+    let user = req.user;
+    console.log(user);
+    res.send(user);
+    // if(req.session.user) {
+    //     let user = req.user;
+    //     res.send("Usuario logueado : ", user);
+    // } else {
+    //     res.send({ status: "error", message: "Error al loguearse" })
+    // }
 })
 app.get("/info", (req, res) => {
     let info = {
@@ -106,57 +114,39 @@ app.get("/info", (req, res) => {
     logger.info(info)
     res.send(info);
 });
-app.get("/current", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res) => {
-    let user = req.user;
-    res.send(user);
-})
+// app.get("/current", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res) => {
+//     console.log("current");
+//     let user = req.user;
+//     res.send(user);
+// })
 
 //APP.POST
-// app.post("/login", async (req, res) => {
-//     try {
-//         let {name, email} = req.body;
-//         if(!name || !email) {
-//             return res.satus(400).send({error: "Completa los campos"})
-//         }
-//         let user = await users.getByName(name);
-//         console.log(user);
-//         if (!user) return {status: "error", message: "Usuario no encontrado"};
-//         req.session.user = {
-//             name: user.name,
-//             email: user.email
-//         }
-//         res.send({status:"Logged"});
-//     } catch(error) {
-//         return {status: "error", message: error.message};
-//     }
-// })
+app.post("/register", upload.single("avatar"), passportCall("register"), (req, res) => {
+    const file = req.file;
+    if(res.status === "error") {
+        res.send({status: "error", message: "Usuario ya existente"})
+    } else {
+        // let user = req.user;
+        // let token = jwt.sign(user, envConfig.JWT_SECRET);
+        // res.cookie("JWT_COOKIE", token, {
+        //     httpOnly: true,
+        //     maxAge: 1000*60*60
+        // })
+        res.send({status: "success", message: "Usuario registrado con éxito"})
+    }
+})
 app.post("/login", passportCall("login"), (req, res) => {
     let user = req.user;
-    console.log("user: ", user);
-    let token = jwt.sign(user, process.env.JWT_SECRET);
+    let token = jwt.sign(user, envConfig.JWT_SECRET);
     res.cookie("JWT_COOKIE", token, {
         httpOnly: true,
         maxAge: 1000*60*60
-    })
-    res.send({status: "scuccess", message: "Logueado"});
+    });
+    res.send({status: "scuccess", message: "Login exitoso"});
 })
 app.post("/logout", (req, res) => {
     res.clearCookie("JWT_COOKIE");
     res.send({ status: "success", message: "Se ha cerrado sesión" });
-})
-app.post("/register", upload.single("avatar"), passportCall("register"), (req, res) => {
-        const file = req.file;
-        if(res.status === "error") {
-            res.send({status: "error", message: "Usuario ya existente"})
-        } else {
-            // let user = req.user;
-            // let token = jwt.sign(user, process.env.JWT_SECRET);
-            // res.cookie("JWT_COOKIE", token, {
-            //     httpOnly: true,
-            //     maxAge: 1000*60*60
-            // })
-            res.send({status: "success", message: "Usuario registrado con éxito"})
-        }
 })
 
 //HANDLEBARS

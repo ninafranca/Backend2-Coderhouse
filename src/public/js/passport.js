@@ -34,7 +34,8 @@ const initializePassport = () => {
                     phone,
                     //avatar: filename,
                     avatar: "NA",
-                    carts: []
+                    carts: [],
+                    role: "user"
                 }
                 console.log(newUser);
                 let result = await users.saveUser(newUser);
@@ -51,9 +52,11 @@ const initializePassport = () => {
     }))
 
     passport.use("login", new localStrategy(({usernameField: "email"}), async (username, password, done) => {
+        console.log("jwt");
         try {
             let user = await users.getByEmail(username);
             if(!user) return done(null, false, {message: "Usuario no encontrado"});
+            console.log("user", user);
             //if(!validPassword(user, password)) return done(null, false, {message: "Contraseña inválida"});
             return done(null, user)
         } catch(error) {
@@ -61,14 +64,17 @@ const initializePassport = () => {
         }
     }))
 
-    passport.use("jwt", new JWTStrategy({jwtFromRequest: extractJwt.fromExtractors([cookieExtractor]), secretOrKey: envConfig.JWT_SECRET }, async (jwt_payload, done) => {
+    passport.use("jwt", new JWTStrategy({jwtFromRequest: extractJwt.fromExtractors([cookieExtractor]), secretOrKey: envConfig.JWT_SECRET}, async (jwt_payload, done) => {
         try {
-            if(jwt_payload.role === "admin") return done(null, jwt_payload);
-            console.log(payload);
-            let user = await users.getById(jwt_payload._id);
+            console.log("jwt")
+            //if(jwt_payload.role === "admin") return done(null, jwt_payload);
+            console.log(jwt_payload);
+            let user = await users.getByEmail(jwt_payload.email);
+            return done(null, { _id: user._id, email: user.email, role: user.role, avatar: user.avatar})
             if(!user) return done(null, false, {message: "Usuario no encontrado"});
         } catch(error) {
-            done(error)
+            console.log("done");
+            return done(error)
         }
     }))
 
@@ -76,8 +82,8 @@ const initializePassport = () => {
         done(null, user._id)
     })
 
-    passport.deserializeUser(async (id, done) => {
-        let result = await users.findById(id);
+    passport.deserializeUser(async (user, done) => {
+        let result = await users.getByEmail(user.email);
         done(null, result)
     })
 

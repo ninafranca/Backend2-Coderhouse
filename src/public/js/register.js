@@ -12,7 +12,8 @@ registrationForm.addEventListener("submit", (e) => {
             age: info.get("age"),
             phone: info.get("phone"),
             //avatar: info.get("avatar")
-            avatar: "NA"
+            avatar: "NA",
+            role: "user"
         }
         fetch("/register", {
             method: "POST",
@@ -23,7 +24,8 @@ registrationForm.addEventListener("submit", (e) => {
             if (result.status === 200) {
                 console.log("success");
                 //registrationForm.reset()
-                location.replace("../pages/registered.html")
+                // location.replace("../pages/registered.html")
+                location.replace("/logged")
             } else {
                 location.replace("../pages/registration-error.html")
             }

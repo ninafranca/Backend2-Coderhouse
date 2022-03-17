@@ -13,6 +13,7 @@ export default class UsersMongo extends MongoContenedor {
                 age: {type: Number, required: true},
                 phone: {type: String, required: true},
                 avatar: {type: String, required: true},
+                role: {type: String, required: true},
                 carts: [{
                     type: String,
                     default: []
