@@ -72,13 +72,16 @@ app.set("view engine", "handlebars");
 app.get("/", (req, res) => {
     res.sendFile("index.html", {root: __dirname + "/public/pages"});
 })
-app.get('/login', (req, res) => {
+app.get("/login", (req, res) => {
     res.sendFile("login.html", {root: __dirname + "/public/pages"});
 })
-app.get('/register', (req, res) => {
+app.get("/register", (req, res) => {
     res.sendFile("register.html", {root: __dirname + "/public/pages"});
 })
-app.get('/registration-error', (req, res) => {
+app.get("/logout", (req, res) => {
+    res.sendFile("logout.html", {root: __dirname + "/public/pages"});
+})
+app.get("/registration-error", (req, res) => {
     res.sendFile("registration-error.html", {root: __dirname + "/public/pages"});
 })
 app.get("/api/productos-test", (req, res) => {
@@ -86,20 +89,10 @@ app.get("/api/productos-test", (req, res) => {
     let products = generate(quantity);
     res.render("ProductsTest", {prods: products});
 })
-// app.get("/logged", passportCall("jwt"),  (req, res) => {
-//     res.sendFile("logged.html", {root: __dirname + "/public/pages"});
-// })
 app.get("/logged", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res) => {
-    console.log("logged");
-    let user = req.user;
+    let user = req.user.payload.toObject();
     console.log("logged: ", user);
-    res.send(user);
-    // if(req.session.user) {
-    //     let user = req.user;
-    //     res.send("Usuario logueado : ", user);
-    // } else {
-    //     res.send({ status: "error", message: "Error al loguearse" })
-    // }
+    res.render("Logged", {user});
 })
 app.get("/info", (req, res) => {
     let info = {
@@ -114,12 +107,6 @@ app.get("/info", (req, res) => {
     logger.info(info)
     res.send(info);
 });
-// app.get("/current", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res) => {
-//     console.log("current");
-//     let user = req.user;
-//     res.send(user);
-// })
-
 //HANDLEBARS
 app.get("/productos", (req, res) => {
     products.getAll().then(result => {
@@ -157,7 +144,7 @@ app.post("/login", passportCall("login"), (req, res) => {
 })
 app.post("/logout", (req, res) => {
     res.clearCookie("JWT_COOKIE");
-    res.send({ status: "success", message: "Se ha cerrado sesión" });
+    res.sendFile("logout.html", {root: __dirname + "/public/pages"});
 })
 
 let messages = [];

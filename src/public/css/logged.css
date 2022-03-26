@@ -1,0 +1,7 @@
+.div-logged {
+    background-color: rgb(201, 200, 200);
+    height: 8vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

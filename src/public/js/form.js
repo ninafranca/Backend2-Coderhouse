@@ -12,7 +12,8 @@ productForm.addEventListener("submit", (e) => {
         price: data.get("price"),
         stock: data.get("stock"),
         description: data.get("description"),
-        thumbnail: data.get("thumbnail")
+        gender: data.get("gender"),
+        thumbnail: data.get("thumbnail").toLowerCase()
     };
     fetch("/api/productos", {
         method: "POST",
@@ -20,7 +21,7 @@ productForm.addEventListener("submit", (e) => {
         headers: {"Content-type": "application/json"}
     })
     .then(result => {
-        if (result.status === "success") {
+        if (result.status === 200) {
         let sent = document.getElementById("sent");
         let sentObject = `<h2 class="sent-object">Producto añadido con éxito</h2>`;
         sent.innerHTML = sentObject;
