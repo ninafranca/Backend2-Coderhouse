@@ -13,6 +13,7 @@ export const cookieExtractor = req => {
     if(req && req.cookies) {
         token = req.cookies["JWT_COOKIE"]
     }
+    return token;
 }
 export const generate = (n) => {
     let products = [];

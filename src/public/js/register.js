@@ -25,12 +25,12 @@ registrationForm.addEventListener("submit", (e) => {
                 console.log("success");
                 //registrationForm.reset()
                 // location.replace("../pages/registered.html")
-                location.replace("/logged")
+                location.replace("/login");
             } else {
-                location.replace("../pages/registration-error.html")
+                location.replace("../pages/registration-error.html");
             }
           })
     } else {
-        alert("Las contraseñas no son iguales")
+        alert("Las contraseñas no son iguales");
     }
 })

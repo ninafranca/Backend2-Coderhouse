@@ -2,7 +2,7 @@ import __dirname from "./utils.js";
 import express from "express";
 import Contenedor from "./contenedor/Contenedor.js";
 //import Carrito from "./contenedor/Carrito.js";
-import {chats, users} from "./daos/index.js";
+import {chats, users, products} from "./daos/index.js";
 import productsRouter from "./routes/products.js";
 import carritoRouter from "./routes/carrito.js";
 import chatsRouter from "./routes/chats.js";
@@ -48,8 +48,8 @@ app.use("/api/chats", chatsRouter);
 //app.use("/register", usersRouter);
 app.use(express.static(__dirname + "/public"));
 app.use(session({
-    store: MongoStore.create({mongoUrl: "mongodb+srv://Nina:123@ecommerce.b23tg.mongodb.net/sessions?retryWrites=true&w=majority"}),
-    secret: "123456789",
+    store: MongoStore.create({mongoUrl: envConfig.MONGO_SESSIONS}),
+    secret: envConfig.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {maxAge: 1000}
@@ -92,7 +92,7 @@ app.get("/api/productos-test", (req, res) => {
 app.get("/logged", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res) => {
     console.log("logged");
     let user = req.user;
-    console.log(user);
+    console.log("logged: ", user);
     res.send(user);
     // if(req.session.user) {
     //     let user = req.user;
@@ -119,6 +119,17 @@ app.get("/info", (req, res) => {
 //     let user = req.user;
 //     res.send(user);
 // })
+
+//HANDLEBARS
+app.get("/productos", (req, res) => {
+    products.getAll().then(result => {
+        const products = result.payload;
+        const objects = {products: products.map(prod => prod.toObject())};
+        if (result.status === "success") {
+            res.render("Home", objects)
+        } else {res.status(500).send(result)}
+    })
+})
 
 //APP.POST
 app.post("/register", upload.single("avatar"), passportCall("register"), (req, res) => {
@@ -149,23 +160,12 @@ app.post("/logout", (req, res) => {
     res.send({ status: "success", message: "Se ha cerrado sesión" });
 })
 
-//HANDLEBARS
-app.get("/productos", (req, res) => {
-    contenedor.getAll().then(result => {
-        const products = result.payload;
-        const objects = {products: products};
-        if (result.status === "success") {
-            res.render("Home", objects)
-        } else {res.status(500).send(result)}
-    })
-})
-
 let messages = [];
 //CON EL SERVIDOR, CUANDO SE CONECTE EL SOCKET, HACE LO SIGUIENTE => {}
 io.on("connection", async socket => {
     console.log("Se conectó socket " + socket.id);
-    let products = await contenedor.getAll();
-    socket.emit("deliverProducts", products);
+    let prods = await products.getAll();
+    socket.emit("deliverProducts", prods);
     socket.emit("messagelog", messages);
     socket.on("message", data => {
         //ACA INSERTAR MÉTODOS PARA MENSAJES

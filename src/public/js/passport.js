@@ -52,7 +52,6 @@ const initializePassport = () => {
     }))
 
     passport.use("login", new localStrategy(({usernameField: "email"}), async (username, password, done) => {
-        console.log("jwt");
         try {
             let user = await users.getByEmail(username);
             if(!user) return done(null, false, {message: "Usuario no encontrado"});
@@ -66,15 +65,15 @@ const initializePassport = () => {
 
     passport.use("jwt", new JWTStrategy({jwtFromRequest: extractJwt.fromExtractors([cookieExtractor]), secretOrKey: envConfig.JWT_SECRET}, async (jwt_payload, done) => {
         try {
-            console.log("jwt")
-            //if(jwt_payload.role === "admin") return done(null, jwt_payload);
-            console.log(jwt_payload);
-            let user = await users.getByEmail(jwt_payload.email);
-            return done(null, { _id: user._id, email: user.email, role: user.role, avatar: user.avatar})
+            if(jwt_payload.role === "admin") return done(null, jwt_payload);
+            console.log("jwt email: ", jwt_payload.payload.email);
+            let user = await users.getByEmail(jwt_payload.payload.email);
             if(!user) return done(null, false, {message: "Usuario no encontrado"});
+            return done(null, user);
+            // return done(null, { _id: user._id, email: user.email, role: user.role, avatar: user.avatar})
         } catch(error) {
             console.log("done");
-            return done(error)
+            return done(error);
         }
     }))
 
@@ -82,9 +81,8 @@ const initializePassport = () => {
         done(null, user._id)
     })
 
-    passport.deserializeUser(async (user, done) => {
-        let result = await users.getByEmail(user.email);
-        done(null, result)
+    passport.deserializeUser(async (id, done) => {
+        users.findById(id, done)
     })
 
 }

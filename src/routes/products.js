@@ -1,5 +1,6 @@
 import express from "express";
 import {products, persistance} from "../daos/index.js";
+import logger from "../public/js/logger.js";
 
 const admin = true;
 const router = express.Router();
@@ -39,7 +40,8 @@ router.post('/', (req, res) => {
         }
     })
     } else {
-        res.status(403).send({ error: -1, description: "Ruta '/api/productos' metodo POST no autorizado"})
+        logger.warn(`Método ${req.method} no disponible en ruta ${req.path}`);
+        res.status(403).send({ error: -1, description: `Ruta ${req.path} metodo ${req.method} no autorizado`})
     }
 })
 
@@ -59,7 +61,8 @@ router.put('/:id', (req, res) => {
             })
         }
     } else {
-        res.status(403).send({ error: -1, description: "Ruta '/api/productos/:id' metodo PUT no autorizado"})
+        logger.warn(`Método ${req.method} no disponible en ruta ${req.path}`);
+        res.status(403).send({ error: -1, description: `Ruta ${req.path} metodo ${req.method} no autorizado`})
     }
 })
 
@@ -78,7 +81,8 @@ router.delete('/:id', (req, res) => {
             })
         }
     } else {
-        res.status(403).send({ error: -1, description: "Ruta '/api/productos/:id' metodo DELETE no autorizado"})
+        logger.warn(`Método ${req.method} no disponible en ruta ${req.path}`)
+        res.status(403).send({ error: -1, description: `Ruta ${req.path} metodo ${req.method} no autorizado`})
     }
 })
 

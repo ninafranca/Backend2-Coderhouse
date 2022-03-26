@@ -29,3 +29,17 @@
 {"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-03-13T20:58:23.364Z"}
 {"level":"warn","message":"Método POST no disponible en ruta /logged","timestamp":"2022-03-14T00:11:58.069Z"}
 {"level":"warn","message":"Método POST no disponible en ruta /logged","timestamp":"2022-03-14T02:42:34.001Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /api","timestamp":"2022-03-22T01:49:15.339Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-03-22T01:49:18.023Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /current","timestamp":"2022-03-22T01:49:45.669Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /crrent","timestamp":"2022-03-22T01:51:01.786Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /current","timestamp":"2022-03-22T01:51:04.459Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logot","timestamp":"2022-03-22T02:54:21.840Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /current","timestamp":"2022-03-22T02:55:56.462Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-03-24T17:18:16.064Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /api/prodcts","timestamp":"2022-03-24T18:24:03.142Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /api/prodcts","timestamp":"2022-03-24T18:24:08.733Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /api/products","timestamp":"2022-03-24T18:24:13.703Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-03-25T03:51:41.859Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logged","timestamp":"2022-03-25T03:57:36.090Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-03-26T01:35:03.435Z"}

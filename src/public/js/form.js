@@ -4,17 +4,17 @@ const productForm = document.querySelector("#product-form");
 
 productForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    let data = new FormData(productForm); productForm
+    let data = new FormData(productForm);
     let object = {
         title: data.get("title"),
-        brand: "brand",
-        code: "code",
+        brand: data.get("brand"),
+        code: data.get("code"),
         price: data.get("price"),
-        stock: "code",
-        description: "description",
+        stock: data.get("stock"),
+        description: data.get("description"),
         thumbnail: data.get("thumbnail")
     };
-    fetch("http://localhost:8080/api/productos", {
+    fetch("/api/productos", {
         method: "POST",
         body: JSON.stringify(object),
         headers: {"Content-type": "application/json"}
@@ -35,9 +35,6 @@ productForm.addEventListener("submit", (e) => {
         return {status: "error", message: "Error al enviar el producto"}
     })
 })
-function sendForm(e) {
-    
-}
 
 socket.on("deliverProducts", data => {
     let products = data.payload;

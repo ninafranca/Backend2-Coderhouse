@@ -241,4 +241,18 @@ export default class MongoContenedor {
         }
     }
 
+    async getById(id) {
+        try {
+            const userFound = await this.collection.findById({_id: id});
+            console.log(userFound);
+            if(!userFound) {
+                return {status: "error", message: "No existe el usuario"};
+            } else {
+                return {status: "success", payload: userFound};
+            } 
+        } catch(error) {
+            return {status: "error", message: error.message};
+        }
+    }
+
 }
