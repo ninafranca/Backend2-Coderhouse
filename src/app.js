@@ -84,15 +84,22 @@ app.get("/logout", (req, res) => {
 app.get("/registration-error", (req, res) => {
     res.sendFile("registration-error.html", {root: __dirname + "/public/pages"});
 })
-app.get("/api/productos-test", (req, res) => {
-    let quantity = req.query.quantity ? parseInt(req.query.quantity) : 10;
-    let products = generate(quantity);
-    res.render("ProductsTest", {prods: products});
+app.get("/chats", (req, res) => {
+    res.sendFile("chat.html", {root: __dirname + "/public/pages"});
 })
+// app.get("/api/productos-test", (req, res) => {
+//     let quantity = req.query.quantity ? parseInt(req.query.quantity) : 10;
+//     let products = generate(quantity);
+//     res.render("ProductsTest", {prods: products});
+// })
 app.get("/logged", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res) => {
     let user = req.user.payload.toObject();
     console.log("logged: ", user);
     res.render("Logged", {user});
+})
+app.get("/user-info", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res) => {
+    let user = req.user.payload.toObject();
+    res.render("User", {user});
 })
 app.get("/info", (req, res) => {
     let info = {
@@ -124,12 +131,6 @@ app.post("/register", upload.single("avatar"), passportCall("register"), (req, r
     if(res.status === "error") {
         res.send({status: "error", message: "Usuario ya existente"})
     } else {
-        // let user = req.user;
-        // let token = jwt.sign(user, envConfig.JWT_SECRET);
-        // res.cookie("JWT_COOKIE", token, {
-        //     httpOnly: true,
-        //     maxAge: 1000*60*60
-        // })
         res.send({status: "success", message: "Usuario registrado con éxito"})
     }
 })

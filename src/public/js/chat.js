@@ -2,6 +2,7 @@ let input = document.getElementById("info");
 let email = document.getElementById("user");
 let enter = document.getElementById("send-message");
 let chatForm = document.getElementById("chat-form");
+const socket = io();
 
 chatForm.addEventListener("submit", (e) => {
     e.preventDefault();

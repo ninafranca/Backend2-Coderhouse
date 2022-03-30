@@ -6,14 +6,14 @@ registrationForm.addEventListener("submit", (e) => {
         let info = new FormData(registrationForm);
         let sendObject = {
             email: info.get("email"),
-            name: info.get("name"),
+            name: info.get("name")[0].toUpperCase() + info.get("name").substr(1).toLowerCase(),
             password: info.get("password"),
             address: info.get("address"),
             age: info.get("age"),
             phone: info.get("phone"),
             //avatar: info.get("avatar")
             avatar: "NA",
-            role: "user"
+            role: "admin"
         }
         fetch("/register", {
             method: "POST",
@@ -23,8 +23,6 @@ registrationForm.addEventListener("submit", (e) => {
         .then(result => {
             if (result.status === 200) {
                 console.log("success");
-                //registrationForm.reset()
-                // location.replace("../pages/registered.html")
                 location.replace("/login");
             } else {
                 location.replace("../pages/registration-error.html");

@@ -1,5 +1,5 @@
 <header class="logged-div">
-    <a href="/user-info">Cuenta</a>
+    <a href="#">Cuenta</a>
     <div class="dropdown">
         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
             Productos
@@ -16,7 +16,12 @@
 </header>
 
 <div>
-    <h1>¡Bienvenido/a {{user.name}}!</h1>
+    <h1>Datos de cuenta</h1>
+    <h2>E-mail: {{user.email}}</h2>
+    <h2>Nombre: {{user.name}}</h2>
+    <h2>Dirección: {{user.address}}</h2>
+    <h2>Edad: {{user.age}}</h2>
+    <h2>Teléfono: {{user.phone}}</h2>
     <div>
         <img src="{{user.avatar}}" alt="User avatar" style="width: 20vw">
     </div>
