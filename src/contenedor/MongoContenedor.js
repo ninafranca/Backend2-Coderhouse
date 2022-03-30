@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 import config from "../config/config.js";
 import {normalize, denormalize, schema} from "normalizr";
+import createLogger from "../public/js/logger.js";
+import {envConfig} from "../config/envConfig.js";
+
+const logger = createLogger(envConfig.NODE_ENV);
 
 mongoose.connect(config.mongo.baseUrl, {useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -251,6 +255,22 @@ export default class MongoContenedor {
                 return {status: "success", payload: userFound};
             } 
         } catch(error) {
+            return {status: "error", message: error.message};
+        }
+    }
+
+    async saveCartToUser(id) {
+        try {
+            let user = await this.collection.findById({_id: id});
+            if(!user) {
+                return {status: "error", message: "Usuario no encontrado"}
+            } else {
+                const newCart = await this.collection.newCart();
+                const result = await this.collection.findByIdAndUpdate(id, {$push: {carts: newCart }});
+                return {status: "success", message: "El carrito se ha creado exitosamente", result};
+            }
+        } catch(error) {
+            logger.error("Error creando carrito para usuario");
             return {status: "error", message: error.message};
         }
     }

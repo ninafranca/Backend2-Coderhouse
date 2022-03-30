@@ -10,8 +10,8 @@ const createLogger = (env) => {
                 json()
             ),
             transports: [
-                new winston.transports.File({filename: __dirname + "/logs/warns.log", level: "warn"}),
-                new winston.transports.File({filename: __dirname + "/logs/errors.log", level: "error"}),
+                new winston.transports.File({filename: "./src/warns.log", level: "warn"}),
+                new winston.transports.File({filename: "./src/errors.log", level: "error"}),
                 new winston.transports.Console({level: "info"})
             ]
         })

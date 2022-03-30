@@ -41,7 +41,7 @@ router.post('/:id_cart/productos/:id_prod', (req, res) => {
     }
 })
 
-//DELETE: vacia un carrito y lo elimina
+//DELETE: vacía un carrito y lo elimina
 router.delete('/:id', (req, res) => {
     let id = req.params.id;
     carts.deleteCartById(id).then(result => {
@@ -49,7 +49,7 @@ router.delete('/:id', (req, res) => {
     })
 })
 
-//DELETE ID: eliminar un producto por su id de producto y de carrito
+//DELETE ID: elimina un producto por su id de producto y de carrito
 router.delete('/:id_cart/productos/:id_prod', (req, res) => {
     if(persistance === fileSystem) {
         let prodId = Number(req.params.id_prod);

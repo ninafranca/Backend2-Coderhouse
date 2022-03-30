@@ -171,3 +171,8 @@
 {"level":"warn","message":"Método GET no disponible en ruta /utils.js","timestamp":"2022-03-30T18:00:26.593Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-03-30T18:01:29.756Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /utils.js","timestamp":"2022-03-30T18:01:29.767Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /carrito","timestamp":"2022-03-30T18:15:06.277Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /ff","timestamp":"2022-03-30T23:50:06.411Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /fo","timestamp":"2022-03-30T23:50:18.506Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /nina7","timestamp":"2022-03-30T23:50:53.829Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /nina","timestamp":"2022-03-30T23:51:00.429Z"}

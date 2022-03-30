@@ -1,4 +1,4 @@
-<header class="logged-div">
+<header class="logged-header">
     <a href="#">Cuenta</a>
     <div class="dropdown">
         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -11,19 +11,23 @@
         </ul>
     </div>
     <a href="/carrito">Carrito</a>
-    <a href="/chats">Chat</a>
+    <a href="/chat">Chat</a>
     <form action="/logout" method="POST"><button type="submit" class="btn btn-secondary">Desloguearse</button></form>
 </header>
 
-<div>
-    <h1>Datos de cuenta</h1>
-    <h2>E-mail: {{user.email}}</h2>
-    <h2>Nombre: {{user.name}}</h2>
-    <h2>Dirección: {{user.address}}</h2>
-    <h2>Edad: {{user.age}}</h2>
-    <h2>Teléfono: {{user.phone}}</h2>
-    <div>
-        <img src="{{user.avatar}}" alt="User avatar" style="width: 20vw">
+<div class="logged-user-info">
+    <h1>Información de usuario</h1>
+    <div class="info-flex1">
+        <div class="info-flex2">
+            <h2>E-mail: {{user.email}}</h2>
+            <h2>Nombre: {{user.name}}</h2>
+            <h2>Dirección: {{user.address}}</h2>
+            <h2>Edad: {{user.age}}</h2>
+            <h2>Teléfono: {{user.phone}}</h2>
+        </div>
+        <div class="info-flex-img">
+            <img src="{{user.avatar}}" alt="User avatar" style="width: 20vw">
+        </div>
     </div>
 </div>
 

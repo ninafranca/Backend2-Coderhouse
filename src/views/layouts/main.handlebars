@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
-    {{#each css}}
-        <script src="/src/public/css/{{this}}"></script>
-    {{/each}}
+    <link rel="stylesheet" href="/css/chat.css">
+    <link rel="stylesheet" href="/css/logged.css">
 </head>
     <body>
 
         {{{body}}}
+        {{#each js}}
+            <script src="/src/public/js/{{this}}"></script>
+        {{/each}}
+
 
     </body>
 </html>

@@ -32,7 +32,7 @@ const server = app.listen(PORT,() => {
     console.log("Listening on port: ", PORT)
 });
 const io = new Server(server);
-const logger = createLogger(process.env.NODE_ENV);
+const logger = createLogger(envConfig.NODE_ENV);
 
 //APP.USE
 app.use(express.json());
@@ -45,7 +45,7 @@ app.use((req, res, next) => {
 app.use("/api/productos", productsRouter);
 app.use("/api/carrito", carritoRouter);
 app.use("/api/chats", chatsRouter);
-//app.use("/register", usersRouter);
+app.use("/users", usersRouter);
 app.use(express.static(__dirname + "/public"));
 app.use(session({
     store: MongoStore.create({mongoUrl: envConfig.MONGO_SESSIONS}),
@@ -84,8 +84,9 @@ app.get("/logout", (req, res) => {
 app.get("/registration-error", (req, res) => {
     res.sendFile("registration-error.html", {root: __dirname + "/public/pages"});
 })
-app.get("/chats", (req, res) => {
-    res.sendFile("chat.html", {root: __dirname + "/public/pages"});
+app.get("/chat", passportCall("jwt"), (req, res) => {
+    let user = req.user.payload.toObject();
+    res.render("Chat", {user});
 })
 // app.get("/api/productos-test", (req, res) => {
 //     let quantity = req.query.quantity ? parseInt(req.query.quantity) : 10;
@@ -97,7 +98,7 @@ app.get("/logged", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res) 
     console.log("logged: ", user);
     res.render("Logged", {user});
 })
-app.get("/user-info", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res) => {
+app.get("/user-info", passportCall("jwt"), (req, res) => {
     let user = req.user.payload.toObject();
     res.render("User", {user});
 })
@@ -172,6 +173,6 @@ io.on("connection", async socket => {
 })
 
 app.use((req, res) => {
-    logger.warn(`Método ${req.method} no disponible en ruta ${req.path}`)
+    logger.warn(`Método ${req.method} no disponible en ruta ${req.path}`);
     res.status(404).send({error: -2, message: "Ruta no implementada"});
 })

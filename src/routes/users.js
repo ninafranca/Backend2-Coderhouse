@@ -9,13 +9,19 @@ router.get("/", (req, res) => {
         res.send(result);
     })
 })
+router.get("/:user_id", (req, res) => {
+    const userId = req.params.user_id
+    users.getById(userId).then(result => {
+        res.send(result);
+    })
+})
 
 //POST
-// router.post("/", async (req, res) => {
-//     let user = req.body;
-//     console.log(user);
-//     let data = await users.saveUser(user)
-//     res.send({user: data})
-// })
+router.post("/:user_id", async (req, res) => {
+    let userId = req.params.user_id;
+    console.log(userId);
+    let data = await users.saveCartToUser(userId)
+    res.send({user_cart: data})
+})
 
 export default router;
