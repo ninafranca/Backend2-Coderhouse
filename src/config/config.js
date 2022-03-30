@@ -1,4 +1,4 @@
-import __dirname from "../../utils.js";
+import __dirname from "../utils.js";
 import {envConfig} from "./envConfig.js";
 
 export default {
@@ -9,6 +9,6 @@ export default {
         baseUrl: envConfig.MONGO_ECOMMERCE
     },
     firebase: {
-        baseUrl: "https://ecommerce-f628b.firebaseio.com"
+        baseUrl: envConfig.FIREBASE
     }
 }

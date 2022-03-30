@@ -22,7 +22,7 @@ import upload from "./public/js/upload.js";
 import {passportCall, checkAuth} from "./public/js/middlewares.js";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
-import {envConfig} from "./public/js/envConfig.js";
+import {envConfig} from "./config/envConfig.js";
 
 const contenedor = new Contenedor();
 //const carrito = new Carrito();

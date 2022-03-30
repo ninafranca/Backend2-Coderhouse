@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import config from "../public/js/config.js";
+import config from "../config/config.js";
 import {normalize, denormalize, schema} from "normalizr";
 
 mongoose.connect(config.mongo.baseUrl, {useNewUrlParser: true, useUnifiedTopology: true});

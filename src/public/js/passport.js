@@ -3,7 +3,7 @@ import local from "passport-local";
 import {validPassword, hashPassword, cookieExtractor} from "../../utils.js";
 import {users} from "../../daos/index.js";
 import jwt from "passport-jwt";
-import {envConfig} from "./envConfig.js";
+import {envConfig} from "../../config/envConfig.js";
 
 const localStrategy = local.Strategy
 const JWTStrategy = jwt.Strategy;

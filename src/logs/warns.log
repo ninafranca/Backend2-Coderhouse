@@ -84,3 +84,4 @@
 {"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-03-26T04:53:13.795Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-03-26T04:54:41.862Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-03-26T04:55:03.405Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-03-28T03:28:06.525Z"}
