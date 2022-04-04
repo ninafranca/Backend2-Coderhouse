@@ -13,7 +13,8 @@ export default class CartsMongo extends MongoContenedor {
                         ref: "products"
                     }],
                     default: []
-                }
+                },
+                user: { type: Schema.Types.ObjectId, ref: 'user', unique: true }
             },
             {timestamps: true}
         )

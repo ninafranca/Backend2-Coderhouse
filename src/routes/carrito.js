@@ -4,28 +4,37 @@ import {carts, persistance} from "../daos/index.js";
 const router = express.Router();
 const fileSystem = "fileSystem";
 
-//GET: devuelve todos los productos del carrito
-router.get('/:id/productos', (req, res)=>{
-    let id = req.params.id;
-    carts.getCart(id).then(result => {
+//GET
+// Devuelve todos los productos de un carrito
+router.get("/:cart_id/productos", (req, res)=>{
+    let cartId = req.params.cart_id;
+    carts.getCart(cartId).then(result => {
+        res.send(result);
+    })
+})
+// Devuelve el carrito de un usuario
+router.get("/:user_id", (req, res) => {
+    let userId = req.params.user_id;
+    carts.getCartByUserId(userId).then(result => {
         res.send(result);
     })
 })
 
 //POST: crea un carrito y devuelve su id
-router.post('/', (req, res) => {
-    carts.newCart().then(result => {
+router.post("/:user_id", (req, res) => {
+    let userId = req.params.user_id;
+    carts.newCart(userId).then(result => {
         res.send(result);
-        if(result.status === "success"){
-            carts.getAll().then(result => {
-                console.log(result);
-            })
-        }
+        // if(result.status === "success"){
+        //     carts.getAll().then(result => {
+        //         console.log(result);
+        //     })
+        // }
     })
 })
 
 //POST: incorpora productos al carrito por su id de producto
-router.post('/:id_cart/productos/:id_prod', (req, res) => {
+router.post("/:id_cart/productos/:id_prod", (req, res) => {
     if(persistance === fileSystem) {
         let prodId = Number(req.params.id_prod);
         let cartId = req.params.id_cart;
@@ -42,7 +51,7 @@ router.post('/:id_cart/productos/:id_prod', (req, res) => {
 })
 
 //DELETE: vacía un carrito y lo elimina
-router.delete('/:id', (req, res) => {
+router.delete("/:id", (req, res) => {
     let id = req.params.id;
     carts.deleteCartById(id).then(result => {
         res.send(result);
@@ -50,7 +59,7 @@ router.delete('/:id', (req, res) => {
 })
 
 //DELETE ID: elimina un producto por su id de producto y de carrito
-router.delete('/:id_cart/productos/:id_prod', (req, res) => {
+router.delete("/:id_cart/productos/:id_prod", (req, res) => {
     if(persistance === fileSystem) {
         let prodId = Number(req.params.id_prod);
         let cartId = req.params.id_cart;

@@ -68,21 +68,24 @@ export default class MongoContenedor {
             let product = await this.collection.findById(id)
             if(product) {
                 await this.collection.findByIdAndDelete(id);
-                return {status: "success", message: "Producto borrado exitosamente"}
+                return {status: "success", message: "Producto borrado exitosamente"};
             }
-            return {status: "error", message: "Producto inexistente"}
+            return {status: "error", message: "Producto inexistente"};
         } catch(error) {
-            return {status: "error", message: "Error borrando producto"}
+            return {status: "error", message: "Error borrando producto"};
         }
     }
 
     //MÉTODOS CARRITO
-    async newCart() {
+    async newCart(userId) {
         try {
-            let cart = await this.collection.create({products: []});
-            return {status: "success", payload: cart}
+            // const hasCart = this.collection.findOne({user: userId});
+            // console.log(hasCart);
+            // if(hasCart) return {status: "error", message: "Usuario ya tiene carrito"};
+            const cart = await this.collection.create({products: [], user: userId});
+            return {status: "success", payload: cart};
         } catch(error) {
-            return {status: "error", message: "Error al crear carrito"}
+            return {status: "error", message: "Error al crear carrito"};
         }
     }
 
@@ -105,12 +108,23 @@ export default class MongoContenedor {
         try {
             let cart = await this.collection.findById(id);
             if(!cart) {
-                return {status: "error", message: "El carrito no existe"}
+                return {status: "error", message: "El carrito no existe"};
             } else {
                 return {status: "success", payload: cart};
             }
         } catch(error) {
-            return {status: "error", message: "Error al obtener carrito" + error}
+            return {status: "error", message: "Error al obtener carrito" + error};
+        }
+    }
+
+    async getCartByUserId(userId) {
+        try {
+            const userCart = await this.collection.findOne({user: userId});
+            if(userCart) return {status: "success", message: "Carrito de usuario encontrado", userCart};
+            return {status: "success", message: "Carrito"};
+        } catch(error) {
+            logger.error(`Error encontrando carrito de usuario`);
+            return {status: "error", message: "Error encontrando carrito de usuario"};
         }
     }
 
@@ -255,22 +269,6 @@ export default class MongoContenedor {
                 return {status: "success", payload: userFound};
             } 
         } catch(error) {
-            return {status: "error", message: error.message};
-        }
-    }
-
-    async saveCartToUser(id) {
-        try {
-            let user = await this.collection.findById({_id: id});
-            if(!user) {
-                return {status: "error", message: "Usuario no encontrado"}
-            } else {
-                const newCart = await this.collection.newCart();
-                const result = await this.collection.findByIdAndUpdate(id, {$push: {carts: newCart }});
-                return {status: "success", message: "El carrito se ha creado exitosamente", result};
-            }
-        } catch(error) {
-            logger.error("Error creando carrito para usuario");
             return {status: "error", message: error.message};
         }
     }

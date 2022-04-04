@@ -112,11 +112,12 @@ app.get("/info", (req, res) => {
         platform: platform,
         memory: memoryUsage()
     }
-    logger.info(info)
+    logger.info(info);
     res.send(info);
 });
 //HANDLEBARS
 app.get("/productos", (req, res) => {
+    //let user = req.user.payload.toObject();
     products.getAll().then(result => {
         const products = result.payload;
         const objects = {products: products.map(prod => prod.toObject())};

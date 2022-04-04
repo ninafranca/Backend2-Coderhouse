@@ -1,0 +1,55 @@
+.products-list {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-row-gap: 5%;
+}
+
+.buy-product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-info>img {
+    width: 10vw;
+}
+
+.product-title {
+    font-size: 120%;
+    text-align: center;
+}
+
+.product-brand {
+    font-size: 105%;
+    text-align: center;
+}
+
+.product-price {
+    font-size: 100%;
+    text-align: center;
+}
+
+.product-description {
+    font-size: 80%;
+}
+
+.products-h1 {
+    text-align: center;
+    margin: 2% 0;
+}
+
+.btn-blue {
+    background-color: rgba(104, 104, 255, 0.842) !important;
+    color: white !important;
+}
+
+.btn-blue:hover {
+    background-color: rgba(74, 74, 250, 0.842) !important;
+    color: white !important;
+}
