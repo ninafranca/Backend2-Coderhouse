@@ -210,3 +210,15 @@
 {"level":"warn","message":"Método GET no disponible en ruta /css/logout.css","timestamp":"2022-03-31T03:45:21.205Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-03-31T03:45:28.310Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-03-31T03:45:30.378Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /api/carrito","timestamp":"2022-04-05T02:18:05.346Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-04-05T02:18:38.762Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /api/carrito","timestamp":"2022-04-05T02:18:43.293Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/carrito","timestamp":"2022-04-05T03:15:25.165Z"}
+{"level":"warn","message":"Método DELETE no disponible en ruta /api/productos","timestamp":"2022-04-05T03:28:57.105Z"}
+{"level":"warn","message":"Método DELETE no disponible en ruta /api/productos","timestamp":"2022-04-05T03:29:15.427Z"}
+{"level":"warn","message":"Método DELETE no disponible en ruta /api/productos","timestamp":"2022-04-05T03:32:44.969Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /api/productos","timestamp":"2022-04-05T03:33:55.342Z"}
+{"level":"warn","message":"Método DELETE no disponible en ruta /productos","timestamp":"2022-04-05T03:33:55.587Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /api/productos","timestamp":"2022-04-05T03:34:25.815Z"}
+{"level":"warn","message":"Método DELETE no disponible en ruta /productos","timestamp":"2022-04-05T03:34:26.054Z"}
+{"level":"warn","message":"Método DELETE no disponible en ruta /users","timestamp":"2022-04-05T03:40:21.130Z"}
