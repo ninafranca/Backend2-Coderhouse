@@ -1,3 +1,7 @@
+.login {
+    background-color: rgb(230, 225, 220);
+}
+
 #login-form {
     background-color: rgb(189, 187, 187);
     display: flex;
@@ -81,4 +85,10 @@
 }
 .div-registration>p>span:hover {
     cursor: pointer;
+}
+
+.already-registered {
+    padding-top: 2%;
+    display: flex;
+    justify-content: center;
 }

@@ -3,7 +3,7 @@ import __dirname from "../../utils.js";
 
 export const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null,"../images")
+        cb(null, __dirname + "/images");
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + file.originalname);
@@ -12,4 +12,4 @@ export const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
-export default upload
+export default upload;

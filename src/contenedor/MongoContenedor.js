@@ -76,12 +76,25 @@ export default class MongoContenedor {
         }
     }
 
+    async getByCategory(gender) {
+        try {
+            const category = await this.collection.find({gender: gender});
+            if(!category) {
+                return {status: "error", message: "No existe la categoría"};
+            } else {
+                return {status: "success", payload: category};
+            } 
+        } catch(error) {
+            return {status: "error", message: error.message};
+        }
+    }
+
     //MÉTODOS CARRITO
     async newCart(userId) {
         try {
-            // const hasCart = this.collection.findOne({user: userId});
-            // console.log(hasCart);
-            // if(hasCart) return {status: "error", message: "Usuario ya tiene carrito"};
+            const hasCart = this.collection.findOne({user: userId});
+            console.log(hasCart);
+            if(hasCart) return {status: "error", message: "Usuario ya tiene carrito"};
             const cart = await this.collection.create({products: [], user: userId});
             return {status: "success", payload: cart};
         } catch(error) {
@@ -120,8 +133,8 @@ export default class MongoContenedor {
     async getCartByUserId(userId) {
         try {
             const userCart = await this.collection.findOne({user: userId});
-            if(userCart) return {status: "success", message: "Carrito de usuario encontrado", userCart};
-            return {status: "success", message: "Carrito"};
+            if(!userCart) return {status: "error", message: "El usuario no tiene carrito"};
+            return {status: "success", payload: userCart._id};
         } catch(error) {
             logger.error(`Error encontrando carrito de usuario`);
             return {status: "error", message: "Error encontrando carrito de usuario"};
@@ -267,6 +280,21 @@ export default class MongoContenedor {
                 return {status: "error", message: "No existe el usuario"};
             } else {
                 return {status: "success", payload: userFound};
+            } 
+        } catch(error) {
+            return {status: "error", message: error.message};
+        }
+    }
+
+    async getCartByUserId(id) {
+        try {
+            const userFound = await this.collection.findById({_id: id});
+            console.log(userFound);
+            if(!userFound) {
+                return {status: "error", message: "No existe el usuario"};
+            } else {
+                let cartFound = await carts.find({user: id})
+                return {status: "success", payload: cartFound};
             } 
         } catch(error) {
             return {status: "error", message: error.message};

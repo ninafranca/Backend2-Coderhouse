@@ -33,6 +33,25 @@ router.post("/:user_id", (req, res) => {
     })
 })
 
+// router.post("/:prod_id", (req, res) => {
+//     console.log("cart");
+//     let userId = req.user.payload._id.toObject();
+//     console.log("user id: ", userId);
+//     let productId = req.params.prod_id;
+//     carts.newCart(userId).then(result => {
+//         if (result.status === "error") {
+//             carts.getCartByUserId(userId).then(result => {
+//                 if (result.status === "success");
+//                 let cartId = result;
+//                 carts.saveProdById(cartId, productId).then(result => {
+//                     res.send(result);
+//                 })
+//             })
+//         }
+//         res.send(result);
+//     })
+// })
+
 //POST: incorpora productos al carrito por su id de producto
 router.post("/:id_cart/productos/:id_prod", (req, res) => {
     if(persistance === fileSystem) {

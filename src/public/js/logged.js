@@ -13,9 +13,9 @@ fetch('/logged')
 
 const userProfile = (user) => {
     const avatar = document.getElementById("register-user-avatar")
-    if (avatar && user.avatar) {avatar.setAttribute('src', user.avatar)}
-    const email = document.getElementById('email')
-    if (email) { email.innerText = user.email }
-    const role = document.getElementById('role')
-    if (role) { role.innerText = user.role }
+    if (avatar && user.avatar) {avatar.setAttribute("src", user.avatar)}
+    const email = document.getElementById("email")
+    if (email) {email.innerText = user.email}
+    const role = document.getElementById("role")
+    if (role) {role.innerText = user.role}
 }

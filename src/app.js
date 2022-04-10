@@ -116,13 +116,23 @@ app.get("/info", (req, res) => {
     res.send(info);
 });
 //HANDLEBARS
-app.get("/productos", (req, res) => {
+app.get("/productos", passportCall("jwt"), (req, res) => {
     //let user = req.user.payload.toObject();
     products.getAll().then(result => {
         const products = result.payload;
         const objects = {products: products.map(prod => prod.toObject())};
         if (result.status === "success") {
             res.render("Home", objects)
+        } else {res.status(500).send(result)}
+    })
+})
+app.get("/productos/:category", passportCall("jwt"), (req, res) => {
+    let cat = req.params.category;
+    products.getByCategory(cat).then(result => {
+        const products = result.payload;
+        const objects = {products: products.map(prod => prod.toObject())};
+        if (result.status === "success") {
+            res.render("Category", objects);
         } else {res.status(500).send(result)}
     })
 })

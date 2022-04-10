@@ -7,13 +7,13 @@ const router = express.Router();
 const fileSystem = "fileSystem";
 
 //GETS
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
     products.getAll().then(result => {
         res.send(result);
     })
 })
 
-router.get('/:id', (req, res)=>{
+router.get("/:id", (req, res) => {
     if(persistance === fileSystem) {
         let id= parseInt(req.params.id);
         products.getById(id).then(result => {
@@ -28,7 +28,7 @@ router.get('/:id', (req, res)=>{
 })
 
 //POST
-router.post('/', (req, res) => {
+router.post("/", (req, res) => {
     if(admin) {
         let prod = req.body;
         products.save(prod).then(result => {
@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
 })
 
 //PUT
-router.put('/:id', (req, res) => {
+router.put("/:id", (req, res) => {
     if(admin) {
         let body = req.body;
         if(persistance === fileSystem) {
@@ -67,7 +67,7 @@ router.put('/:id', (req, res) => {
 })
 
 //DELETE
-router.delete('/:id', (req, res) => {
+router.delete("/:id", (req, res) => {
     if(admin) {
         if(persistance === fileSystem) {
             let id= parseInt(req.params.id);

@@ -24,4 +24,12 @@ router.post("/:user_id", async (req, res) => {
     res.send({user_cart: data})
 })
 
+router.post("/:user_id", (req, res) => {
+    let userId = req.params.user_id;
+    let productId = req.params.product_id;
+    carts.saveProdById(userId, cartId).then(result => {
+        res.send(result);
+    })
+})
+
 export default router;
