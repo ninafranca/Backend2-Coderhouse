@@ -117,10 +117,10 @@ app.get("/info", (req, res) => {
 });
 //HANDLEBARS
 app.get("/productos", passportCall("jwt"), (req, res) => {
-    //let user = req.user.payload.toObject();
+    let user = req.user.payload.toObject();
     products.getAll().then(result => {
         const products = result.payload;
-        const objects = {products: products.map(prod => prod.toObject())};
+        const objects = {products: products.map(prod => prod.toObject()), user: user};
         if (result.status === "success") {
             res.render("Home", objects)
         } else {res.status(500).send(result)}
@@ -128,9 +128,10 @@ app.get("/productos", passportCall("jwt"), (req, res) => {
 })
 app.get("/productos/:category", passportCall("jwt"), (req, res) => {
     let cat = req.params.category;
+    let user = req.user.payload.toObject();
     products.getByCategory(cat).then(result => {
         const products = result.payload;
-        const objects = {products: products.map(prod => prod.toObject())};
+        const objects = {products: products.map(prod => prod.toObject()), user: user};
         if (result.status === "success") {
             res.render("Category", objects);
         } else {res.status(500).send(result)}

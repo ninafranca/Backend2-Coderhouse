@@ -1,5 +1,7 @@
 import express from "express";
 import {carts, persistance} from "../daos/index.js";
+import {passportCall} from "../public/js/middlewares.js";
+import {envConfig} from "../config/envConfig.js"
 
 const router = express.Router();
 const fileSystem = "fileSystem";
@@ -20,7 +22,8 @@ router.get("/:user_id", (req, res) => {
     })
 })
 
-//POST: crea un carrito y devuelve su id
+//POST 
+//Crea un carrito y devuelve su id
 router.post("/:user_id", (req, res) => {
     let userId = req.params.user_id;
     carts.newCart(userId).then(result => {
@@ -30,29 +33,19 @@ router.post("/:user_id", (req, res) => {
         //         console.log(result);
         //     })
         // }
+    }); 
+})
+
+//Agrega producto a carrito de usuario
+router.post("/usuario/:user_id/producto/:prod_id", (req, res) => {
+    let userId = req.params.user_id;
+    let prodId = req.params.prod_id;
+    carts.getCartByUserIdAddProd(userId, prodId).then(result => {
+        res.send(result);
     })
 })
 
-// router.post("/:prod_id", (req, res) => {
-//     console.log("cart");
-//     let userId = req.user.payload._id.toObject();
-//     console.log("user id: ", userId);
-//     let productId = req.params.prod_id;
-//     carts.newCart(userId).then(result => {
-//         if (result.status === "error") {
-//             carts.getCartByUserId(userId).then(result => {
-//                 if (result.status === "success");
-//                 let cartId = result;
-//                 carts.saveProdById(cartId, productId).then(result => {
-//                     res.send(result);
-//                 })
-//             })
-//         }
-//         res.send(result);
-//     })
-// })
-
-//POST: incorpora productos al carrito por su id de producto
+//incorpora productos al carrito de usuario por su id de producto
 router.post("/:id_cart/productos/:id_prod", (req, res) => {
     if(persistance === fileSystem) {
         let prodId = Number(req.params.id_prod);

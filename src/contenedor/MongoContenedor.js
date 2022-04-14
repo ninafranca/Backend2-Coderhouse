@@ -134,10 +134,29 @@ export default class MongoContenedor {
         try {
             const userCart = await this.collection.findOne({user: userId});
             if(!userCart) return {status: "error", message: "El usuario no tiene carrito"};
-            return {status: "success", payload: userCart._id};
+            return {status: "success", payload: userCart};
         } catch(error) {
             logger.error(`Error encontrando carrito de usuario`);
             return {status: "error", message: "Error encontrando carrito de usuario"};
+        }
+    }
+
+    async getCartByUserIdAddProd(userId, productId) {
+        try {
+            const userCart = await this.collection.findOne({user: userId});
+            console.log(userCart);
+            if(!userCart) {
+                let createCart = await this.collection.create({products: [productId], user: userId});;
+                let cart = await this.collection.findOne({user: userId});
+                return {status: "success", payload: cart}
+            } else {
+                let addProdToCart = await this.collection.findByIdAndUpdate(userCart._id, {$push: {products: productId }})
+                return {status: "success", payload: addProdToCart}
+            }
+            //return {status: "error", message: error.message};
+        } catch(error) {
+            logger.error(`Error agregando producto a carrito`);
+            return {status: "error", message: error.message};
         }
     }
 

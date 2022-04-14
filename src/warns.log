@@ -262,3 +262,54 @@
 {"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-10T21:29:36.615Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-10T22:07:09.572Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-10T22:24:39.712Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-04-11T17:48:15.465Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-11T17:48:50.001Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-12T02:39:32.452Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-04-12T17:30:39.721Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-12T17:30:51.442Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T17:31:45.136Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T17:32:00.745Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T17:32:32.459Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T17:33:29.427Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T17:36:01.341Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T17:36:13.686Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-12T18:32:13.525Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-12T18:44:08.227Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-12T20:48:20.615Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T20:48:24.843Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T21:35:28.380Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T21:43:23.505Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T21:43:32.387Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T21:47:22.271Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T21:47:53.798Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-12T21:51:18.836Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T21:51:24.671Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T21:52:05.391Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T21:52:07.548Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T21:52:44.075Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T21:52:46.947Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-04-12T21:54:54.320Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-04-12T21:56:29.026Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-12T21:58:16.684Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-04-12T21:58:32.949Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-04-14T02:42:20.163Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-14T02:43:19.056Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-04-14T02:51:51.395Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/carrito/usuario//producto/","timestamp":"2022-04-14T02:56:58.107Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/carrito/usuario//producto/","timestamp":"2022-04-14T02:58:13.812Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/carrito/usuario//producto/","timestamp":"2022-04-14T02:59:25.374Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/carrito/usuario//producto/623ea84b045414b2af79d6fd","timestamp":"2022-04-14T02:59:30.273Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/carrito/usuario//producto/623ea84b045414b2af79d6fd","timestamp":"2022-04-14T03:00:38.014Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/carrito/usuario//producto/","timestamp":"2022-04-14T03:01:17.028Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/carrito/usuario//producto/623ea84b045414b2af79d6fd","timestamp":"2022-04-14T03:01:41.094Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/carrito/usuario//producto/623ea84b045414b2af79d6fd","timestamp":"2022-04-14T03:13:51.849Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-04-14T03:20:13.456Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-14T03:25:19.147Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-14T03:25:48.913Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-14T03:26:13.563Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-04-14T03:26:26.838Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-04-14T03:32:25.807Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /api/carrito/usuario/6244fbd36c870f32de894737/producto/623ea84b045414b2af79d6fd","timestamp":"2022-04-14T03:47:33.543Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-14T04:01:08.366Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-14T04:01:13.520Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /public/js/buy.js","timestamp":"2022-04-14T04:16:18.395Z"}

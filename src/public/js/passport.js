@@ -70,7 +70,6 @@ const initializePassport = () => {
             let user = await users.getByEmail(jwt_payload.payload.email);
             if(!user) return done(null, false, {message: "Usuario no encontrado"});
             return done(null, user);
-            // return done(null, { _id: user._id, email: user.email, role: user.role, avatar: user.avatar})
         } catch(error) {
             console.log("done");
             return done(error);
