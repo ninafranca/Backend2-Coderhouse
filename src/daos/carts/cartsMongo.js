@@ -9,7 +9,8 @@ export default class CartsMongo extends MongoContenedor {
             {
                 products: {
                     type: [{
-                        type: Schema.Types.ObjectId,
+                        // type: Schema.Types.ObjectId,
+                        type: String,
                         ref: "products"
                     }],
                     default: []

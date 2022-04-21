@@ -2,7 +2,7 @@ import __dirname from "./utils.js";
 import express from "express";
 import Contenedor from "./contenedor/Contenedor.js";
 //import Carrito from "./contenedor/Carrito.js";
-import {chats, users, products} from "./daos/index.js";
+import {chats, users, products, carts} from "./daos/index.js";
 import productsRouter from "./routes/products.js";
 import carritoRouter from "./routes/carrito.js";
 import chatsRouter from "./routes/chats.js";
@@ -135,6 +135,27 @@ app.get("/productos/:category", passportCall("jwt"), (req, res) => {
         if (result.status === "success") {
             res.render("Category", objects);
         } else {res.status(500).send(result)}
+    })
+})
+app.get("/carrito/:id_carrito", passportCall("jwt"), (req, res) => {
+    let id = req.params.id_carrito;
+    let user = req.user.payload.toObject();
+    carts.getCartByUserId(id).then(result => {
+        const productsId = result.payload;
+        let list = []
+        productsId.map(p => products.getById(p).then(result => {
+            if (result.status === "success") {
+                list.push(result.payload.toObject())
+            }
+            }))
+        setTimeout(() => {
+            console.log("soy el log ", list);
+            const objects = {products: list, user: user, cart: id};
+            console.log("objects: ", objects);
+            if (result.status === "success") {
+                res.render("Cart", objects);
+            } else {res.status(500).send(result)}
+        }, 3000)
     })
 })
 

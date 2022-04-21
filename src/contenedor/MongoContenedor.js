@@ -8,10 +8,10 @@ const logger = createLogger(envConfig.NODE_ENV);
 
 mongoose.connect(config.mongo.baseUrl, {useNewUrlParser: true, useUnifiedTopology: true});
 
-export default class MongoContenedor {
+export default class MongoContenedor {  
 
     constructor(collection, schema, timestamps) {
-        this.collection = mongoose.model(collection, new mongoose.Schema(schema, timestamps))
+        this.collection = mongoose.model(collection, new mongoose.Schema(schema, timestamps));
     }
 
     //MÉTODOS PRODUCTOS
@@ -132,9 +132,12 @@ export default class MongoContenedor {
 
     async getCartByUserId(userId) {
         try {
-            const userCart = await this.collection.findOne({user: userId});
-            if(!userCart) return {status: "error", message: "El usuario no tiene carrito"};
-            return {status: "success", payload: userCart};
+            // const user = await users.findById(userId);
+            // if(!user) return {status: "error", message: "El usuario no existe"};
+            let cart = await this.collection.findOne({user: userId});
+            if(!cart) return {status: "error", message: "El usuario no cuenta con carrito existente"};
+            let productsId = cart.products;
+            return {status: "success", payload: productsId};
         } catch(error) {
             logger.error(`Error encontrando carrito de usuario`);
             return {status: "error", message: "Error encontrando carrito de usuario"};
@@ -305,19 +308,19 @@ export default class MongoContenedor {
         }
     }
 
-    async getCartByUserId(id) {
-        try {
-            const userFound = await this.collection.findById({_id: id});
-            console.log(userFound);
-            if(!userFound) {
-                return {status: "error", message: "No existe el usuario"};
-            } else {
-                let cartFound = await carts.find({user: id})
-                return {status: "success", payload: cartFound};
-            } 
-        } catch(error) {
-            return {status: "error", message: error.message};
-        }
-    }
+    // async getCartByUserId(id) {
+    //     try {
+    //         const userFound = await this.collection.findOne({_id: id});
+    //         console.log(userFound);
+    //         if(!userFound) {
+    //             return {status: "error", message: "No existe el usuario"};
+    //         } else {
+    //             let cartFound = await carts.find({user: id})
+    //             return {status: "success", payload: cartFound};
+    //         } 
+    //     } catch(error) {
+    //         return {status: "error", message: error.message};
+    //     }
+    // }
 
 }

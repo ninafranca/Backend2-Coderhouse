@@ -10,13 +10,12 @@
             <li><a class="dropdown-item" href="/productos">Todos</a></li>
         </ul>
     </div>
-    <a href="/carrito">Carrito</a>
+    <a href="/carrito/{{user._id}}">Carrito</a>
     <a href="/chat">Chat</a>
     <form action="/logout" method="POST"><button type="submit" class="btn btn-secondary">Desloguearse</button></form>
 </header>
 
 <h1 class="products-h1">Productos</h1>
-<h2 id="user-id" style="display: none;">{{user._id}}</h2>
 <div class="products-list">
     {{#if products}}
         {{#each products}}
