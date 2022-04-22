@@ -39,7 +39,7 @@ productForm.addEventListener("submit", (e) => {
 
 socket.on("deliverProducts", data => {
     let products = data.payload;
-    fetch("templates/productTable.handlebars").then(string => string.text()).then(template => {
+    fetch("templates/ProductTable.handlebars").then(string => string.text()).then(template => {
         const processedTemplate = Handlebars.compile(template);
         const templateObject = {
             products: products

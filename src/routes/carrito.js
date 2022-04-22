@@ -70,7 +70,7 @@ router.delete("/:id", (req, res) => {
     })
 })
 
-//DELETE ID: elimina un producto por su id de producto y de carrito
+//DELETE ID: elimina un producto del carrito por su id de producto y de carrito
 router.delete("/:id_cart/productos/:id_prod", (req, res) => {
     if(persistance === fileSystem) {
         let prodId = Number(req.params.id_prod);

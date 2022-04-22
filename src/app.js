@@ -8,7 +8,7 @@ import carritoRouter from "./routes/carrito.js";
 import chatsRouter from "./routes/chats.js";
 import usersRouter from "./routes/users.js";
 //import loginRouter from "./routes/login.js";
-import {generate} from "./utils.js";
+//import {generate} from "./utils.js";
 import {Server} from "socket.io";
 import {engine} from "express-handlebars";
 import cors from "cors";
@@ -69,8 +69,11 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 
 //APP.GET
+// app.get("/", (req, res) => {
+//     res.sendFile("index.html", {root: __dirname + "/public/pages"});
+// })
 app.get("/", (req, res) => {
-    res.sendFile("index.html", {root: __dirname + "/public/pages"});
+    res.sendFile("login.html", {root: __dirname + "/public/pages"});
 })
 app.get("/login", (req, res) => {
     res.sendFile("login.html", {root: __dirname + "/public/pages"});
@@ -88,11 +91,6 @@ app.get("/chat", passportCall("jwt"), (req, res) => {
     let user = req.user.payload.toObject();
     res.render("Chat", {user});
 })
-// app.get("/api/productos-test", (req, res) => {
-//     let quantity = req.query.quantity ? parseInt(req.query.quantity) : 10;
-//     let products = generate(quantity);
-//     res.render("ProductsTest", {prods: products});
-// })
 app.get("/logged", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res) => {
     let user = req.user.payload.toObject();
     console.log("logged: ", user);
@@ -140,23 +138,31 @@ app.get("/productos/:category", passportCall("jwt"), (req, res) => {
 app.get("/carrito/:id_carrito", passportCall("jwt"), (req, res) => {
     let id = req.params.id_carrito;
     let user = req.user.payload.toObject();
-    carts.getCartByUserId(id).then(result => {
-        const productsId = result.payload;
-        let list = []
-        productsId.map(p => products.getById(p).then(result => {
-            if (result.status === "success") {
-                list.push(result.payload.toObject())
-            }
-            }))
-        setTimeout(() => {
-            console.log("soy el log ", list);
-            const objects = {products: list, user: user, cart: id};
-            console.log("objects: ", objects);
-            if (result.status === "success") {
+    if (req.user.status !== "success") {
+        console.log("no ta");
+        location.replace("/login")
+    } else {
+        carts.getCartByUserId(id).then(result => {
+            if(result.status === "success") {
+                const productsId = result.payload;
+                let list = []
+                productsId.map(p => products.getById(p).then(result => {
+                    if (result.status === "success") {
+                        list.push(result.payload.toObject())
+                    }
+                    }))
+                setTimeout(() => {
+                    const objects = {products: list, user: user, cart: id};
+                    if (result.status === "success") {
+                        res.render("Cart", objects);
+                    } else {res.status(500).send(result)}
+                }, 3000)
+            } else {
+                const objects = {user};
                 res.render("Cart", objects);
-            } else {res.status(500).send(result)}
-        }, 3000)
-    })
+            }
+        })
+    }
 })
 
 //APP.POST

@@ -15,10 +15,10 @@
     <form action="/logout" method="POST"><button type="submit" class="btn btn-secondary">Desloguearse</button></form>
 </header>
 
+{{#if products}}
 <h1 class="products-h1">Productos</h1>
 <div class="products-list">
-    {{#if products}}
-        {{#each products}}
+    {{#each products}}
         <form class="buy-product" id="buy-form" name="buy-form" method="POST" action="http://localhost:8080/api/carrito/usuario/{{../user._id}}/producto/{{this._id}}">
                 <div class="product-info">
                     <h2 class="product-title">{{this.title}}</h2>
@@ -31,7 +31,7 @@
             </form>
         {{/each}}
     {{else}}
-        <h2>No hay productos</h2>
+        <h2 style="text-align: center; padding-top: 5%;">El carrito está vacío</h2>
     {{/if}}
 </div>
 
