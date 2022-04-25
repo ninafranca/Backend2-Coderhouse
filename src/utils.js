@@ -1,6 +1,5 @@
 import {fileURLToPath} from "url";
 import {dirname} from "path";
-import faker from "faker";
 import bcrypt from "bcrypt";
 
 const filename = fileURLToPath(import.meta.url);
@@ -14,20 +13,6 @@ export const cookieExtractor = req => {
         token = req.cookies["JWT_COOKIE"]
     }
     return token;
-}
-export const generate = (n) => {
-    let products = [];
-    for(let i = 0; i < n; i++) {
-      products.push({
-        id: i+1,
-        title: faker.commerce.productName(),
-        price: faker.commerce.price(),
-        description: faker.lorem.sentence(),
-        thumbnail: faker.image.image(),
-        stock: faker.datatype.number()
-      })
-    }
-    return products;
 }
 
 export default __dirname;

@@ -19,7 +19,7 @@
 <div class="products-list">
     {{#if products}}
         {{#each products}}
-            <form class="buy-product" id="buy-form" name="buy-form" method="POST" action="http://localhost:8080/api/carrito/usuario/{{../user._id}}/producto/{{this._id}}">
+            <form class="buy-product card shadow p-3 mb-5 bg-body rounded" id="buy-form" name="buy-form" method="POST" action="http://localhost:8080/api/carrito/usuario/{{../user._id}}/producto/{{this._id}}">
                 <div class="product-info">
                     <h2 class="product-title">{{this.title}}</h2>
                     <h2 class="product-brand">{{this.brand}}</h2>

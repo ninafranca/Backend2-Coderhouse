@@ -15,25 +15,93 @@
     <form action="/logout" method="POST"><button type="submit" class="btn btn-secondary">Desloguearse</button></form>
 </header>
 
+<h1 class="products-h1">Carrito</h1>
 {{#if products}}
-<h1 class="products-h1">Productos</h1>
-<div class="products-list">
+<div class="products-list-cart card container">
     {{#each products}}
-        <form class="buy-product" id="buy-form" name="buy-form" method="POST" action="http://localhost:8080/api/carrito/usuario/{{../user._id}}/producto/{{this._id}}">
-                <div class="product-info">
-                    <h2 class="product-title">{{this.title}}</h2>
-                    <h2 class="product-brand">{{this.brand}}</h2>
-                    <h2 class="product-price">${{this.price}}</h2>
-                    <img src="{{this.thumbnail}}" alt="Product image" class="product-thumbnail">
-                    <!--<h2 class="product-description">{{this.description}}</h2>-->
+        <div class="cart-products" id="buy-form">
+            {{!-- <div class="product-info-cart"> --}}
+            <img src="{{this.thumbnail}}" alt="Product image" class="product-thumbnail">
+            <h2 class="product-title">{{this.title}}</h2>
+            <h2 class="product-brand">{{this.brand}}</h2>
+            <h2 class="product-price-cart">${{this.price}}</h2>
+            <div class="card-div">
+                <div class="card-content">
+                    <p class="card plus-minus" id="minus" style="background-color: rgb(216, 214, 214);">-</p>
+                    <p id="counter-value"></p>
+                    <p class="card plus-minus" id="plus" style="background-color: rgb(216, 214, 214);">+</p>
                 </div>
-                <button id="{{this._id}}" method="DELETE" action="http://localhost:8080/api/carrito/{{../cart}}/productos/{{this._id}}" type="submit" value="send" class="btn btn-blue delete-prod-cart">Borrar</button>
-            </form>
-        {{/each}}
-    {{else}}
-        <h2 style="text-align: center; padding-top: 5%;">El carrito está vacío</h2>
-    {{/if}}
+            </div>
+                <!--<h2 class="product-description">{{this.description}}</h2>-->
+            {{!-- </div> --}}
+            <button id="delete-prod-cart" onclick="deleteProduct(`{{../cart}}`, `{{this._id}}`)" class="btn btn-blue">Borrar</button>
+        </div>
+    {{/each}}
+        <div>
+            <h2 style="text-align: end; padding-right: 8%">Total: ${{total.price}}</h2>
+        </div>
+        <div class="pay-div" style="display: flex; justify-content: flex-end; padding: 2% 8% 0 0;">
+            <button id="pay" type="submit" value="send" class="btn btn-success pay" data-bs-toggle="modal" data-bs-target="#productModal">Pagar</button>
+            {{!-- Modal --}}
+            <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productModalLabel">¡Su compra ha sido realizada con éxito!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{{else}}
+    <h2 style="text-align: center; padding-top: 5%;">El carrito está vacío</h2>
+{{/if}}
 </div>
 
-<script src="../public/js/buy.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    let plus = document.getElementById("plus");
+    let minus = document.getElementById("minus");
+    let counter = document.getElementById("counter-value");
+    let quantity = 1;
+
+    function deleteProduct (cartId, prodId) {
+        fetch(`http://localhost:8080/api/carrito/${cartId}/productos/${prodId}`, {
+            method: "DELETE",
+            headers: {"Content-type": "application/json"}
+        })
+        .then(result=> {
+            return result.json()
+        })
+        .then(json=> {
+            location.reload()
+        })
+        .catch(() => {
+            return {status: "error", message: "Error al borrar el producto"}
+        })
+    }
+
+    counter.innerHTML = quantity;
+
+    plus.addEventListener("click", () => {
+        quantity = quantity + 1;
+        console.log(quantity)
+        counter.innerHTML = quantity;
+    })
+
+    minus.addEventListener("click", () => {
+        if(quantity == 1) {
+            quantity = 1;
+            counter.innerHTML = quantity;
+        } else {
+            quantity = quantity - 1;
+            counter.innerHTML = quantity;
+        }
+    })
+
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

@@ -3,7 +3,6 @@ import config from "../config/config.js";
 import {normalize, denormalize, schema} from "normalizr";
 import createLogger from "../public/js/logger.js";
 import {envConfig} from "../config/envConfig.js";
-
 const logger = createLogger(envConfig.NODE_ENV);
 
 mongoose.connect(config.mongo.baseUrl, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -137,7 +136,8 @@ export default class MongoContenedor {
             let cart = await this.collection.findOne({user: userId});
             if(!cart) return {status: "error", message: "El usuario no cuenta con carrito existente"};
             let productsId = cart.products;
-            return {status: "success", payload: productsId};
+            let cartId = cart._id;
+            return {status: "success", payload: productsId, cartId};
         } catch(error) {
             logger.error(`Error encontrando carrito de usuario`);
             return {status: "error", message: "Error encontrando carrito de usuario"};
@@ -192,7 +192,7 @@ export default class MongoContenedor {
                 }
             }
         } catch(error) {
-        return {status: 'error', message: "Error al borrar producto del carrito"}
+        return {status: 'error', message: error.message}
         }
     }
 

@@ -1,10 +1,9 @@
 import express from "express";
-import {carts, persistance} from "../daos/index.js";
+import {carts} from "../daos/index.js";
 import {passportCall} from "../public/js/middlewares.js";
 import {envConfig} from "../config/envConfig.js"
 
 const router = express.Router();
-const fileSystem = "fileSystem";
 
 //GET
 // Devuelve todos los productos de un carrito
@@ -47,22 +46,15 @@ router.post("/usuario/:user_id/producto/:prod_id", (req, res) => {
 
 //incorpora productos al carrito de usuario por su id de producto
 router.post("/:id_cart/productos/:id_prod", (req, res) => {
-    if(persistance === fileSystem) {
-        let prodId = Number(req.params.id_prod);
-        let cartId = req.params.id_cart;
-        carts.saveProdById(prodId, cartId).then(result => {
-            res.send(result);
-        })
-    } else {
-        let prodId = req.params.id_prod;
-        let cartId = req.params.id_cart;
-        carts.saveProdById(prodId, cartId).then(result => {
-            res.send(result);
-        })
-    }
+    let prodId = req.params.id_prod;
+    let cartId = req.params.id_cart;
+    carts.saveProdById(prodId, cartId).then(result => {
+        res.send(result);
+    })
 })
 
-//DELETE: vacía un carrito y lo elimina
+//DELETE
+//Elimina un carrito
 router.delete("/:id", (req, res) => {
     let id = req.params.id;
     carts.deleteCartById(id).then(result => {
@@ -70,21 +62,13 @@ router.delete("/:id", (req, res) => {
     })
 })
 
-//DELETE ID: elimina un producto del carrito por su id de producto y de carrito
+//Elimina un producto del carrito por su id de producto y de carrito
 router.delete("/:id_cart/productos/:id_prod", (req, res) => {
-    if(persistance === fileSystem) {
-        let prodId = Number(req.params.id_prod);
-        let cartId = req.params.id_cart;
-        carts.deleteCartProd(cartId, prodId).then(result => {
-            res.send(result);
-        })
-    } else {
-        let prodId = req.params.id_prod;
-        let cartId = req.params.id_cart;
-        carts.deleteCartProd(cartId, prodId).then(result => {
-            res.send(result);
-        })
-    }
+    let prodId = req.params.id_prod;
+    let cartId = req.params.id_cart;
+    carts.deleteCartProd(cartId, prodId).then(result => {
+        res.send(result);
+    })
 })
 
 export default router;

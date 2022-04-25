@@ -1,14 +1,10 @@
 import __dirname from "./utils.js";
 import express from "express";
-import Contenedor from "./contenedor/Contenedor.js";
-//import Carrito from "./contenedor/Carrito.js";
 import {chats, users, products, carts} from "./daos/index.js";
 import productsRouter from "./routes/products.js";
 import carritoRouter from "./routes/carrito.js";
 import chatsRouter from "./routes/chats.js";
 import usersRouter from "./routes/users.js";
-//import loginRouter from "./routes/login.js";
-//import {generate} from "./utils.js";
 import {Server} from "socket.io";
 import {engine} from "express-handlebars";
 import cors from "cors";
@@ -24,8 +20,6 @@ import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import {envConfig} from "./config/envConfig.js";
 
-const contenedor = new Contenedor();
-//const carrito = new Carrito();
 const app = express();
 const PORT = parseInt(process.env.PORT) || 8080;
 const server = app.listen(PORT,() => {
@@ -69,11 +63,8 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 
 //APP.GET
-// app.get("/", (req, res) => {
-//     res.sendFile("index.html", {root: __dirname + "/public/pages"});
-// })
 app.get("/", (req, res) => {
-    res.sendFile("login.html", {root: __dirname + "/public/pages"});
+    res.sendFile("index.html", {root: __dirname + "/public/pages"});
 })
 app.get("/login", (req, res) => {
     res.sendFile("login.html", {root: __dirname + "/public/pages"});
@@ -89,16 +80,36 @@ app.get("/registration-error", (req, res) => {
 })
 app.get("/chat", passportCall("jwt"), (req, res) => {
     let user = req.user.payload.toObject();
-    res.render("Chat", {user});
+    let role = req.user.payload.toObject().role.toUpperCase();
+    if(role === "ADMIN") {
+        res.render("ChatAdmin", {user});
+    } else {
+        res.render("Chat", {user});
+    }
 })
-app.get("/logged", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res) => {
+app.get("/add-products-admin", passportCall("jwt"), (req, res) => {
     let user = req.user.payload.toObject();
-    console.log("logged: ", user);
-    res.render("Logged", {user});
+    res.render("AddProductsAdmin", {user});
+})
+app.get("/admin-info", passportCall("jwt"), (req, res) => {
+    let user = req.user.payload.toObject();
+    res.render("AdminInfo", {user});
 })
 app.get("/user-info", passportCall("jwt"), (req, res) => {
     let user = req.user.payload.toObject();
     res.render("User", {user});
+})
+app.get("/logged", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res) => {
+    let user = req.user.payload.toObject();
+    let role = req.user.payload.toObject().role.toUpperCase();
+    console.log(role);
+    if(role === "ADMIN") {
+        console.log("logged: ", user);
+        res.render("LoggedAdmin", {user});
+    } else {
+        console.log("logged: ", user);
+        res.render("Logged", {user});
+    }
 })
 app.get("/info", (req, res) => {
     let info = {
@@ -135,16 +146,16 @@ app.get("/productos/:category", passportCall("jwt"), (req, res) => {
         } else {res.status(500).send(result)}
     })
 })
-app.get("/carrito/:id_carrito", passportCall("jwt"), (req, res) => {
-    let id = req.params.id_carrito;
+app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
+    let id = req.params.id_user;
     let user = req.user.payload.toObject();
     if (req.user.status !== "success") {
-        console.log("no ta");
         location.replace("/login")
     } else {
         carts.getCartByUserId(id).then(result => {
             if(result.status === "success") {
                 const productsId = result.payload;
+                const cartId = result.cartId;
                 let list = []
                 productsId.map(p => products.getById(p).then(result => {
                     if (result.status === "success") {
@@ -152,7 +163,10 @@ app.get("/carrito/:id_carrito", passportCall("jwt"), (req, res) => {
                     }
                     }))
                 setTimeout(() => {
-                    const objects = {products: list, user: user, cart: id};
+                    let total = list.reduce((a, b) => {
+                        return {price: a.price + b.price};
+                    })
+                    const objects = {products: list, user: user, cart: cartId, total: total};
                     if (result.status === "success") {
                         res.render("Cart", objects);
                     } else {res.status(500).send(result)}
