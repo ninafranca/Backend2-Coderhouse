@@ -1,0 +1,34 @@
+import express from "express";
+import {orders} from "../daos/index.js";
+
+const router = express.Router();
+
+//GET
+// Devuelve el carrito de un usuario
+// router.get("/:user_id", (req, res) => {
+//     let userId = req.params.user_id;
+//     carts.getCartByUserId(userId).then(result => {
+//         res.send(result);
+//     })
+// })
+
+//POST
+//Crea órden por id de carrito y usuario
+router.post("/cart/:cart_id/user/:user_id", (req, res) => {
+    let cartId = req.params.cart_id;
+    let userId = req.params.user_id;
+    orders.setOrder(cartId, userId).then(result => {
+        res.send(result);
+    })
+})
+
+//DELETE
+//Elimina un carrito
+// router.delete("/:id", (req, res) => {
+//     let id = req.params.id;
+//     carts.deleteCartById(id).then(result => {
+//         res.send(result);
+//     })
+// })
+
+export default router;

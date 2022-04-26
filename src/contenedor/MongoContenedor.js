@@ -104,13 +104,15 @@ export default class MongoContenedor {
     //Agrego validación si ya existe el producto en el carrito
     async saveProdById(productId, id) {
         try {
-            let cartProduct = await this.collection.findById(id).findOne({products: productId});
-            if(cartProduct) {
-                return {status: "error", message: "Producto ya existente en carrito"}
-            } else {
-                await this.collection.findByIdAndUpdate(id, {$push: {products: productId }});
-                return {status: "success", message: "El producto se ha guardado exitosamente"};
-            }
+            await this.collection.findByIdAndUpdate(id, {$push: {products: productId }});
+            return {status: "success", message: "El producto se ha guardado exitosamente"};
+            // let cartProduct = await this.collection.findById(id).findOne({products: productId});
+            // if(cartProduct) {
+            //     return {status: "error", message: "Producto ya existente en carrito"}
+            // } else {
+            //     await this.collection.findByIdAndUpdate(id, {$push: {products: productId }});
+            //     return {status: "success", message: "El producto se ha guardado exitosamente"};
+            // }
         } catch(error) {
             return {status: "error", message: "Error al añadir producto"};
         }
@@ -308,19 +310,14 @@ export default class MongoContenedor {
         }
     }
 
-    // async getCartByUserId(id) {
-    //     try {
-    //         const userFound = await this.collection.findOne({_id: id});
-    //         console.log(userFound);
-    //         if(!userFound) {
-    //             return {status: "error", message: "No existe el usuario"};
-    //         } else {
-    //             let cartFound = await carts.find({user: id})
-    //             return {status: "success", payload: cartFound};
-    //         } 
-    //     } catch(error) {
-    //         return {status: "error", message: error.message};
-    //     }
-    // }
+    //MÉTODO ORDERS
+    async setOrder(cartId, userId) {
+        try {
+            const order = await this.collection.create({cart: cartId, user: userId});
+            return {status: "success", payload: order};
+        } catch(error) {
+            return {status: "error", message: "Error al crear órden"};
+        }
+    }
 
 }

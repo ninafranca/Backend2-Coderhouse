@@ -5,6 +5,7 @@ import productsRouter from "./routes/products.js";
 import carritoRouter from "./routes/carrito.js";
 import chatsRouter from "./routes/chats.js";
 import usersRouter from "./routes/users.js";
+import ordersRouter from "./routes/orders.js"
 import {Server} from "socket.io";
 import {engine} from "express-handlebars";
 import cors from "cors";
@@ -40,6 +41,7 @@ app.use("/api/productos", productsRouter);
 app.use("/api/carrito", carritoRouter);
 app.use("/api/chats", chatsRouter);
 app.use("/users", usersRouter);
+app.use("/orders", ordersRouter);
 app.use(express.static(__dirname + "/public"));
 app.use(session({
     store: MongoStore.create({mongoUrl: envConfig.MONGO_SESSIONS}),

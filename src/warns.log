@@ -722,3 +722,28 @@
 {"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-24T23:57:55.641Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-25T00:58:20.582Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-25T02:03:53.043Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-25T03:36:28.999Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-25T03:59:11.930Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-04-25T04:12:33.310Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-04-25T04:12:41.243Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-04-25T04:15:19.527Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-04-25T04:16:03.585Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/carrito%C2%A1/6265a3e14d66b349c68556f8/productos/623ea84b045414b2af79d6fd","timestamp":"2022-04-25T04:18:07.060Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/carrito%C2%A1/6265a3e14d66b349c68556f8/productos/623ea8c0dd0768d43411e954","timestamp":"2022-04-25T04:19:50.568Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/carrito%C2%A1/6265a3e14d66b349c68556f8/productos/623ea8c0dd0768d43411e954","timestamp":"2022-04-25T04:19:58.739Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/carrito/usuario/6244fbd36c870f32de894737/producto/6265cf4fcc870adca00a1950","timestamp":"2022-04-25T04:28:54.078Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/carrito/usuario/6244fbd36c870f32de894737/productos/6265cf4fcc870adca00a1950","timestamp":"2022-04-25T04:29:37.452Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-04-25T18:10:37.023Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-25T18:10:43.716Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-25T18:10:46.176Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-25T18:11:12.154Z"}
+{"level":"warn","message":"Método DELETE no disponible en ruta /api/carrito/","timestamp":"2022-04-25T19:09:59.063Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-25T19:11:40.016Z"}
+{"level":"warn","message":"Método DELETE no disponible en ruta /api/carrito/","timestamp":"2022-04-25T19:11:50.713Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-26T01:44:28.577Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-26T01:44:31.264Z"}
+{"level":"warn","message":"Método DELETE no disponible en ruta /orders/cart/6266f2c055a38dda9be2d851/user/6244fbd36c870f32de894737","timestamp":"2022-04-26T02:14:16.553Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /orders/cart//user/6244fbd36c870f32de894737","timestamp":"2022-04-26T02:22:31.453Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /orders/cart//user/6244fbd36c870f32de894737","timestamp":"2022-04-26T02:35:38.661Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-26T02:45:13.210Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /NA","timestamp":"2022-04-26T03:40:37.387Z"}
