@@ -1,9 +1,9 @@
 import passport from "passport";
 import local from "passport-local";
-import {validPassword, hashPassword, cookieExtractor} from "../../utils.js";
-import {users} from "../../daos/index.js";
+import {validPassword, hashPassword, cookieExtractor} from "../utils.js";
+import {users} from "../daos/index.js";
 import jwt from "passport-jwt";
-import {envConfig} from "../../config/envConfig.js";
+import {envConfig} from "./envConfig.js";
 
 const localStrategy = local.Strategy
 const JWTStrategy = jwt.Strategy;
@@ -12,44 +12,42 @@ const extractJwt = jwt.ExtractJwt;
 const initializePassport = () => {
 
     passport.use("register", new localStrategy({
-        passReqToCallback: true, 
-        usernameField: "email"
-    }, async (req, username, password, done) => {
-        let {email, name, address, age, phone} = req.body;
-        try {
-            //if(!req.file) return done(null, false, {messages: "No se pudo subir la imágen"});
-            //console.log("req.file", req.file);
-            //const filename = await req.file;
-            let user = await users.getByEmail(username);
-            console.log(user);
-            if(user.status === "success") {
-                return done("error");
-            } else {
-                const newUser = {
-                    email,
-                    name,
-                    password: hashPassword(password),
-                    address,
-                    age,
-                    phone,
-                    //avatar: filename,
-                    avatar: "NA",
-                    carts: [],
-                    role: "user"
-                }
-                console.log(newUser);
-                let result = await users.saveUser(newUser);
-                if(result) {
-                    console.log("result " + JSON.stringify(result));
-                    done(null, result);
+            passReqToCallback: true, 
+            usernameField: "email"
+        }, async (req, username, password, done) => {
+            let {email, name, address, age, phone} = req.body;
+            try {
+                // const filename = req.file;
+                // if(!req.file) return done(null, false, {messages: "No se pudo subir la imágen"});
+                let user = await users.getByEmail(username);
+                console.log(user);
+                if(user.status === "success") {
+                    return done("Usuario ya registrado");
                 } else {
-                    return {status: "error", message: "Ya existe mismo usuario"}
+                    const newUser = {
+                        email,
+                        name,
+                        password: hashPassword(password),
+                        address,
+                        age,
+                        phone,
+                        avatar: req.file.filename,
+                        role: "user"
+                    }
+                    console.log(newUser);
+                    let result = await users.saveUser(newUser);
+                    if(result) {
+                        console.log("result " + JSON.stringify(result));
+                        done(null, result);
+                    } else {
+                        return {status: "error", message: "Ya existe mismo usuario"}
+                    }
                 }
+            } catch(error) {
+                return done(error)
             }
-        } catch(error) {
-            return done(error)
         }
-    }))
+    ))
 
     passport.use("login", new localStrategy(({usernameField: "email"}), async (username, password, done) => {
         try {

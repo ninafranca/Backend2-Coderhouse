@@ -14,9 +14,9 @@ import MongoStore from "connect-mongo";
 import createLogger from "./public/js/logger.js";
 import {cwd, pid, version, title, platform, memoryUsage} from "process";
 import passport from "passport";
-import initializePassport from "./public/js/passport.js";
-import upload from "./public/js/upload.js";
-import {passportCall, checkAuth} from "./public/js/middlewares.js";
+import initializePassport from "./config/passport.js";
+import upload from "./services/upload.js";
+import {passportCall} from "./middlewares/middlewares.js";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import {envConfig} from "./config/envConfig.js";
@@ -65,10 +65,10 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 
 //APP.GET
+// app.get("/", (req, res) => {
+//     res.sendFile("index.html", {root: __dirname + "/public"});
+// })
 app.get("/", (req, res) => {
-    res.sendFile("index.html", {root: __dirname + "/public/pages"});
-})
-app.get("/login", (req, res) => {
     res.sendFile("login.html", {root: __dirname + "/public/pages"});
 })
 app.get("/register", (req, res) => {
@@ -101,7 +101,7 @@ app.get("/user-info", passportCall("jwt"), (req, res) => {
     let user = req.user.payload.toObject();
     res.render("User", {user});
 })
-app.get("/logged", passportCall("jwt"), checkAuth(["ADMIN","USER"]), (req, res) => {
+app.get("/logged", passportCall("jwt"), (req, res) => {
     let user = req.user.payload.toObject();
     let role = req.user.payload.toObject().role.toUpperCase();
     console.log(role);

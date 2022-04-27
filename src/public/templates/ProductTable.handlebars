@@ -4,10 +4,12 @@
         {{#if products}}
         {{#each products}}
             <div class="products-title card shadow p-3 mb-5 bg-body rounded">
-                <h2 class="products-title-title">{{this.title}}</h2>
-                <h2 class="products-title-brand">{{this.brand}}</h2>
-                <h2 class="products-title-description">{{this.description}}</h2>
-                <h2 class="products-title-price">${{this.price}}</h2>
+                <h2 class="products-title-title">Nombre: {{this.title}}</h2>
+                <h2 class="products-title-brand">Marca: {{this.brand}}</h2>
+                <h2 class="products-title-description">Descripción: {{this.description}}</h2>
+                <h2 class="products-title-description">Código: {{this.code}}</h2>
+                <h2 class="products-title-description">Género: {{this.gender}}</h2>
+                <h2 class="products-title-price">Precio: ${{this.price}}</h2>
                 <img src="{{this.thumbnail}}" alt="Product image" style="width: 10vw">
             </div>
         {{/each}}
