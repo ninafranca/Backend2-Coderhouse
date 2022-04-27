@@ -183,7 +183,7 @@ app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
 
 //APP.POST
 app.post("/register", upload.single("avatar"), passportCall("register"), (req, res) => {
-    const file = req.file;
+    //const file = req.file;
     if(res.status === "error") {
         res.send({status: "error", message: "Usuario ya existente"})
     } else {

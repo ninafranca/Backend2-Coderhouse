@@ -17,6 +17,10 @@
     padding-right: 2%;
 }
 
+.alias {
+    color: rgb(153, 49, 153);
+}
+
 .date {
     color: rgb(119, 27, 27);
     padding-right: 1%;
@@ -24,10 +28,12 @@
 
 .message {
     color: green;
+    font-weight: 500;
     font-style: italic;
 }
 
-#user, #age, #avatar, #alias, #first_name, #last_name {
+#user-name, #user-age, #avatar, #alias, #user-email {
+    font-size: 120%;
     width: 30%;
     margin-bottom: 2% !important;
 }
@@ -47,10 +53,10 @@
 .sent-msg {
     display: flex;
     align-items: center;
-    margin: 0 0 0 20%;
+    margin: 0 0 0.5% 20%;
 }
 
 .sent-msg>img {
-    width: 10%;
+    width: 9%;
     padding-right: 2%;
 }

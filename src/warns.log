@@ -786,3 +786,5 @@
 {"level":"warn","message":"Método GET no disponible en ruta /public/images/1651032325867-Cosgp8pVIAEbCh_.jpg","timestamp":"2022-04-27T04:17:08.030Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /public/images/1651032325867-Cosgp8pVIAEbCh_.jpg","timestamp":"2022-04-27T04:20:51.690Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /1651032325867-Cosgp8pVIAEbCh_.jpg","timestamp":"2022-04-27T04:21:33.239Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-04-27T16:11:58.706Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /images/undefined","timestamp":"2022-04-27T19:52:48.678Z"}

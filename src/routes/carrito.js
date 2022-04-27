@@ -1,7 +1,5 @@
 import express from "express";
 import {carts} from "../daos/index.js";
-// import {passportCall} from "../public/js/middlewares.js";
-// import {envConfig} from "../config/envConfig.js"
 
 const router = express.Router();
 
@@ -27,11 +25,6 @@ router.post("/:user_id", (req, res) => {
     let userId = req.params.user_id;
     carts.newCart(userId).then(result => {
         res.send(result);
-        // if(result.status === "success"){
-        //     carts.getAll().then(result => {
-        //         console.log(result);
-        //     })
-        // }
     }); 
 })
 

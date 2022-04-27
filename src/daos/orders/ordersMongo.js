@@ -8,11 +8,14 @@ export default class OrdersMongo extends MongoContenedor {
             "orders",
             {
                 cart: {
-                    type: [{
-                        type: String,
-                        ref: "carts"
-                    }],
-                    default: []
+                    type: String, 
+                    ref: "carts", 
+                    unique: true 
+                    // type: [{
+                    //     type: String,
+                    //     ref: "carts"
+                    // }],
+                    // default: []
                 },
                 user: { 
                     type: String, 
