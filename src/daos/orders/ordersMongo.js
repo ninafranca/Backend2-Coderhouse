@@ -7,15 +7,12 @@ export default class OrdersMongo extends MongoContenedor {
         super(
             "orders",
             {
-                cart: {
-                    type: String, 
-                    ref: "carts", 
-                    unique: true 
-                    // type: [{
-                    //     type: String,
-                    //     ref: "carts"
-                    // }],
-                    // default: []
+                products: {
+                    type: [{
+                        type: String,
+                        ref: "products"
+                    }],
+                    default: []
                 },
                 user: { 
                     type: String, 

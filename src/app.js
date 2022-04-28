@@ -148,6 +148,38 @@ app.get("/productos/:category", passportCall("jwt"), (req, res) => {
         } else {res.status(500).send(result)}
     })
 })
+// app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
+//     let id = req.params.id_user;
+//     let user = req.user.payload.toObject();
+//     if (req.user.status !== "success") {
+//         location.replace("/login")
+//     } else {
+//         carts.getCartByUserId(id).then(result => {
+//             if(result.status === "success") {
+//                 const productsId = result.payload;
+//                 const cartId = result.cartId;
+//                 let list = []
+//                 productsId.map(p => products.getById(p).then(result => {
+//                     if (result.status === "success") {
+//                         list.push(result.payload.toObject())
+//                     }
+//                     }))
+//                 setTimeout(() => {
+//                     let total = list.reduce((a, b) => {
+//                         return {price: a.price + b.price};
+//                     })
+//                     const objects = {products: list, user: user, cart: cartId, total: total};
+//                     if (result.status === "success") {
+//                         res.render("Cart", objects);
+//                     } else {res.status(500).send(result)}
+//                 }, 3000)
+//             } else {
+//                 const objects = {user};
+//                 res.render("Cart", objects);
+//             }
+//         })
+//     }
+// })
 app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
     let id = req.params.id_user;
     let user = req.user.payload.toObject();
@@ -168,6 +200,16 @@ app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
                     let total = list.reduce((a, b) => {
                         return {price: a.price + b.price};
                     })
+                    // const reducer = (map, val) => {
+                    //     if (map[val] == null) {
+                    //         map[val] = 1;
+                    //     } else {
+                    //         ++map[val];
+                    //     }
+                    //     return map;
+                    // };
+                    // let reducedList = list.map(p => p.title).reduce(reducer, []);
+                    //console.log("reduced", reducedList);
                     const objects = {products: list, user: user, cart: cartId, total: total};
                     if (result.status === "success") {
                         res.render("Cart", objects);

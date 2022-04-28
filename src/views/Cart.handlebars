@@ -32,7 +32,6 @@
                     <p class="card plus-minus" id="plus" onclick="addProduct(`{{../cart}}`, `{{this._id}}`)" style="background-color: rgb(216, 214, 214);">+</p>
                 </div>
             </div>
-                <!--<h2 class="product-description">{{this.description}}</h2>-->
             {{!-- </div> --}}
             <button id="delete-prod-cart" onclick="deleteProduct(`{{../cart}}`, `{{this._id}}`)" class="btn btn-blue">Borrar</button>
         </div>
@@ -63,74 +62,5 @@
 </div>
 
 <script src="/socket.io/socket.io.js"></script>
-<script>
-    let plus = document.getElementById("plus");
-    let minus = document.getElementById("minus");
-    let counter = document.getElementById("counter-value");
-
-    function deleteProduct (cartId, prodId) {
-        fetch(`http://localhost:8080/api/carrito/${cartId}/productos/${prodId}`, {
-            method: "DELETE",
-            headers: {"Content-type": "application/json"}
-        })
-        .then(result=> {
-            return result.json()
-        })
-        .then(json=> {
-            location.reload()
-        })
-        .catch(() => {
-            return {status: "error", message: "Error al borrar el producto"}
-        })
-    }
-
-    function addProduct (cartId, prodId) {
-        fetch(`http://localhost:8080/api/carrito/${cartId}/productos/${prodId}`, {
-            method: "POST",
-            headers: {"Content-type": "application/json"}
-        })
-        .then(result=> {
-            return result.json()
-        })
-        .then(json=> {
-            location.reload()
-        })
-        .catch(() => {
-            return {status: "error", message: "Error al agregar producto"}
-        })
-    }
-
-    function deleteCart (cartId) {
-        fetch(`http://localhost:8080/api/carrito/${cartId}`, {
-            method: "DELETE",
-            headers: {"Content-type": "application/json"}
-        })
-        .then(result=> {
-            return result.json()
-        })
-        .then(json=> {
-            location.reload()
-        })
-        .catch(() => {
-            return {status: "error", message: "Error al borrar el producto"}
-        })
-    }
-
-    function newOrder (cartId, userId) {
-        fetch(`http://localhost:8080/orders/cart/${cartId}/user/${userId}`, {
-            method: "POST",
-            headers: {"Content-type": "application/json"}
-        })
-        .then(result=> {
-            return result.json()
-        })
-        .then(json=> {
-            location.reload()
-        })
-        .catch(() => {
-            return {status: "error", message: "Error al crear órden"}
-        })
-    }
-
-</script>
+<script src="/js/buy.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

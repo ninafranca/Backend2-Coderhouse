@@ -1,5 +1,5 @@
 import express from "express";
-import {orders} from "../daos/index.js";
+import {orders, carts} from "../daos/index.js";
 
 const router = express.Router();
 
@@ -17,9 +17,22 @@ const router = express.Router();
 router.post("/cart/:cart_id/user/:user_id", (req, res) => {
     let cartId = req.params.cart_id;
     let userId = req.params.user_id;
-    orders.setOrder(cartId, userId).then(result => {
-        res.send(result);
+    carts.getCart(cartId).then(result => {
+        let products = result.payload.products;
+        console.log(products);
+        orders.setOrder(products, userId).then(result => {
+            carts.deleteCartById(cartId).then(result => {
+                res.send(result);
+            })
+            res.send(result);
+        })
     })
+    // orders.setOrder(cartId, userId).then(result => {
+    //     let products = carts.getCart(cartId).then(result => {
+            
+    //     })
+    //     res.send(result);
+    // })
 })
 
 //DELETE

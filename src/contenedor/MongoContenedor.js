@@ -311,9 +311,9 @@ export default class MongoContenedor {
     }
 
     //MÉTODO ORDERS
-    async setOrder(cartId, userId) {
+    async setOrder(products, userId) {
         try {
-            const order = await this.collection.create({cart: cartId, user: userId});
+            const order = await this.collection.create({products: products, user: userId});
             return {status: "success", payload: order};
         } catch(error) {
             return {status: "error", message: "Error al crear órden"};

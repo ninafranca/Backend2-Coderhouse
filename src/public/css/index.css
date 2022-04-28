@@ -6,7 +6,7 @@
 }
 
 #product-form>div {
-    margin-bottom: -2%
+    margin-bottom: -2.5%
 }
 
 #product-form>div>input {
@@ -92,6 +92,10 @@ form>div>input {
 }
 
 .products-title-description {
+    font-size: 120%;
+}
+
+.products-title-price {
     font-size: 120%;
 }
 
