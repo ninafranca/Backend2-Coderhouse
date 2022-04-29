@@ -200,6 +200,7 @@ app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
                     let total = list.reduce((a, b) => {
                         return {price: a.price + b.price};
                     })
+                    console.log(list);
                     // const reducer = (map, val) => {
                     //     if (map[val] == null) {
                     //         map[val] = 1;

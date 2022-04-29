@@ -12,7 +12,7 @@
     </div>
     <a href="/carrito/{{user._id}}">Carrito</a>
     <a href="/chat">Chat</a>
-    <form action="/logout" method="POST"><button type="submit" class="btn btn-secondary">Desloguearse</button></form>
+    <a href="/logout">Desloguearse</a>
 </header>
 
 <h1 class="products-h1">Carrito</h1>
@@ -40,7 +40,7 @@
             <h2 style="text-align: end; padding-right: 8%">Total: ${{total.price}}</h2>
         </div>
         <div class="pay-div" style="display: flex; justify-content: flex-end; padding: 2% 8% 0 0;">
-            <button id="pay" type="submit" value="send" class="btn btn-success pay" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Pagar</button>
+            <button id="pay" type="submit" value="send" class="btn btn-success pay" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="newOrder(`{{cart}}`, `{{user._id}}`)">Pagar</button>
             {{!-- Modal --}}
             <div class="modal fade" id="staticBackdrop" tabindex="-1" data-bs-backdrop="static" aria-labelledby="productModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -49,9 +49,9 @@
                         <h5 class="modal-title" id="staticBackdropLabel">¡Su compra ha sido realizada con éxito!</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="newOrder(`{{cart}}`, `{{user._id}}`)">Close</button>
-                    </div>
+                    {{!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div> --}}
                     </div>
                 </div>
             </div>
