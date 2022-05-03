@@ -28,7 +28,7 @@
             <div class="card-div">
                 <div class="card-content">
                     <p class="card plus-minus" id="minus" onclick="deleteProduct(`{{../cart}}`, `{{this._id}}`)" style="background-color: rgb(216, 214, 214);">-</p>
-                    <p id="counter-value"></p>
+                    <p id="counter-value">{{this.count}}</p>
                     <p class="card plus-minus" id="plus" onclick="addProduct(`{{../cart}}`, `{{this._id}}`)" style="background-color: rgb(216, 214, 214);">+</p>
                 </div>
             </div>

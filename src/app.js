@@ -188,8 +188,10 @@ app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
     } else {
         carts.getCartByUserId(id).then(result => {
             if(result.status === "success") {
-                const productsId = result.payload;
-                const cartId = result.cartId;
+                const productsId = result.payload.products;
+                console.log(productsId);
+                const cartId = result.payload._id;
+                console.log("cartId ", cartId);
                 let list = []
                 productsId.map(p => products.getById(p).then(result => {
                     if (result.status === "success") {
@@ -201,21 +203,21 @@ app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
                         return {price: a.price + b.price};
                     })
                     console.log(list);
-                    // const reducer = (map, val) => {
-                    //     if (map[val] == null) {
-                    //         map[val] = 1;
-                    //     } else {
-                    //         ++map[val];
-                    //     }
-                    //     return map;
-                    // };
-                    // let reducedList = list.map(p => p.title).reduce(reducer, []);
-                    //console.log("reduced", reducedList);
-                    const objects = {products: list, user: user, cart: cartId, total: total};
+                    // let repeatedProds = [...list.reduce( (mp, o) => {
+                    //     if (!mp.has(o.title)) mp.set(o.title, { ...o, count: 0 });
+                    //     mp.get(o.title).count++;
+                    //     return mp;
+                    // }, new Map).values()];
+                                        let repeatedProds = [...list.reduce( (mp, o) => {
+                        if (!mp.has(o.title)) mp.set(o.title, { ...o, count: 0 });
+                        mp.get(o.title).count++;
+                        return mp;
+                    }, new Map).values()];
+                    const objects = {products: repeatedProds, user: user, cart: cartId, total: total};
                     if (result.status === "success") {
                         res.render("Cart", objects);
                     } else {res.status(500).send(result)}
-                }, 3000)
+                }, 500)
             } else {
                 const objects = {user};
                 res.render("Cart", objects);

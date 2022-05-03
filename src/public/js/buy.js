@@ -78,6 +78,6 @@ function buyProduct (userId, prodId) {
         location.reload()
     })
     .catch(() => {
-        return {status: "error", message: "Error al borrar el producto"}
+        return {status: "error", message: "Error al comprar el producto"}
     })
 }
