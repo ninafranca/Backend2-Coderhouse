@@ -55,7 +55,16 @@ router.delete("/:id", (req, res) => {
     })
 })
 
-//Elimina un producto del carrito por su id de producto y de carrito
+//Elimina una sola equivalencia de producto del carrito por su id de producto y de carrito
+router.delete("/:id_cart/producto/:id_prod", (req, res) => {
+    let prodId = req.params.id_prod;
+    let cartId = req.params.id_cart;
+    carts.deleteOneCartProd(cartId, prodId).then(result => {
+        res.send(result);
+    })
+})
+
+//Elimina todos los IDs de mismo producto del carrito por su id de producto y de carrito
 router.delete("/:id_cart/productos/:id_prod", (req, res) => {
     let prodId = req.params.id_prod;
     let cartId = req.params.id_cart;

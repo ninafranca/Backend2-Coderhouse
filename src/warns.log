@@ -260,3 +260,23 @@
 {"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:10:04.112Z"}
 {"level":"warn","message":"Método POST no disponible en ruta /productos/mujer","timestamp":"2022-05-03T23:11:45.462Z"}
 {"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:11:45.832Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /productos/mujer","timestamp":"2022-05-03T23:23:59.117Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:23:59.483Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /productos/mujer","timestamp":"2022-05-03T23:27:31.589Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:27:31.944Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /productos/mujer","timestamp":"2022-05-03T23:27:34.526Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:27:34.886Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-03T23:27:41.275Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:31:51.202Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:31:54.543Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:33:21.469Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:34:06.459Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-03T23:34:16.274Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:34:37.498Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-03T23:35:17.647Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-03T23:35:28.261Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-03T23:37:21.590Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-03T23:37:29.922Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-03T23:38:41.348Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-03T23:38:55.908Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-03T23:38:57.384Z"}

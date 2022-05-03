@@ -18,6 +18,22 @@ function deleteProduct (cartId, prodId) {
     })
 }
 
+function deleteOneProduct (cartId, prodId) {
+    fetch(`http://localhost:8080/api/carrito/${cartId}/producto/${prodId}`, {
+        method: "DELETE",
+        headers: {"Content-type": "application/json"}
+    })
+    .then(result=> {
+        return result.json()
+    })
+    .then(json=> {
+        location.reload()
+    })
+    .catch(() => {
+        return {status: "error", message: "Error al borrar el producto"}
+    })
+}
+
 function addProduct (cartId, prodId) {
     fetch(`http://localhost:8080/api/carrito/${cartId}/productos/${prodId}`, {
         method: "POST",
@@ -58,9 +74,6 @@ function newOrder (cartId, userId) {
     .then(result=> {
         return result.json()
     })
-    .then(json=> {
-        location.reload()
-    })
     .catch(() => {
         return {status: "error", message: "Error al crear órden"}
     })
@@ -74,10 +87,11 @@ function buyProduct (userId, prodId) {
     .then(result=> {
         return result.json()
     })
-    .then(json=> {
-        location.reload()
-    })
     .catch(() => {
         return {status: "error", message: "Error al comprar el producto"}
     })
+}
+
+function refreshCart() {
+    location.reload()
 }

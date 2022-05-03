@@ -27,7 +27,7 @@
             <h2 class="product-price-cart">${{this.price}}</h2>
             <div class="card-div">
                 <div class="card-content">
-                    <p class="card plus-minus" id="minus" onclick="deleteProduct(`{{../cart}}`, `{{this._id}}`)" style="background-color: rgb(216, 214, 214);">-</p>
+                    <p class="card plus-minus" id="minus" onclick="deleteOneProduct(`{{../cart}}`, `{{this._id}}`)" style="background-color: rgb(216, 214, 214);">-</p>
                     <p id="counter-value">{{this.count}}</p>
                     <p class="card plus-minus" id="plus" onclick="addProduct(`{{../cart}}`, `{{this._id}}`)" style="background-color: rgb(216, 214, 214);">+</p>
                 </div>
@@ -49,12 +49,15 @@
                         <h5 class="modal-title" id="staticBackdropLabel">¡Su compra ha sido realizada con éxito!</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    {{!-- <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div> --}}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="refreshCart()">Close</button>
+                    </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div>
+            <button class="btn btn-danger pay delete-cart" onclick="deleteCart(`{{cart}}`)">Eliminar carrito</button>
         </div>
 {{else}}
     <h2 style="text-align: center; padding-top: 5%;">El carrito está vacío</h2>

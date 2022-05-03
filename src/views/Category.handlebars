@@ -19,31 +19,31 @@
 <div class="products-list">
     {{#if products}}
         {{#each products}}
-        <form class="buy-product card shadow p-3 mb-5 bg-body rounded" id="buy-form" name="buy-form" method="POST">
+        <div class="buy-product card shadow p-3 mb-5 bg-body rounded" id="buy-form">
             {{!-- <form class="buy-product card shadow p-3 mb-5 bg-body rounded" id="buy-form" name="buy-form" method="POST" action="http://localhost:8080/api/carrito/usuario/{{../user._id}}/producto/{{this._id}}"> --}}
-                <div class="product-info">
-                    <h2 class="product-title">{{this.title}}</h2>
-                    <h2 class="product-brand">{{this.brand}}</h2>
-                    <h2 class="product-description">{{this.description}}</h2>
-                    <h2 class="product-price">${{this.price}}</h2>
-                    <img src="{{this.thumbnail}}" alt="Product image" class="product-thumbnail">
-                </div>
-                <button id="{{this._id}}" type="submit" onclick="buyProduct(`{{../user._id}}`, `{{this._id}}`)" value="send" class="btn btn-blue buy" data-bs-toggle="modal" data-bs-target="#productModal">Comprar</button>
-                {{!-- Modal --}}
-                <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="productModalLabel">Producto añadido a carrito</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                        </div>
+            <div class="product-info">
+                <h2 class="product-title">{{this.title}}</h2>
+                <h2 class="product-brand">{{this.brand}}</h2>
+                <h2 class="product-description">{{this.description}}</h2>
+                <h2 class="product-price">${{this.price}}</h2>
+                <img src="{{this.thumbnail}}" alt="Product image" class="product-thumbnail">
+            </div>
+            <button id="{{this._id}}" type="submit" onclick="buyProduct(`{{../user._id}}`, `{{this._id}}`)" value="send" class="btn btn-blue buy" data-bs-toggle="modal" data-bs-target="#productModal">Comprar</button>
+            {{!-- Modal --}}
+            <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productModalLabel">Producto añadido a carrito</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                     </div>
                 </div>
-            </form>
+            </div>
+        </div>
         {{/each}}
     {{else}}
         <h2>No hay productos</h2>

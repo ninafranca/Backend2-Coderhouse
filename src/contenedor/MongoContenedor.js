@@ -238,7 +238,7 @@ export default class MongoContenedor {
         }
     }
 
-    async deleteCartProd(cartId, productId) {
+    async deleteOneCartProd(cartId, productId) {
         try {
             let cart = await this.collection.findById(cartId);
             if (!cart) {
@@ -260,27 +260,28 @@ export default class MongoContenedor {
             return {status: 'error', message: error.message}
         }
     }
-    // async deleteCartProd(cartId, productId) {
-    //     try {
-    //         let cart = await this.collection.findById(cartId);
-    //         if (!cart) {
-    //             logger.error(error.message);
-    //             return {status: "error", message: "No existe el carrito especificado"};
-    //         } else {
-    //             const product = await this.collection.findById(cartId).findOne({products: productId});
-    //             if (!product) {
-    //                 logger.error(error.message);
-    //                 return {status: "error", message: "El producto no existe en el carrito"};
-    //             } else {
-    //                 await this.collection.findByIdAndUpdate(cartId, {$pull: {products: productId}})
-    //                 return {status: "success", message: "El producto se ha borrado exitosamente del carrito"}
-    //             }
-    //         }
-    //     } catch(error) {
-    //         logger.error(error.message);
-    //         return {status: 'error', message: error.message}
-    //     }
-    // }
+
+    async deleteCartProd(cartId, productId) {
+        try {
+            let cart = await this.collection.findById(cartId);
+            if (!cart) {
+                logger.error(error.message);
+                return {status: "error", message: "No existe el carrito especificado"};
+            } else {
+                const product = await this.collection.findById(cartId).findOne({products: productId});
+                if (!product) {
+                    logger.error(error.message);
+                    return {status: "error", message: "El producto no existe en el carrito"};
+                } else {
+                    await this.collection.findByIdAndUpdate(cartId, {$pull: {products: productId}})
+                    return {status: "success", message: "El producto se ha borrado exitosamente del carrito"}
+                }
+            }
+        } catch(error) {
+            logger.error(error.message);
+            return {status: 'error', message: error.message}
+        }
+    }
 
     //MÉTODOS CHAT
     async getAllMessages() {
