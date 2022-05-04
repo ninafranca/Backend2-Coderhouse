@@ -3,7 +3,7 @@ let minus = document.getElementById("minus");
 let counter = document.getElementById("counter-value");
 
 function deleteProduct (cartId, prodId) {
-    fetch(`http://localhost:8080/api/carrito/${cartId}/productos/${prodId}`, {
+    fetch(`https://coder-backend-final.herokuapp.com/api/carrito/${cartId}/productos/${prodId}`, {
         method: "DELETE",
         headers: {"Content-type": "application/json"}
     })
@@ -19,7 +19,7 @@ function deleteProduct (cartId, prodId) {
 }
 
 function deleteOneProduct (cartId, prodId) {
-    fetch(`http://localhost:8080/api/carrito/${cartId}/producto/${prodId}`, {
+    fetch(`https://coder-backend-final.herokuapp.com/api/carrito/${cartId}/producto/${prodId}`, {
         method: "DELETE",
         headers: {"Content-type": "application/json"}
     })
@@ -35,7 +35,7 @@ function deleteOneProduct (cartId, prodId) {
 }
 
 function addProduct (cartId, prodId) {
-    fetch(`http://localhost:8080/api/carrito/${cartId}/productos/${prodId}`, {
+    fetch(`https://coder-backend-final.herokuapp.com/api/carrito/${cartId}/productos/${prodId}`, {
         method: "POST",
         headers: {"Content-type": "application/json"}
     })
@@ -51,7 +51,7 @@ function addProduct (cartId, prodId) {
 }
 
 function deleteCart (cartId) {
-    fetch(`http://localhost:8080/api/carrito/${cartId}`, {
+    fetch(`https://coder-backend-final.herokuapp.com/api/carrito/${cartId}`, {
         method: "DELETE",
         headers: {"Content-type": "application/json"}
     })
@@ -67,7 +67,7 @@ function deleteCart (cartId) {
 }
 
 function newOrder (cartId, userId) {
-    fetch(`http://localhost:8080/orders/cart/${cartId}/user/${userId}`, {
+    fetch(`https://coder-backend-final.herokuapp.com/orders/cart/${cartId}/user/${userId}`, {
         method: "POST",
         headers: {"Content-type": "application/json"}
     })
@@ -80,7 +80,7 @@ function newOrder (cartId, userId) {
 }
 
 function buyProduct (userId, prodId) {
-    fetch(`http://localhost:8080/api/carrito/usuario/${userId}/producto/${prodId}`, {
+    fetch(`https://coder-backend-final.herokuapp.com/carrito/usuario/${userId}/producto/${prodId}`, {
         method: "POST",
         headers: {"Content-type": "application/json"}
     })
