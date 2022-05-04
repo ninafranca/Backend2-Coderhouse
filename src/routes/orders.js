@@ -18,21 +18,19 @@ router.post("/cart/:cart_id/user/:user_id", (req, res) => {
     let cartId = req.params.cart_id;
     let userId = req.params.user_id;
     carts.getCart(cartId).then(result => {
+        console.log(1);
         let products = result.payload.products;
         console.log(products);
-        orders.setOrder(products, userId).then(result => {
-            carts.deleteCartById(cartId).then(result => {
+        orders.setOrder(products, userId).then(async result => {
+            console.log(2);
+            await carts.deleteCartById(cartId).then(result => {
+                console.log(3);
                 res.send(result);
-            })
+            });
+            console.log(4);
             res.send(result);
         })
     })
-    // orders.setOrder(cartId, userId).then(result => {
-    //     let products = carts.getCart(cartId).then(result => {
-            
-    //     })
-    //     res.send(result);
-    // })
 })
 
 //DELETE

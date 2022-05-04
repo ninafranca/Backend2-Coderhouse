@@ -14,11 +14,7 @@ export default class OrdersMongo extends MongoContenedor {
                     }],
                     default: []
                 },
-                user: { 
-                    type: String, 
-                    ref: "users", 
-                    unique: true 
-                }
+                user: {type: String, required: true}
             },
             {timestamps: true}
         )

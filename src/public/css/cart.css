@@ -24,10 +24,13 @@
 
 .pay {
     margin-bottom: 2%;
+    width: 5vw;
 }
 
-.delete-cart {
-    margin-left: 12%;
+#delete-cart {
+    font-size: 70%;
+    margin: 0 0 2% 12%;
+    
 }
 
 .products-list-cart {
@@ -54,6 +57,17 @@
 
 #plus, #minus {
     cursor: pointer;
+}
+
+#plus:hover, #minus:hover {
+    background-color: rgb(184, 184, 184) !important;
+    color: white;
+}
+
+#delete-prod-cart {
+    font-size: 80%;
+    height: 35%;
+    width: 45%;
 }
 
 /* .products-list-cart {

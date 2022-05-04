@@ -37,7 +37,7 @@
         </div>
     {{/each}}
         <div>
-            <h2 style="text-align: end; padding-right: 8%">Total: ${{total.price}}</h2>
+            <h2 style="text-align: end; padding-right: 8%; font-size: 160%">Total: ${{total.price}}</h2>
         </div>
         <div class="pay-div" style="display: flex; justify-content: flex-end; padding: 2% 8% 0 0;">
             <button id="pay" type="submit" value="send" class="btn btn-success pay" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="newOrder(`{{cart}}`, `{{user._id}}`)">Pagar</button>
@@ -45,19 +45,19 @@
             <div class="modal fade" id="staticBackdrop" tabindex="-1" data-bs-backdrop="static" aria-labelledby="productModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">¡Su compra ha sido realizada con éxito!</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="refreshCart()">Close</button>
-                    </div>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">¡Su compra ha sido realizada con éxito!</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="refreshCart()">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div>
-            <button class="btn btn-danger pay delete-cart" onclick="deleteCart(`{{cart}}`)">Eliminar carrito</button>
+            <button id="delete-cart" class="btn btn-danger" onclick="deleteCart(`{{cart}}`)">Eliminar carrito</button>
         </div>
 {{else}}
     <h2 style="text-align: center; padding-top: 5%;">El carrito está vacío</h2>

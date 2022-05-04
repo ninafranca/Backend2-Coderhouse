@@ -149,3 +149,82 @@
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-03T23:38:41.348Z"}
 {"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-03T23:38:55.908Z"}
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-03T23:38:57.384Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:39:18.940Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:39:20.695Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:39:22.390Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-03T23:39:54.604Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-03T23:39:57.214Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:40:15.491Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-03T23:51:30.755Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:51:48.689Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:51:52.794Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:51:56.451Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-03T23:52:19.900Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-03T23:52:26.921Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-03T23:52:30.157Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-03T23:52:36.700Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-03T23:52:42.788Z"}
+{"level":"error","message":"error is not defined","timestamp":"2022-05-04T00:12:25.938Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T00:12:47.926Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T00:12:49.498Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T00:12:51.290Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T00:12:53.292Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T00:12:55.485Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T00:12:58.310Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T00:12:59.926Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T00:13:14.838Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T00:13:20.047Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T00:13:21.588Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T00:13:23.293Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T00:13:25.156Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T00:13:26.958Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T00:13:29.722Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-04T00:36:55.102Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T00:37:00.655Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T00:37:32.194Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T00:37:42.207Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-04T00:59:08.713Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T00:59:12.180Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-04T00:59:56.565Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:00:16.869Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-04T01:05:04.104Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:05:06.473Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T01:11:00.279Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T01:11:02.324Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-04T01:11:31.001Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:11:32.621Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T01:13:56.805Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T01:13:58.804Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-04T01:14:35.662Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:14:37.105Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:15:52.377Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-04T01:16:05.661Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:16:06.722Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-04T01:29:57.824Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:29:59.140Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:31:31.080Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-04T01:31:38.754Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:31:39.816Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:33:00.937Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T01:33:33.465Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T01:33:35.223Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T01:33:36.936Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: user_1 dup key: { user: \"6271c4eacfa9427b885c8498\" }","timestamp":"2022-05-04T01:33:49.007Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:33:50.004Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:35:41.579Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T01:36:02.649Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T01:36:04.410Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: user_1 dup key: { user: \"6271c4eacfa9427b885c8498\" }","timestamp":"2022-05-04T01:36:09.456Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:36:10.639Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:42:35.214Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: user_1 dup key: { user: \"6271c4eacfa9427b885c8498\" }","timestamp":"2022-05-04T01:42:50.052Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:42:51.030Z"}
+{"level":"error","message":"E11000 duplicate key error collection: ecommerce.orders index: cart_1 dup key: { cart: null }","timestamp":"2022-05-04T01:51:58.070Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:51:59.685Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T01:52:38.462Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T01:52:41.096Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:52:54.508Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T01:53:20.801Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T01:53:25.055Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-04T01:53:26.723Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-04T01:53:43.939Z"}
