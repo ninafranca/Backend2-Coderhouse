@@ -1,4 +1,3 @@
-//INSTANCIO
 const socket = io();
 const productForm = document.querySelector("#product-form");
 

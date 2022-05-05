@@ -24,8 +24,6 @@ const mail = {
 try {
     const result = await transport.sendMail(mail);
     logger.info(`E-mail enviado: ${result}`);
-    //console.log(result);
 } catch(error) {
     logger.error("Error enviando e-mail");
-    console.log(error);
 }

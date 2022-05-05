@@ -17,8 +17,6 @@ const initializePassport = () => {
         }, async (req, username, password, done) => {
             let {email, name, address, age, phone} = req.body;
             try {
-                // const filename = req.file;
-                // if(!req.file) return done(null, false, {messages: "No se pudo subir la imágen"});
                 let user = await users.getByEmail(username);
                 console.log(user);
                 if(user.status === "success") {

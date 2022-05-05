@@ -1,6 +1,5 @@
 import express from "express";
 import {products} from "../daos/index.js";
-//import logger from "../public/js/logger.js";
 
 const router = express.Router();
 
