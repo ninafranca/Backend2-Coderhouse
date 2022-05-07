@@ -2,10 +2,11 @@ import __dirname from "./utils.js";
 import express from "express";
 import {chats, products, carts} from "./daos/index.js";
 import productsRouter from "./routes/products.js";
-import carritoRouter from "./routes/carrito.js";
+import cartsRouter from "./routes/carts.js";
 import chatsRouter from "./routes/chats.js";
+import sessionsRouter from "./routes/sessions.js"
 import usersRouter from "./routes/users.js";
-import ordersRouter from "./routes/orders.js"
+import ordersRouter from "./routes/orders.js";
 import {Server} from "socket.io";
 import {engine} from "express-handlebars";
 import cors from "cors";
@@ -38,8 +39,9 @@ app.use((req, res, next) => {
     next();
 })
 app.use("/api/productos", productsRouter);
-app.use("/api/carrito", carritoRouter);
+app.use("/api/carrito", cartsRouter);
 app.use("/api/chats", chatsRouter);
+app.use("/session", sessionsRouter);
 app.use("/users", usersRouter);
 app.use("/orders", ordersRouter);
 app.use(express.static(__dirname + "/public"));
@@ -64,22 +66,18 @@ app.set("views", __dirname + "/views");
 //Para Handlebars
 app.set("view engine", "handlebars");
 
-//APP.GET
-// app.get("/", (req, res) => {
-//     res.sendFile("index.html", {root: __dirname + "/public"});
-// })
 app.get("/", (req, res) => {
     res.sendFile("login.html", {root: __dirname + "/public/pages"});
 })
-app.get("/register", (req, res) => {
-    res.sendFile("register.html", {root: __dirname + "/public/pages"});
-})
-app.get("/logout", (req, res) => {
-    res.sendFile("logout.html", {root: __dirname + "/public/pages"});
-})
-app.get("/registration-error", (req, res) => {
-    res.sendFile("registration-error.html", {root: __dirname + "/public/pages"});
-})
+// app.get("/register", (req, res) => {
+//     res.sendFile("register.html", {root: __dirname + "/public/pages"});
+// })
+// app.get("/logout", (req, res) => {
+//     res.sendFile("logout.html", {root: __dirname + "/public/pages"});
+// })
+// app.get("/registration-error", (req, res) => {
+//     res.sendFile("registration-error.html", {root: __dirname + "/public/pages"});
+// })
 app.get("/chat", passportCall("jwt"), (req, res) => {
     let user = req.user.payload.toObject();
     let role = req.user.payload.toObject().role.toUpperCase();
@@ -209,10 +207,10 @@ app.post("/login", passportCall("login"), (req, res) => {
     });
     res.send({status: "scuccess", message: "Login exitoso"});
 })
-app.post("/logout", (req, res) => {
-    res.clearCookie("JWT_COOKIE");
-    res.sendFile("logout.html", {root: __dirname + "/public/pages"});
-})
+// app.post("/logout", (req, res) => {
+//     res.clearCookie("JWT_COOKIE");
+//     res.sendFile("logout.html", {root: __dirname + "/public/pages"});
+// })
 
 let messages = [];
 io.on("connection", async socket => {

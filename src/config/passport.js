@@ -61,13 +61,11 @@ const initializePassport = () => {
 
     passport.use("jwt", new JWTStrategy({jwtFromRequest: extractJwt.fromExtractors([cookieExtractor]), secretOrKey: envConfig.JWT_SECRET}, async (jwt_payload, done) => {
         try {
-            if(jwt_payload.role === "admin") return done(null, jwt_payload);
             console.log("jwt email: ", jwt_payload.payload.email);
             let user = await users.getByEmail(jwt_payload.payload.email);
             if(!user) return done(null, false, {message: "Usuario no encontrado"});
             return done(null, user);
         } catch(error) {
-            console.log("done");
             return done(error);
         }
     }))
