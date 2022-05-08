@@ -13,7 +13,7 @@ import cors from "cors";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import createLogger from "./public/js/logger.js";
-import {cwd, pid, version, title, platform, memoryUsage} from "process";
+//import {cwd, pid, version, title, platform, memoryUsage} from "process";
 import passport from "passport";
 import initializePassport from "./config/passport.js";
 import upload from "./services/upload.js";
@@ -111,19 +111,19 @@ app.get("/logged", passportCall("jwt"), (req, res) => {
         res.render("Logged", {user});
     }
 })
-app.get("/info", (req, res) => {
-    let info = {
-        arguments: process.argv,
-        cwd: cwd(),
-        pid: pid,
-        version: version,
-        title: title,
-        platform: platform,
-        memory: memoryUsage()
-    }
-    logger.info(info);
-    res.send(info);
-});
+// app.get("/info", (req, res) => {
+//     let info = {
+//         arguments: process.argv,
+//         cwd: cwd(),
+//         pid: pid,
+//         version: version,
+//         title: title,
+//         platform: platform,
+//         memory: memoryUsage()
+//     }
+//     logger.info(info);
+//     res.send(info);
+// });
 //HANDLEBARS
 app.get("/productos", passportCall("jwt"), (req, res) => {
     let user = req.user.payload.toObject();
