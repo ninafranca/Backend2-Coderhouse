@@ -187,23 +187,6 @@ app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
                         return
                     }
                 }, 500)
-                // setTimeout(() => {
-                //     let total = list.reduce((a, b) => {
-                //         return {price: a.price + b.price};
-                //     })
-                //     let repeatedProds = [...list.reduce( (mp, o) => {
-                //         if (!mp.has(o.title)) mp.set(o.title, { ...o, count: 0 });
-                //         mp.get(o.title).count++;
-                //         return mp;
-                //     }, new Map).values()];
-                //     const objects = {products: repeatedProds, user: user, cart: cartId, total: total};
-                //     if (result.status === "success") {
-                //         res.render("Cart", objects);
-                //     } else {
-                //         res.status(500).send(result);
-                //         return;
-                //     }
-                // }, 500)
             } else {
                 const objects = {user};
                 res.render("Cart", objects);
@@ -214,22 +197,22 @@ app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
 })
 
 //APP.POST
-app.post("/register", upload.single("avatar"), passportCall("register"), (req, res) => {
-    if(res.status === "error") {
-        res.send({status: "error", message: "Usuario ya existente"})
-    } else {
-        res.send({status: "success", message: "Usuario registrado con éxito"})
-    }
-})
-app.post("/login", passportCall("login"), (req, res) => {
-    let user = req.user;
-    let token = jwt.sign(user, envConfig.JWT_SECRET);
-    res.cookie("JWT_COOKIE", token, {
-        httpOnly: true,
-        maxAge: 1000*60*60
-    });
-    res.send({status: "scuccess", message: "Login exitoso"});
-})
+// app.post("/register", upload.single("avatar"), passportCall("register"), (req, res) => {
+//     if(res.status === "error") {
+//         res.send({status: "error", message: "Usuario ya existente"})
+//     } else {
+//         res.send({status: "success", message: "Usuario registrado con éxito"})
+//     }
+// })
+// app.post("/login", passportCall("login"), (req, res) => {
+//     let user = req.user;
+//     let token = jwt.sign(user, envConfig.JWT_SECRET);
+//     res.cookie("JWT_COOKIE", token, {
+//         httpOnly: true,
+//         maxAge: 1000*60*60
+//     });
+//     res.send({status: "scuccess", message: "Login exitoso"});
+// })
 // app.post("/logout", (req, res) => {
 //     res.clearCookie("JWT_COOKIE");
 //     res.sendFile("logout.html", {root: __dirname + "/public/pages"});

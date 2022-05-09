@@ -8,7 +8,7 @@ sendLogin.addEventListener("submit", (e) => {
         email: info.get("login-email"),
         password: info.get("login-password")
     }
-    fetch("/login", {
+    fetch("/session/login", {
         method: "POST",
         body: JSON.stringify(sendObject),
         headers: {"Content-Type":"application/json"}

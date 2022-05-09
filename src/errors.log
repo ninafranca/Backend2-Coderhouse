@@ -90,3 +90,7 @@
 {"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:59:44.892Z"}
 {"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:59:44.893Z"}
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T03:59:48.288Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T04:55:44.239Z"}
+{"level":"error","message":"error is not defined","timestamp":"2022-05-09T15:24:41.761Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T15:27:48.276Z"}
+{"level":"error","message":"error is not defined","timestamp":"2022-05-09T16:09:57.276Z"}

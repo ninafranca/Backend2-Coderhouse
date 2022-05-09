@@ -134,3 +134,11 @@
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T03:59:48.288Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /api/users/6224e2d2114267a0bdd005ff","timestamp":"2022-05-09T04:52:32.249Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /api/user/6224e2d2114267a0bdd005ff","timestamp":"2022-05-09T04:52:42.304Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /images/1651076156563-IMG-20210926-WA0061.png","timestamp":"2022-05-09T04:55:37.049Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T04:55:44.239Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-05-09T15:08:23.129Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /login","timestamp":"2022-05-09T15:08:31.839Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /login","timestamp":"2022-05-09T15:18:54.862Z"}
+{"level":"error","message":"error is not defined","timestamp":"2022-05-09T15:24:41.761Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T15:27:48.276Z"}
+{"level":"error","message":"error is not defined","timestamp":"2022-05-09T16:09:57.276Z"}

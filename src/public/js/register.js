@@ -4,7 +4,7 @@ registrationForm.addEventListener("submit", (e) => {
     e.preventDefault();
     if(document.getElementById("register-user-password").value === document.getElementById("register-user-repeat-password").value) {
         let info = new FormData(registrationForm);
-        fetch("/register", {
+        fetch("/session/register", {
             method: "POST",
             body: info
             // headers: {"Content-Type":"application/json"}
