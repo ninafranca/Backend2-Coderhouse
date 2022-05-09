@@ -5,13 +5,14 @@ import Carts from "./Carts.js";
 import Orders from "./Orders.js";
 import {envConfig} from "../config/envConfig.js";
 import createLogger from "../public/js/logger.js";
+import mongoose from "mongoose";
 
 const logger = createLogger(envConfig.NODE_ENV);
 
 export default class Dao {
 
     constructor(config) {
-        this.mongoose = mongoose.connect(config.url, {useNewUrlParser: true}).catch(error => {
+        this.mongoose = mongoose.connect(config.baseUrl, {useNewUrlParser: true}).catch(error => {
             logger.error(error.message);
             process.exit();
         })

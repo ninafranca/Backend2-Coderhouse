@@ -1,16 +1,18 @@
 import express from "express";
 import {carts} from "../daos/index.js";
+import cartsController from "../controllers/carts.controller.js";
 
 const router = express.Router();
 
 //GET
 // Devuelve todos los productos de un carrito
-router.get("/:cart_id/productos", (req, res)=>{
-    let cartId = req.params.cart_id;
-    carts.getCart(cartId).then(result => {
-        res.send(result);
-    })
-})
+router.get("/:cart_id/productos", cartsController.getCartById)
+// router.get("/:cart_id/productos", (req, res)=>{
+//     let cartId = req.params.cart_id;
+//     carts.getCart(cartId).then(result => {
+//         res.send(result);
+//     })
+// })
 // Devuelve el carrito de un usuario
 router.get("/:user_id", (req, res) => {
     let userId = req.params.user_id;
