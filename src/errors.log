@@ -7,3 +7,56 @@
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-08T22:46:42.693Z"}
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-08T22:47:13.654Z"}
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-08T22:48:29.262Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T01:31:29.113Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-09T01:59:28.809Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-09T02:04:03.381Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:11:29.817Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T02:12:27.187Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:13:34.652Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:19:28.740Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:19:49.287Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T02:26:28.167Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:28:00.537Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T02:29:50.540Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-09T02:36:10.367Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-09T02:36:14.708Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:40:12.365Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:40:18.281Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:40:19.177Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:40:20.196Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:40:21.422Z"}
+{"level":"error","message":"Error agregando producto a carrito","timestamp":"2022-05-09T02:40:29.310Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:40:38.930Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:40:40.496Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:40:40.734Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:40:41.627Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:40:43.267Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:41:02.014Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:41:09.951Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:41:13.829Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:41:20.130Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:41:23.467Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:42:17.379Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:42:18.583Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:42:20.062Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:42:20.921Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:42:27.189Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:42:31.357Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:42:34.080Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:44:34.362Z"}
+{"level":"error","message":"Cannot read property 'dao' of undefined","timestamp":"2022-05-09T02:45:03.941Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:45:08.844Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:45:12.984Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:45:16.243Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:45:16.244Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:45:44.212Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:45:44.215Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:45:49.592Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:45:49.592Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:45:55.520Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:45:55.520Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:49:16.381Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:49:16.384Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:50:06.480Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:50:06.481Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T02:50:30.770Z"}
