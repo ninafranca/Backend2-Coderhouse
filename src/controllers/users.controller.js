@@ -1,13 +1,19 @@
 import {usersService} from "../services/services.js";
 
+const getUsers = async(req,res) =>{
+    usersService.getUsers().then(result => {
+        res.send(result);
+    })
+}
 
-// const getCartById = async(req,res) =>{
-//     let id = req.params.cid;
-//     let cart = await cartService.getByWithPopulate({_id:id})
-//     console.log(cart);
-//     res.send({status:200,payload:cart})
-// }
+const getById = async(req,res) =>{
+    const userId = req.params.user_id
+    usersService.getById(userId).then(result => {
+        res.send(result);
+    })
+}
 
 export default {
-    getCartById
+    getUsers,
+    getById
 }

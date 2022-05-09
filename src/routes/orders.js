@@ -1,5 +1,6 @@
 import express from "express";
-import {orders, carts} from "../daos/index.js";
+import ordersController from "../controllers/orders.controller.js";
+//import {orders, carts} from "../daos/index.js";
 
 const router = express.Router();
 
@@ -14,24 +15,25 @@ const router = express.Router();
 
 //POST
 //Crea órden por id de carrito y usuario
-router.post("/cart/:cart_id/user/:user_id", (req, res) => {
-    let cartId = req.params.cart_id;
-    let userId = req.params.user_id;
-    carts.getCart(cartId).then(result => {
-        console.log(1);
-        let products = result.payload.products;
-        console.log(products);
-        orders.setOrder(products, userId).then(async result => {
-            console.log(2);
-            await carts.deleteCartById(cartId).then(result => {
-                console.log(3);
-                res.send(result);
-            });
-            console.log(4);
-            res.send(result);
-        })
-    })
-})
+router.post("/cart/:cart_id/user/:user_id", ordersController.setOrder)
+// router.post("/cart/:cart_id/user/:user_id", (req, res) => {
+//     let cartId = req.params.cart_id;
+//     let userId = req.params.user_id;
+//     carts.getCart(cartId).then(result => {
+//         console.log(1);
+//         let products = result.payload.products;
+//         console.log(products);
+//         orders.setOrder(products, userId).then(async result => {
+//             console.log(2);
+//             await carts.deleteCartById(cartId).then(result => {
+//                 console.log(3);
+//                 res.send(result);
+//             });
+//             console.log(4);
+//             res.send(result);
+//         })
+//     })
+// })
 
 //DELETE
 //Elimina un carrito

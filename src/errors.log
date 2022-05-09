@@ -60,3 +60,33 @@
 {"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:50:06.480Z"}
 {"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T02:50:06.481Z"}
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T02:50:30.770Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T03:43:51.780Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:44:42.359Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:44:45.248Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:49:23.599Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:49:30.796Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:49:34.804Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:49:34.805Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:50:00.160Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:50:00.160Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:50:05.585Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:50:05.586Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:50:05.586Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:50:08.542Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:50:08.543Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:50:08.544Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:50:08.544Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:50:12.158Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:50:12.159Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:50:12.159Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:50:12.159Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:56:43.182Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:56:43.185Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:56:43.186Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:56:43.186Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T03:56:47.662Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:59:36.459Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:59:40.898Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:59:44.892Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"{ _id: 'delete' }\" (type Object) at path \"_id\" for model \"products\"","timestamp":"2022-05-09T03:59:44.893Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T03:59:48.288Z"}
