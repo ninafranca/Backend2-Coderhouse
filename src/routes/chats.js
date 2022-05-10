@@ -1,6 +1,5 @@
 import express from "express";
 import chatsControllers from "../controllers/chats.controllers.js";
-import {chats} from "../daos/index.js";
 
 const router = express.Router();
 

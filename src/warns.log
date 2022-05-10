@@ -142,3 +142,52 @@
 {"level":"error","message":"error is not defined","timestamp":"2022-05-09T15:24:41.761Z"}
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T15:27:48.276Z"}
 {"level":"error","message":"error is not defined","timestamp":"2022-05-09T16:09:57.276Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /chat","timestamp":"2022-05-09T23:45:49.004Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"delete\" (type string) at path \"_id\" for model \"Products\"","timestamp":"2022-05-09T23:51:20.984Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"delete\" (type string) at path \"_id\" for model \"Products\"","timestamp":"2022-05-09T23:51:20.999Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"delete\" (type string) at path \"_id\" for model \"Products\"","timestamp":"2022-05-09T23:51:21.009Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T23:54:40.375Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T23:55:29.295Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T23:57:03.298Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T00:22:18.873Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /session/chat","timestamp":"2022-05-10T00:29:05.925Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /chat","timestamp":"2022-05-10T00:29:10.072Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /chat","timestamp":"2022-05-10T00:29:13.239Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /session/chat","timestamp":"2022-05-10T00:29:41.870Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T00:32:35.213Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T00:34:35.656Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/productos","timestamp":"2022-05-10T01:17:55.498Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/productos","timestamp":"2022-05-10T01:17:58.117Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/productos","timestamp":"2022-05-10T01:18:01.100Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/productos","timestamp":"2022-05-10T01:18:01.308Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/productos","timestamp":"2022-05-10T01:18:01.484Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/productos","timestamp":"2022-05-10T01:18:04.428Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/productos","timestamp":"2022-05-10T01:18:04.620Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/productos","timestamp":"2022-05-10T01:18:04.811Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/productos","timestamp":"2022-05-10T01:18:04.979Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T01:57:32.039Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /productos","timestamp":"2022-05-10T01:59:28.761Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /session/productos","timestamp":"2022-05-10T02:00:47.753Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /session/productos","timestamp":"2022-05-10T02:00:50.058Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /productos","timestamp":"2022-05-10T02:00:56.948Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /productos","timestamp":"2022-05-10T02:01:09.985Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /session/productos","timestamp":"2022-05-10T02:01:15.552Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /productos","timestamp":"2022-05-10T02:01:41.945Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /session/productos","timestamp":"2022-05-10T02:04:04.406Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /session/productos","timestamp":"2022-05-10T02:04:09.742Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /session/productos","timestamp":"2022-05-10T02:04:18.892Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /productos","timestamp":"2022-05-10T02:04:24.200Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /add-products-admin","timestamp":"2022-05-10T02:07:57.056Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /add-products-admin","timestamp":"2022-05-10T02:11:24.948Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /add-products-admin","timestamp":"2022-05-10T02:11:46.762Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /session/admin-info","timestamp":"2022-05-10T02:16:46.846Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /session/admin-info","timestamp":"2022-05-10T02:17:00.860Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /session/admin-info","timestamp":"2022-05-10T02:17:03.329Z"}
+{"level":"error","message":"error is not defined","timestamp":"2022-05-10T02:26:44.809Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T02:26:45.203Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T02:27:16.765Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T02:27:40.161Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T02:28:05.338Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T02:28:16.541Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /api/productos","timestamp":"2022-05-10T03:21:02.357Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /login","timestamp":"2022-05-10T03:28:47.207Z"}

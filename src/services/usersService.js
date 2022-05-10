@@ -3,7 +3,7 @@ import GenericQueries from "./genericQueries.js";
 import createLogger from "../public/js/logger.js";
 import {envConfig} from "../config/envConfig.js";
 
-const logger = createLogger(envConfig.NODE_ENV)
+const logger = createLogger(envConfig.NODE_ENV);
 
 export default class UsersService extends GenericQueries {
 
@@ -29,6 +29,22 @@ export default class UsersService extends GenericQueries {
     async getById(id) {
         try {
             const userFound = await this.dao.models[Users.model].findById({_id: id});
+            if(!userFound) {
+                logger.error(error.message);
+                return {status: "error", message: "No existe el usuario"};
+            } else {
+                return {status: "success", payload: userFound};
+            } 
+        } catch(error) {
+            logger.error(error.message);
+            return {status: "error", message: error.message};
+        }
+    }
+
+    async getByEmail(email) {
+        try {
+            const userFound = await this.dao.models[Users.model].findOne({email: email});
+            console.log(userFound);
             if(!userFound) {
                 logger.error(error.message);
                 return {status: "error", message: "No existe el usuario"};

@@ -13,17 +13,15 @@ const getById = async (req,res) =>{
     })
 }
 // CHEQUEAR EMIT//
-// const save = async (req, res) => {
-//     let prod = req.body;
-//     productsService.save(prod).then(result => {
-//         res.send(result);
-//         if(result.status === "success"){
-//             productsService.getAll().then(result => {
-//                 req.io.emit("deliverProducts", result);
-//             })
-//         }
-//     })
-// }
+const save = async (req, res) => {
+    let prod = req.body;
+    productsService.save(prod).then(result => {
+        res.send(result);
+        productsService.getAll().then(result => {
+            req.io.emit("deliverProducts", result);
+        })
+    })
+}
 
 const updateObject = async (req,res) =>{
     let body = req.body;
@@ -43,7 +41,7 @@ const deleteById = async (req, res) => {
 export default {
     getAll,
     getById,
-    //save,
+    save,
     updateObject,
     deleteById
 }

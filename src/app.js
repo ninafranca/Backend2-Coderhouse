@@ -1,6 +1,7 @@
 import __dirname from "./utils.js";
 import express from "express";
-import {chats, products, carts} from "./daos/index.js";
+import {chatsService, productsService, cartsService} from "./services/services.js";
+// import {chats, products, cartsService} from "./daos/index.js";
 import productsRouter from "./routes/products.js";
 import cartsRouter from "./routes/carts.js";
 import chatsRouter from "./routes/chats.js";
@@ -69,15 +70,6 @@ app.set("view engine", "handlebars");
 app.get("/", (req, res) => {
     res.sendFile("login.html", {root: __dirname + "/public/pages"});
 })
-// app.get("/register", (req, res) => {
-//     res.sendFile("register.html", {root: __dirname + "/public/pages"});
-// })
-// app.get("/logout", (req, res) => {
-//     res.sendFile("logout.html", {root: __dirname + "/public/pages"});
-// })
-// app.get("/registration-error", (req, res) => {
-//     res.sendFile("registration-error.html", {root: __dirname + "/public/pages"});
-// })
 app.get("/chat", passportCall("jwt"), (req, res) => {
     let user = req.user.payload.toObject();
     let role = req.user.payload.toObject().role.toUpperCase();
@@ -111,34 +103,31 @@ app.get("/logged", passportCall("jwt"), (req, res) => {
         res.render("Logged", {user});
     }
 })
-// app.get("/info", (req, res) => {
-//     let info = {
-//         arguments: process.argv,
-//         cwd: cwd(),
-//         pid: pid,
-//         version: version,
-//         title: title,
-//         platform: platform,
-//         memory: memoryUsage()
-//     }
-//     logger.info(info);
-//     res.send(info);
-// });
 //HANDLEBARS
 app.get("/productos", passportCall("jwt"), (req, res) => {
     let user = req.user.payload.toObject();
-    products.getAll().then(result => {
-        const products = result.payload;
-        const objects = {products: products.map(prod => prod.toObject()), user: user};
-        if (result.status === "success") {
-            res.render("Home", objects)
-        } else {res.status(500).send(result)}
+    productsService.getAll().then(result => {
+        const products = result;
+        const objects = {products: products, user: user};
+        res.render("Home", objects)
     })
 })
+// app.get("/productos", passportCall("jwt"), (req, res) => {
+//     let user = req.user.payload.toObject();
+//     productsService.getAll().then(result => {
+//         const products = result.payload;
+//         console.log(result);
+//         const objects = {products: products.map(prod => prod.toObject()), user: user};
+//         if (result.status === "success") {
+//             res.render("Home", objects)
+//         } else {res.status(500).send(result)}
+//     })
+// })
+
 app.get("/productos/:category", passportCall("jwt"), (req, res) => {
     let cat = req.params.category;
     let user = req.user.payload.toObject();
-    products.getByCategory(cat).then(result => {
+    productsService.getByCategory(cat).then(result => {
         const products = result.payload;
         const objects = {products: products.map(prod => prod.toObject()), user: user};
         if (result.status === "success") {
@@ -152,14 +141,14 @@ app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
     if (req.user.status !== "success") {
         location.replace("/login")
     } else {
-        carts.getCartByUserId(id).then(result => {
+        cartsService.getCartByUserId(id).then(result => {
             if(result.status === "success") {
                 const productsId = result.payload.products;
                 console.log(productsId);
                 const cartId = result.payload._id;
                 console.log("cartId ", cartId);
                 let list = []
-                productsId.map(p => products.getById(p).then(result => {
+                productsId.map(p => productsService.getById(p).then(result => {
                     if (result.status === "success") {
                         list.push(result.payload.toObject())
                     }
@@ -196,39 +185,33 @@ app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
     }
 })
 
-//APP.POST
-// app.post("/register", upload.single("avatar"), passportCall("register"), (req, res) => {
-//     if(res.status === "error") {
-//         res.send({status: "error", message: "Usuario ya existente"})
-//     } else {
-//         res.send({status: "success", message: "Usuario registrado con éxito"})
-//     }
-// })
-// app.post("/login", passportCall("login"), (req, res) => {
-//     let user = req.user;
-//     let token = jwt.sign(user, envConfig.JWT_SECRET);
-//     res.cookie("JWT_COOKIE", token, {
-//         httpOnly: true,
-//         maxAge: 1000*60*60
-//     });
-//     res.send({status: "scuccess", message: "Login exitoso"});
-// })
-// app.post("/logout", (req, res) => {
-//     res.clearCookie("JWT_COOKIE");
-//     res.sendFile("logout.html", {root: __dirname + "/public/pages"});
+// app.post("/api/productos", (req, res) => {
+//     let prod = req.body;
+//     productsService.save(prod).then(result => {
+//         res.send(result);
+//         if(result.status === "success"){
+//             console.log(0);
+//             productsService.getAll().then(result => {
+//                 console.log(1);
+//                 console.log("result: ", result);
+//                 console.log(2);
+//                 req.io.emit("deliverProducts", result);
+//             })
+//         }
+//     })
 // })
 
 let messages = [];
 io.on("connection", async socket => {
     console.log("Se conectó socket " + socket.id);
-    let prods = await products.getAll();
+    let prods = await productsService.getAll();
     socket.emit("deliverProducts", prods);
     socket.emit("messagelog", messages);
     socket.on("message", data => {
-        chats.saveMessage(data)
+        chatsService.saveMessage(data)
         .then(result => console.log(result))
         .then(() => {
-            chats.getAllMessages().then(result => {
+            chatsService.getAllMessages().then(result => {
             if (result.status === "success") {
                 io.emit("message", result.payload)
             }

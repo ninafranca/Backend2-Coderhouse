@@ -94,3 +94,19 @@
 {"level":"error","message":"error is not defined","timestamp":"2022-05-09T15:24:41.761Z"}
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T15:27:48.276Z"}
 {"level":"error","message":"error is not defined","timestamp":"2022-05-09T16:09:57.276Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"delete\" (type string) at path \"_id\" for model \"Products\"","timestamp":"2022-05-09T23:51:20.984Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"delete\" (type string) at path \"_id\" for model \"Products\"","timestamp":"2022-05-09T23:51:20.999Z"}
+{"level":"error","message":"Cast to ObjectId failed for value \"delete\" (type string) at path \"_id\" for model \"Products\"","timestamp":"2022-05-09T23:51:21.009Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T23:54:40.375Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T23:55:29.295Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-09T23:57:03.298Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T00:22:18.873Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T00:32:35.213Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T00:34:35.656Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T01:57:32.039Z"}
+{"level":"error","message":"error is not defined","timestamp":"2022-05-10T02:26:44.809Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T02:26:45.203Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T02:27:16.765Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T02:27:40.161Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T02:28:05.338Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T02:28:16.541Z"}

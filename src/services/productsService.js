@@ -3,7 +3,7 @@ import GenericQueries from "./genericQueries.js";
 import createLogger from "../public/js/logger.js";
 import {envConfig} from "../config/envConfig.js";
 
-const logger = createLogger(envConfig.NODE_ENV)
+const logger = createLogger(envConfig.NODE_ENV);
 
 export default class ProductsService extends GenericQueries {
 
@@ -36,20 +36,20 @@ export default class ProductsService extends GenericQueries {
         }
     }
 
-    // async save(product) {
-    //     try {
-    //         let exists = await this.dao.models[Products.model].findOne({title: {$eq: product.title}});
-    //         if(exists) {
-    //             logger.error(error.message);
-    //             return {status: "error", message: "El producto ya existe"}
-    //         }
-    //         let newProduct = await this.dao.models[Products.model].create(product);
-    //         return {status: "success", payload: newProduct}
-    //     } catch(error) {
-    //         logger.error(error.message);
-    //         return {status: "error", message: "Error al guardar producto"}
-    //     }
-    // }
+    async save(product) {
+        try {
+            let exists = await this.dao.models[Products.model].findOne({title: {$eq: product.title}});
+            if(exists) {
+                logger.error(error.message);
+                return {status: "error", message: "El producto ya existe"}
+            }
+            let newProduct = await this.dao.models[Products.model].create(product);
+            return {status: "success", payload: newProduct}
+        } catch(error) {
+            logger.error(error.message);
+            return {status: "error", message: "Error al guardar producto"}
+        }
+    }
 
     async updateObject(id, body) {
         try {
@@ -77,6 +77,21 @@ export default class ProductsService extends GenericQueries {
         } catch(error) {
             logger.error(error.message);
             return {status: "error", message: "Error borrando producto"};
+        }
+    }
+
+    async getByCategory(gender) {
+        try {
+            const category = await this.dao.models[Products.model].find({gender: gender});
+            if(!category) {
+                logger.error(error.message);
+                return {status: "error", message: "No existe la categoría"};
+            } else {
+                return {status: "success", payload: category};
+            } 
+        } catch(error) {
+            logger.error(error.message);
+            return {status: "error", message: error.message};
         }
     }
 

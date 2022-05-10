@@ -1,10 +1,10 @@
 import express from "express";
-import {carts} from "../daos/index.js";
 import __dirname from "../utils.js";
-import { passportCall } from "../middlewares/middlewares.js";
+import {passportCall} from "../middlewares/middlewares.js";
 import jwt from "jsonwebtoken";
 import {envConfig} from "../config/envConfig.js";
 import upload from "../services/upload.js";
+import {productsService} from "../services/services.js";
 
 const router = express.Router();
 
@@ -44,5 +44,37 @@ router.post("/logout", (req, res) => {
     res.clearCookie("JWT_COOKIE");
     res.sendFile("logout.html", {root: __dirname + "/public/pages"});
 })
+
+// router.get("/chat", passportCall("jwt"), (req, res) => {
+//     console.log(1);
+//     let user = req.user.payload.toObject();
+//     let role = req.user.payload.toObject().role.toUpperCase();
+//     console.log(user, role);
+//     if(role === "ADMIN") {
+//         res.render("ChatAdmin", {user});
+//     } else {
+//         res.render("Chat", {user});
+//     }
+// })
+
+// router.get("/productos", passportCall("jwt"), (req, res) => {
+//     let user = req.user.payload.toObject();
+//     productsService.getAll().then(result => {
+//         const products = result;
+//         const objects = {products: products, user: user};
+//         res.render("Home", objects)
+//     })
+// })
+
+// router.get("/add-products-admin", passportCall("jwt"), (req, res) => {
+//     let user = req.user.payload.toObject();
+//     console.log("userrrr", user);
+//     res.render("AddProductsAdmin", {user});
+// })
+
+// router.get("/admin-info", passportCall("jwt"), (req, res) => {
+//     let user = req.user.payload.toObject();
+//     res.render("AdminInfo", {user});
+// })
 
 export default router;
