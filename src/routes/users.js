@@ -1,35 +1,13 @@
 import express from "express";
-import {users} from "../daos/index.js";
+import usersController from "../controllers/users.controller.js";
 
 const router = express.Router();
 
 //GET
-router.get("/", (req, res) => {
-    users.getUsers().then(result => {
-        res.send(result);
-    })
-})
-router.get("/:user_id", (req, res) => {
-    const userId = req.params.user_id
-    users.getById(userId).then(result => {
-        res.send(result);
-    })
-})
+// Devuelve todos los usuarios
+router.get("/", usersController.getUsers)
 
-//POST
-// router.post("/:user_id", async (req, res) => {
-//     let userId = req.params.user_id;
-//     console.log(userId);
-//     let data = await users.saveCartToUser(userId)
-//     res.send({user_cart: data})
-// })
-
-// router.post("/:user_id", (req, res) => {
-//     let userId = req.params.user_id;
-//     let productId = req.params.product_id;
-//     carts.saveProdById(userId, cartId).then(result => {
-//         res.send(result);
-//     })
-// })
+// Devuelve un usuario
+router.get("/:user_id", usersController.getById)
 
 export default router;

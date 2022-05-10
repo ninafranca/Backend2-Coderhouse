@@ -30,7 +30,6 @@ chatForm.addEventListener("submit", (e) => {
     })
 })
 
-//CUANDO RECIBA EL WELCOME, CON LA DATA QUE ME HAYA PASADO, VOY A EJECUTAR X
 socket.on("messagelog", data => {
     let p = document.getElementById("log");
     let avatar = document.getElementById("user-avatar").innerHTML;

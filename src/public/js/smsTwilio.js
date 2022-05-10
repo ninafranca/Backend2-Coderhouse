@@ -13,7 +13,6 @@ try {
         to: process.env.TWILIO_VERIFIED
     });
     logger.info(`Sms enviado: ${message}`);
-    //console.log(message);
 } catch(error) {
     logger.error(`Fallo al enviar sms: ${error}`);
     console.log(error);

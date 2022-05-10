@@ -1,51 +1,25 @@
 import express from "express";
-import {products} from "../daos/index.js";
-//import logger from "../public/js/logger.js";
+import productsController from "../controllers/products.controller.js";
 
 const router = express.Router();
 
-//GETS
-router.get("/", (req, res) => {
-    products.getAll().then(result => {
-        res.send(result);
-    })
-})
+//GET
+// Devuelve todos los productos
+router.get("/", productsController.getAll)
 
-router.get("/:id", (req, res) => {
-    let id = req.params.id;
-    products.getById(id).then(result => {
-        res.send(result);
-    })
-})
+// Devuelve un producto
+router.get("/:id", productsController.getById)
 
 //POST
-router.post("/", (req, res) => {
-    let prod = req.body;
-    products.save(prod).then(result => {
-        res.send(result);
-        if(result.status === "success"){
-            products.getAll().then(result => {
-                req.io.emit("deliverProducts", result);
-            })
-        }
-    })
-})
+// Guarda un producto
+router.post("/", productsController.save)
 
 //PUT
-router.put("/:id", (req, res) => {
-    let body = req.body;
-    let id = req.params.id;
-    products.updateObject(id, body).then(result => {
-        res.send(result);
-    })
-})
+// Actualiza un producto
+router.put("/:id", productsController.updateObject)
 
 //DELETE
-router.delete("/:id", (req, res) => {
-    let id = req.params.id;
-    products.deleteById(id).then(result => {
-        res.send(result);
-    })
-})
+// Borra un producto
+router.delete("/:id", productsController.deleteById)
 
 export default router;

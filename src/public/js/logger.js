@@ -3,7 +3,7 @@ const {combine, timestamp, json} = winston.format;
 import __dirname from "../../utils.js";
 
 const createLogger = (env) => {
-    //if (env === "dev") {
+    if (env === "dev") {
         return winston.createLogger({
             format: combine(
                 timestamp(),
@@ -15,17 +15,17 @@ const createLogger = (env) => {
                 new winston.transports.Console({level: "info"})
             ]
         })
-    // } else {
-    //     return winston.createLogger({
-    //         format: combine(
-    //             timestamp(),
-    //             json()
-    //         ),
-    //         transports: [
-    //             new winston.transports.Console({level: "all"})
-    //         ]
-    //     })
-    // }
+    } else {
+        return winston.createLogger({
+            format: combine(
+                timestamp(),
+                json()
+            ),
+            transports: [
+                new winston.transports.Console({level: "all"})
+            ]
+        })
+    }
 }
 
 export default createLogger;

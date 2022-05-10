@@ -68,20 +68,6 @@ export default class MongoContenedor {
         }
     }
 
-    // async deleteById(id) {
-    //     try {
-    //         let product = await this.collection.findOne(id)
-    //         if(product) {
-    //             await product.update("delete");
-    //             return {status: "success", message: "Producto borrado exitosamente"};
-    //         }
-    //         logger.error(error.message);
-    //         return {status: "error", message: "Producto inexistente"};
-    //     } catch(error) {
-    //         logger.error(error.message);
-    //         return {status: "error", message: "Error borrando producto"};
-    //     }
-    //}
     async deleteById(id) {
         try {
             let product = await this.collection.findById(id)
@@ -129,18 +115,10 @@ export default class MongoContenedor {
         }
     }
 
-    //Agrego validación si ya existe el producto en el carrito
     async saveProdById(productId, id) {
         try {
             await this.collection.findByIdAndUpdate(id, {$push: {products: productId }});
             return {status: "success", message: "El producto se ha guardado exitosamente"};
-            // let cartProduct = await this.collection.findById(id).findOne({products: productId});
-            // if(cartProduct) {
-            //     return {status: "error", message: "Producto ya existente en carrito"}
-            // } else {
-            //     await this.collection.findByIdAndUpdate(id, {$push: {products: productId }});
-            //     return {status: "success", message: "El producto se ha guardado exitosamente"};
-            // }
         } catch(error) {
             logger.error(error.message);
             return {status: "error", message: "Error al añadir producto"};
@@ -164,8 +142,6 @@ export default class MongoContenedor {
 
     async getCartByUserId(userId) {
         try {
-            // const user = await users.findById(userId);
-            // if(!user) return {status: "error", message: "El usuario no existe"};
             let cart = await this.collection.findOne({user: userId});
             if(!cart) {
                 logger.error(error.message);
@@ -180,30 +156,6 @@ export default class MongoContenedor {
         }
     }
 
-    // async getCartByUserIdAddProd(userId, productId) {
-    //     try {
-    //         const userCart = await this.collection.findOne({user: userId});
-    //         console.log(userCart);
-    //         if(!userCart) {
-    //             let createCart = await this.collection.create({products: {id: productId, quantity: 1}, user: userId});
-    //             let cart = await this.collection.findOne({user: userId});
-    //             return {status: "success", payload: cart}
-    //         } else {
-    //             let productInCart = cart.findOne({products: {id: productId}});
-    //             console.log(productInCart);
-    //             if(productInCart) {
-    //                 let addProdToCart = await userCart.findOneAndUpdate({products: {id: productId}}, {$inc: {products: {quantity: +1}}});
-    //                 return {status: "success", payload: addProdToCart};
-    //             } else {
-    //                 let addNewProdToCart = await userCart.insertOne({products: {id: productId, quantity: 1}});
-    //                 return {status: "success", payload: cart};                  
-    //             }
-    //         }
-    //     } catch(error) {
-    //         //logger.error(error.message);
-    //         return {status: "error", message: error.message};
-    //     }
-    // }
     async getCartByUserIdAddProd(userId, productId) {
         try {
             const userCart = await this.collection.findOne({user: userId});

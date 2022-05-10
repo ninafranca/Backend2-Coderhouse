@@ -2,7 +2,7 @@ let user = {}
 
 fetch('/logged')
     .then(result => {
-        if (result.status !== 200) location.replace("/login");
+        if (result.status !== 200) location.replace("/session/login");
         return result.json();
     })
     .then(response => {

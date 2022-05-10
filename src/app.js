@@ -1,24 +1,22 @@
 import __dirname from "./utils.js";
 import express from "express";
-import {chats, users, products, carts} from "./daos/index.js";
-import productsRouter from "./routes/products.js";
-import carritoRouter from "./routes/carrito.js";
-import chatsRouter from "./routes/chats.js";
-import usersRouter from "./routes/users.js";
-import ordersRouter from "./routes/orders.js"
 import {Server} from "socket.io";
 import {engine} from "express-handlebars";
+import passport from "passport";
 import cors from "cors";
+import cookieParser from "cookie-parser";
+import {chatsService, productsService, cartsService} from "./services/services.js";
+import productsRouter from "./routes/products.js";
+import cartsRouter from "./routes/carts.js";
+import chatsRouter from "./routes/chats.js";
+import sessionsRouter from "./routes/sessions.js"
+import usersRouter from "./routes/users.js";
+import ordersRouter from "./routes/orders.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import createLogger from "./public/js/logger.js";
-import {cwd, pid, version, title, platform, memoryUsage} from "process";
-import passport from "passport";
 import initializePassport from "./config/passport.js";
-import upload from "./services/upload.js";
 import {passportCall} from "./middlewares/middlewares.js";
-import jwt from "jsonwebtoken";
-import cookieParser from "cookie-parser";
 import {envConfig} from "./config/envConfig.js";
 
 const app = express();
@@ -38,8 +36,9 @@ app.use((req, res, next) => {
     next();
 })
 app.use("/api/productos", productsRouter);
-app.use("/api/carrito", carritoRouter);
+app.use("/api/carrito", cartsRouter);
 app.use("/api/chats", chatsRouter);
+app.use("/session", sessionsRouter);
 app.use("/users", usersRouter);
 app.use("/orders", ordersRouter);
 app.use(express.static(__dirname + "/public"));
@@ -56,29 +55,14 @@ app.use(passport.session());
 app.use(cookieParser())
 
 //APP.ENGINE
-//Para Handlebars
 app.engine("handlebars", engine());
 
 //APP.SET
 app.set("views", __dirname + "/views");
-//Para Handlebars
 app.set("view engine", "handlebars");
 
-//APP.GET
-// app.get("/", (req, res) => {
-//     res.sendFile("index.html", {root: __dirname + "/public"});
-// })
 app.get("/", (req, res) => {
     res.sendFile("login.html", {root: __dirname + "/public/pages"});
-})
-app.get("/register", (req, res) => {
-    res.sendFile("register.html", {root: __dirname + "/public/pages"});
-})
-app.get("/logout", (req, res) => {
-    res.sendFile("logout.html", {root: __dirname + "/public/pages"});
-})
-app.get("/registration-error", (req, res) => {
-    res.sendFile("registration-error.html", {root: __dirname + "/public/pages"});
 })
 app.get("/chat", passportCall("jwt"), (req, res) => {
     let user = req.user.payload.toObject();
@@ -113,34 +97,20 @@ app.get("/logged", passportCall("jwt"), (req, res) => {
         res.render("Logged", {user});
     }
 })
-app.get("/info", (req, res) => {
-    let info = {
-        arguments: process.argv,
-        cwd: cwd(),
-        pid: pid,
-        version: version,
-        title: title,
-        platform: platform,
-        memory: memoryUsage()
-    }
-    logger.info(info);
-    res.send(info);
-});
 //HANDLEBARS
 app.get("/productos", passportCall("jwt"), (req, res) => {
     let user = req.user.payload.toObject();
-    products.getAll().then(result => {
-        const products = result.payload;
-        const objects = {products: products.map(prod => prod.toObject()), user: user};
-        if (result.status === "success") {
-            res.render("Home", objects)
-        } else {res.status(500).send(result)}
+    productsService.getAll().then(result => {
+        const products = result;
+        const objects = {products: products, user: user};
+        res.render("Home", objects)
     })
 })
+
 app.get("/productos/:category", passportCall("jwt"), (req, res) => {
     let cat = req.params.category;
     let user = req.user.payload.toObject();
-    products.getByCategory(cat).then(result => {
+    productsService.getByCategory(cat).then(result => {
         const products = result.payload;
         const objects = {products: products.map(prod => prod.toObject()), user: user};
         if (result.status === "success") {
@@ -148,120 +118,67 @@ app.get("/productos/:category", passportCall("jwt"), (req, res) => {
         } else {res.status(500).send(result)}
     })
 })
-// app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
-//     let id = req.params.id_user;
-//     let user = req.user.payload.toObject();
-//     if (req.user.status !== "success") {
-//         location.replace("/login")
-//     } else {
-//         carts.getCartByUserId(id).then(result => {
-//             if(result.status === "success") {
-//                 const productsId = result.payload;
-//                 const cartId = result.cartId;
-//                 let list = []
-//                 productsId.map(p => products.getById(p).then(result => {
-//                     if (result.status === "success") {
-//                         list.push(result.payload.toObject())
-//                     }
-//                     }))
-//                 setTimeout(() => {
-//                     let total = list.reduce((a, b) => {
-//                         return {price: a.price + b.price};
-//                     })
-//                     const objects = {products: list, user: user, cart: cartId, total: total};
-//                     if (result.status === "success") {
-//                         res.render("Cart", objects);
-//                     } else {res.status(500).send(result)}
-//                 }, 3000)
-//             } else {
-//                 const objects = {user};
-//                 res.render("Cart", objects);
-//             }
-//         })
-//     }
-// })
 app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
     let id = req.params.id_user;
     let user = req.user.payload.toObject();
     if (req.user.status !== "success") {
         location.replace("/login")
     } else {
-        carts.getCartByUserId(id).then(result => {
+        cartsService.getCartByUserId(id).then(result => {
             if(result.status === "success") {
                 const productsId = result.payload.products;
                 console.log(productsId);
                 const cartId = result.payload._id;
                 console.log("cartId ", cartId);
                 let list = []
-                productsId.map(p => products.getById(p).then(result => {
+                productsId.map(p => productsService.getById(p).then(result => {
                     if (result.status === "success") {
                         list.push(result.payload.toObject())
                     }
-                    }))
+                }))
                 setTimeout(() => {
-                    let total = list.reduce((a, b) => {
-                        return {price: a.price + b.price};
-                    })
-                    console.log(list);
-                    // let repeatedProds = [...list.reduce( (mp, o) => {
-                    //     if (!mp.has(o.title)) mp.set(o.title, { ...o, count: 0 });
-                    //     mp.get(o.title).count++;
-                    //     return mp;
-                    // }, new Map).values()];
-                                        let repeatedProds = [...list.reduce( (mp, o) => {
-                        if (!mp.has(o.title)) mp.set(o.title, { ...o, count: 0 });
-                        mp.get(o.title).count++;
-                        return mp;
-                    }, new Map).values()];
-                    const objects = {products: repeatedProds, user: user, cart: cartId, total: total};
-                    if (result.status === "success") {
+                    if(list.length > 0) {
+                        let total = list.reduce((a, b) => {
+                            return {price: a.price + b.price};
+                        })
+                        let repeatedProds = [...list.reduce( (mp, o) => {
+                            if (!mp.has(o.title)) mp.set(o.title, { ...o, count: 0 });
+                            mp.get(o.title).count++;
+                            return mp;
+                        }, new Map).values()];
+                        const objects = {products: repeatedProds, user: user, cart: cartId, total: total};
+                        if (result.status === "success") {
+                            res.render("Cart", objects);
+                        } else {
+                            res.status(500).send(result);
+                            return;
+                        }
+                    } else {
+                        const objects = {user};
                         res.render("Cart", objects);
-                    } else {res.status(500).send(result)}
+                        return
+                    }
                 }, 500)
             } else {
                 const objects = {user};
                 res.render("Cart", objects);
+                return
             }
         })
     }
 })
 
-//APP.POST
-app.post("/register", upload.single("avatar"), passportCall("register"), (req, res) => {
-    //const file = req.file;
-    if(res.status === "error") {
-        res.send({status: "error", message: "Usuario ya existente"})
-    } else {
-        res.send({status: "success", message: "Usuario registrado con éxito"})
-    }
-})
-app.post("/login", passportCall("login"), (req, res) => {
-    let user = req.user;
-    let token = jwt.sign(user, envConfig.JWT_SECRET);
-    res.cookie("JWT_COOKIE", token, {
-        httpOnly: true,
-        maxAge: 1000*60*60
-    });
-    res.send({status: "scuccess", message: "Login exitoso"});
-})
-app.post("/logout", (req, res) => {
-    res.clearCookie("JWT_COOKIE");
-    res.sendFile("logout.html", {root: __dirname + "/public/pages"});
-})
-
 let messages = [];
-//CON EL SERVIDOR, CUANDO SE CONECTE EL SOCKET, HACE LO SIGUIENTE => {}
 io.on("connection", async socket => {
     console.log("Se conectó socket " + socket.id);
-    let prods = await products.getAll();
+    let prods = await productsService.getAll();
     socket.emit("deliverProducts", prods);
     socket.emit("messagelog", messages);
     socket.on("message", data => {
-        //ACA INSERTAR MÉTODOS PARA MENSAJES
-        chats.saveMessage(data)
+        chatsService.saveMessage(data)
         .then(result => console.log(result))
         .then(() => {
-            chats.getAllMessages().then(result => {
+            chatsService.getAllMessages().then(result => {
             if (result.status === "success") {
                 io.emit("message", result.payload)
             }
