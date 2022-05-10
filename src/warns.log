@@ -191,3 +191,5 @@
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T02:28:16.541Z"}
 {"level":"warn","message":"Método POST no disponible en ruta /api/productos","timestamp":"2022-05-10T03:21:02.357Z"}
 {"level":"warn","message":"Método GET no disponible en ruta /login","timestamp":"2022-05-10T03:28:47.207Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T03:41:08.600Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T03:41:53.890Z"}

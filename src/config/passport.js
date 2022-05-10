@@ -5,6 +5,7 @@ import {validPassword, hashPassword, cookieExtractor} from "../utils.js";
 import {usersService} from "../services/services.js";
 import jwt from "passport-jwt";
 import {envConfig} from "./envConfig.js";
+//PONER LOGGERS DE ERROR!//
 
 const localStrategy = local.Strategy
 const JWTStrategy = jwt.Strategy;
@@ -52,8 +53,8 @@ const initializePassport = () => {
         try {
             let user = await usersService.getByEmail(username);
             if(!user) return done(null, false, {message: "Usuario no encontrado"});
-            console.log("user", user);
-            //if(!validPassword(user, password)) return done(null, false, {message: "Contraseña inválida"});
+            let userPass = user.payload.password;
+            if(validPassword(password, userPass) === false) return done(null, false, {status: "error", message: "Contraseña inválida"});
             return done(null, user)
         } catch(error) {
             done(error)
