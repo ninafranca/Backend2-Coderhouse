@@ -38,13 +38,12 @@ const initializePassport = () => {
                     if(result) {
                         done(null, result);
                     } else {
-                        
-                        console.log("result " + JSON.stringify(result));
+                        logger.error("Usuario ya existente");
                         return {status: "error", message: "Ya existe mismo usuario"}
                     }
                 }
             } catch(error) {
-                logger.error(error.message);
+                logger.error("Error registrando usuario");
                 return done(error)
             }
         }
@@ -58,7 +57,7 @@ const initializePassport = () => {
             if(validPassword(password, userPass) === false) return done(null, false, {status: "error", message: "Contraseña inválida"});
             return done(null, user)
         } catch(error) {
-            logger.error(error.message);
+            logger.error("Error en login de usuario");
             return done(error)
         }
     }))
@@ -69,7 +68,7 @@ const initializePassport = () => {
             if(!user) return done(null, false, {message: "Usuario no encontrado"});
             return done(null, user);
         } catch(error) {
-            logger.error(error.message);
+            logger.error("Error de autenticación de usuario");
             return done(error);
         }
     }))

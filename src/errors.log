@@ -118,3 +118,11 @@
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T18:07:44.572Z"}
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T18:10:26.274Z"}
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T18:10:40.984Z"}
+{"level":"error","message":"error is not defined","timestamp":"2022-05-10T18:14:52.133Z"}
+{"level":"error","message":"usersService.saveUser is not a function","timestamp":"2022-05-10T18:14:52.234Z"}
+{"level":"error","message":"error is not defined","timestamp":"2022-05-10T18:15:12.790Z"}
+{"level":"error","message":"usersService.saveUser is not a function","timestamp":"2022-05-10T18:15:12.891Z"}
+{"level":"error","message":"error is not defined","timestamp":"2022-05-10T18:15:45.966Z"}
+{"level":"error","message":"usersService.saveUser is not a function","timestamp":"2022-05-10T18:15:46.067Z"}
+{"level":"error","message":"error is not defined","timestamp":"2022-05-10T18:18:13.723Z"}
+{"level":"error","message":"error is not defined","timestamp":"2022-05-10T18:19:56.494Z"}

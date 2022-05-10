@@ -37,7 +37,7 @@ export default class UsersService extends GenericQueries {
             } 
         } catch(error) {
             logger.error(error.message);
-            return {status: "error", message: error.message};
+            return {status: "error", message: "Error recibiendo usuario por id"};
         }
     }
 
@@ -53,7 +53,34 @@ export default class UsersService extends GenericQueries {
             } 
         } catch(error) {
             logger.error(error.message);
-            return {status: "error", message: error.message};
+            return {status: "error", message: "Error buscando usuario por email"};
+        }
+    }
+
+    async saveUser(user) {
+        try {
+            const readFile = await this.dao.models[Users.model].find();
+            if(!readFile) {
+                await this.dao.models[Users.model].create();
+                let exists = await this.dao.models[Users.model].findOne({email: user.email});
+                if(exists) {
+                    logger.error(error.message);
+                    return {status: "error", message: "Ya existe usuario con mismo e-mail"};
+                }
+                await this.dao.models[Users.model].create(user);
+            } else {
+                let exists = await this.dao.models[Users.model].findOne({email: user.email});
+                if(exists) {
+                    logger.error(error.message);
+                    return {status: "error", message: "Ya existe usuario con mismo e-mail"};
+                } else {
+                    let newUser = await this.dao.models[Users.model].create(user);
+                    return {status: "success", payload: newUser};
+                }
+            }
+        } catch(error) {
+            logger.error(error.message);
+            return {status: "error", message: "Error guardando usuario"};
         }
     }
 

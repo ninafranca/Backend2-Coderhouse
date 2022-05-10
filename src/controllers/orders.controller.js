@@ -15,6 +15,22 @@ const setOrder = async (req, res) => {
     })
 }
 
+const getOrder = async (req, res) => {
+    let orderId = req.params.order_id;
+    ordersService.getOrder(orderId).then(result => {
+        res.send(result);
+    })
+}
+
+const deleteOrder = async (req, res) => {
+    let orderId = req.params.order_id;
+    ordersService.deleteOrder(orderId).then(result => {
+        res.send(result);
+    })
+}
+
 export default {
-    setOrder
+    setOrder,
+    getOrder,
+    deleteOrder
 }
