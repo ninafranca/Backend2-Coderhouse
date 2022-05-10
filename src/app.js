@@ -1,26 +1,22 @@
 import __dirname from "./utils.js";
 import express from "express";
+import {Server} from "socket.io";
+import {engine} from "express-handlebars";
+import passport from "passport";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 import {chatsService, productsService, cartsService} from "./services/services.js";
-// import {chats, products, cartsService} from "./daos/index.js";
 import productsRouter from "./routes/products.js";
 import cartsRouter from "./routes/carts.js";
 import chatsRouter from "./routes/chats.js";
 import sessionsRouter from "./routes/sessions.js"
 import usersRouter from "./routes/users.js";
 import ordersRouter from "./routes/orders.js";
-import {Server} from "socket.io";
-import {engine} from "express-handlebars";
-import cors from "cors";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import createLogger from "./public/js/logger.js";
-//import {cwd, pid, version, title, platform, memoryUsage} from "process";
-import passport from "passport";
 import initializePassport from "./config/passport.js";
-import upload from "./services/upload.js";
 import {passportCall} from "./middlewares/middlewares.js";
-import jwt from "jsonwebtoken";
-import cookieParser from "cookie-parser";
 import {envConfig} from "./config/envConfig.js";
 
 const app = express();
@@ -59,12 +55,10 @@ app.use(passport.session());
 app.use(cookieParser())
 
 //APP.ENGINE
-//Para Handlebars
 app.engine("handlebars", engine());
 
 //APP.SET
 app.set("views", __dirname + "/views");
-//Para Handlebars
 app.set("view engine", "handlebars");
 
 app.get("/", (req, res) => {
@@ -112,17 +106,6 @@ app.get("/productos", passportCall("jwt"), (req, res) => {
         res.render("Home", objects)
     })
 })
-// app.get("/productos", passportCall("jwt"), (req, res) => {
-//     let user = req.user.payload.toObject();
-//     productsService.getAll().then(result => {
-//         const products = result.payload;
-//         console.log(result);
-//         const objects = {products: products.map(prod => prod.toObject()), user: user};
-//         if (result.status === "success") {
-//             res.render("Home", objects)
-//         } else {res.status(500).send(result)}
-//     })
-// })
 
 app.get("/productos/:category", passportCall("jwt"), (req, res) => {
     let cat = req.params.category;
@@ -184,22 +167,6 @@ app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
         })
     }
 })
-
-// app.post("/api/productos", (req, res) => {
-//     let prod = req.body;
-//     productsService.save(prod).then(result => {
-//         res.send(result);
-//         if(result.status === "success"){
-//             console.log(0);
-//             productsService.getAll().then(result => {
-//                 console.log(1);
-//                 console.log("result: ", result);
-//                 console.log(2);
-//                 req.io.emit("deliverProducts", result);
-//             })
-//         }
-//     })
-// })
 
 let messages = [];
 io.on("connection", async socket => {

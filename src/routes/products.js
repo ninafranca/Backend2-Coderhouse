@@ -1,51 +1,25 @@
 import express from "express";
 import productsController from "../controllers/products.controller.js";
-//import {products} from "../daos/index.js";
-import {productsService} from "../services/services.js";
 
 const router = express.Router();
 
-//GETS
+//GET
+// Devuelve todos los productos
 router.get("/", productsController.getAll)
 
+// Devuelve un producto
 router.get("/:id", productsController.getById)
 
 //POST
-// router.post("/", (req, res) => {
-//     let prod = req.body;
-//     console.log(prod);
-//     productsService.save(prod).then(result => {
-//         console.log(result);
-//         res.send(result);
-//         if(result.status === "success"){
-//             console.log(0);
-//             productsService.getAll().then(result => {
-//                 console.log(1);
-//                 console.log("result: ", result);
-//                 console.log(2);
-//                 req.io.emit("deliverProducts", result);
-//             })
-//         }
-//     })
-// })
+// Guarda un producto
 router.post("/", productsController.save)
-// router.post("/", (req, res) => {
-//     let prod = req.body;
-//     console.log(prod);
-//     productsService.save(prod).then(result => {
-//         res.send(result);
-//         if(result.status === "success"){
-//             productsService.getAll().then(result => {
-//                 req.io.emit("deliverProducts", result);
-//             })
-//         }
-//     })
-// })
 
 //PUT
+// Actualiza un producto
 router.put("/:id", productsController.updateObject)
 
 //DELETE
+// Borra un producto
 router.delete("/:id", productsController.deleteById)
 
 export default router;
