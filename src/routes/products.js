@@ -3,22 +3,22 @@ import productsController from "../controllers/products.controller.js";
 
 const router = express.Router();
 
-//GET
+// GET //
 // Devuelve todos los productos
 router.get("/", productsController.getAll)
 
 // Devuelve un producto
 router.get("/:id", productsController.getById)
 
-//POST
+// POST //
 // Guarda un producto
 router.post("/", productsController.save)
 
-//PUT
+// PUT //
 // Actualiza un producto
 router.put("/:id", productsController.updateObject)
 
-//DELETE
+// DELETE //
 // Borra un producto
 router.delete("/:id", productsController.deleteById)
 

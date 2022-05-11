@@ -5,7 +5,6 @@ import {usersService} from "../services/services.js";
 import jwt from "passport-jwt";
 import {envConfig} from "./envConfig.js";
 import createLogger from "../public/js/logger.js";
-//PONER LOGGERS DE ERROR!//
 
 const logger = createLogger(envConfig.NODE_ENV);
 const localStrategy = local.Strategy

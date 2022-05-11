@@ -12,7 +12,7 @@ const getById = async (req,res) =>{
         res.send(result);
     })
 }
-// CHEQUEAR EMIT//
+
 const save = async (req, res) => {
     let prod = req.body;
     productsService.save(prod).then(result => {

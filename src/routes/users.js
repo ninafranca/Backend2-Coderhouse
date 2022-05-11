@@ -3,7 +3,7 @@ import usersController from "../controllers/users.controller.js";
 
 const router = express.Router();
 
-//GET
+// GET //
 // Devuelve todos los usuarios
 router.get("/", usersController.getUsers)
 

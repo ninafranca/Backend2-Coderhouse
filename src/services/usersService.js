@@ -44,7 +44,6 @@ export default class UsersService extends GenericQueries {
     async getByEmail(email) {
         try {
             const userFound = await this.dao.models[Users.model].findOne({email: email});
-            console.log(userFound);
             if(!userFound) {
                 logger.error(error.message);
                 return {status: "error", message: "No existe el usuario"};

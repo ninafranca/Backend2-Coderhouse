@@ -1,5 +1,5 @@
 function logout () {
-    fetch(`/logout`, {
+    fetch(`/session/logout`, {
         method: "POST",
         headers: {"Content-type": "application/json"}
     })

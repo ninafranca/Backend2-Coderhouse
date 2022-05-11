@@ -7,11 +7,9 @@ registrationForm.addEventListener("submit", (e) => {
         fetch("/session/register", {
             method: "POST",
             body: info
-            // headers: {"Content-Type":"application/json"}
         })
         .then(result => {
             if (result.status === 200) {
-                console.log("success");
                 location.replace("/");
             } else {
                 location.replace("../pages/registration-error.html");

@@ -22,7 +22,7 @@ export default class CartsService extends GenericQueries {
             }
         } catch(error) {
             logger.error(error.message);
-            return {status: "error", message: "Error al obtener carrito" + error};
+            return {status: "error", message: "Error al obtener carrito"};
         }
     }
 
@@ -31,7 +31,7 @@ export default class CartsService extends GenericQueries {
             let cart = await this.dao.models[Carts.model].findOne({user: userId});
             if(!cart) {
                 logger.error(error.message);
-                return {status: "error", message: "El usuario no cuenta con carrito existente"};
+                return {status: "error", message: "El usuario no cuenta con carrito"};
             }
             let productsId = cart.products;
             let cartId = cart._id;
@@ -45,7 +45,6 @@ export default class CartsService extends GenericQueries {
     async newCart(userId) {
         try {
             const hasCart = this.dao.models[Carts.model].findOne({user: userId});
-            console.log(hasCart);
             if(hasCart) {
                 logger.error(error.message);
                 return {status: "error", message: "Usuario ya tiene carrito"};
@@ -61,7 +60,6 @@ export default class CartsService extends GenericQueries {
     async getCartByUserIdAddProd(userId, productId) {
         try {
             const userCart = await this.dao.models[Carts.model].findOne({user: userId});
-            console.log(userCart);
             if(!userCart) {
                 let createCart = await this.dao.models[Carts.model].create({products: productId, user: userId});;
                 let cart = await this.dao.models[Carts.model].findOne({user: userId});
@@ -72,7 +70,7 @@ export default class CartsService extends GenericQueries {
             }
         } catch(error) {
             logger.error(`Error agregando producto a carrito`);
-            return {status: "error", message: error.message};
+            return {status: "error", message: "Error agregando producto a carrito de usuario"};
         }
     }
 
@@ -143,7 +141,7 @@ export default class CartsService extends GenericQueries {
             }
         } catch(error) {
             logger.error(error.message);
-            return {status: 'error', message: error.message}
+            return {status: 'error', message: "Error borrando producto de carrito"}
         }
     }
 

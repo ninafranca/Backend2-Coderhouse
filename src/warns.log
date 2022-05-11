@@ -228,3 +228,17 @@
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T00:23:56.882Z"}
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T00:26:49.969Z"}
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T00:27:59.723Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logout","timestamp":"2022-05-11T01:46:39.392Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logout","timestamp":"2022-05-11T01:46:41.368Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logout","timestamp":"2022-05-11T01:49:25.772Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logout","timestamp":"2022-05-11T01:49:28.062Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T01:51:07.256Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T01:51:27.801Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /chat","timestamp":"2022-05-11T01:58:00.939Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /logout","timestamp":"2022-05-11T02:08:56.638Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /chat","timestamp":"2022-05-11T02:23:59.561Z"}
+{"level":"error","message":"error is not defined","timestamp":"2022-05-11T02:28:42.469Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T02:28:52.283Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T02:41:18.201Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T02:41:30.850Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T02:42:56.955Z"}

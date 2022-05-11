@@ -91,7 +91,7 @@ export default class ProductsServices extends GenericQueries {
             } 
         } catch(error) {
             logger.error(error.message);
-            return {status: "error", message: error.message};
+            return {status: "error", message: "Error encontrando categoría"};
         }
     }
 

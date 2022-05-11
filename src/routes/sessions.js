@@ -52,10 +52,8 @@ router.post("/logout", (req, res) => {
 })
 
 // router.get("/chat", passportCall("jwt"), (req, res) => {
-//     console.log(1);
 //     let user = req.user.payload.toObject();
 //     let role = req.user.payload.toObject().role.toUpperCase();
-//     console.log(user, role);
 //     if(role === "ADMIN") {
 //         res.render("ChatAdmin", {user});
 //     } else {
