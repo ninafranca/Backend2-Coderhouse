@@ -242,3 +242,6 @@
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T02:41:18.201Z"}
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T02:41:30.850Z"}
 {"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T02:42:56.955Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /favicon.ico","timestamp":"2022-05-11T17:25:56.349Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T17:27:54.366Z"}
+{"level":"error","message":"error is not defined","timestamp":"2022-05-11T17:29:21.118Z"}
