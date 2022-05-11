@@ -1,4 +1,5 @@
 export default class GenericQueries {
+
     constructor(dao,model) {
         this.dao = dao,
         this.model = model
@@ -33,4 +34,5 @@ export default class GenericQueries {
     getProductsByCartId = async (id) => {
         return this.dao.getProductsByCartId(id, this.model)
     }
-} 
+
+}

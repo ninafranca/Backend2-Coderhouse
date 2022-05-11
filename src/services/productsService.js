@@ -5,7 +5,7 @@ import {envConfig} from "../config/envConfig.js";
 
 const logger = createLogger(envConfig.NODE_ENV);
 
-export default class ProductsService extends GenericQueries {
+export default class ProductsServices extends GenericQueries {
 
     constructor(dao) {
         super(dao, Products.model)

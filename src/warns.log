@@ -208,3 +208,23 @@
 {"level":"error","message":"usersService.saveUser is not a function","timestamp":"2022-05-10T18:15:46.067Z"}
 {"level":"error","message":"error is not defined","timestamp":"2022-05-10T18:18:13.723Z"}
 {"level":"error","message":"error is not defined","timestamp":"2022-05-10T18:19:56.494Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /logged","timestamp":"2022-05-10T19:12:35.606Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /logged","timestamp":"2022-05-10T19:14:20.468Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /logged","timestamp":"2022-05-10T19:14:20.489Z"}
+{"level":"warn","message":"Método GET no disponible en ruta /logged","timestamp":"2022-05-10T19:16:42.721Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T23:13:28.547Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-10T23:14:33.431Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logout","timestamp":"2022-05-10T23:16:40.341Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logout","timestamp":"2022-05-10T23:16:43.340Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logout","timestamp":"2022-05-10T23:16:45.881Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logout","timestamp":"2022-05-10T23:16:59.892Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logout","timestamp":"2022-05-10T23:17:02.235Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logout","timestamp":"2022-05-10T23:17:03.563Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logout","timestamp":"2022-05-10T23:17:05.402Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logout","timestamp":"2022-05-10T23:17:10.920Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logout","timestamp":"2022-05-10T23:17:12.475Z"}
+{"level":"warn","message":"Método POST no disponible en ruta /logout","timestamp":"2022-05-10T23:17:18.577Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T00:23:47.318Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T00:23:56.882Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T00:26:49.969Z"}
+{"level":"error","message":"Error encontrando carrito de usuario","timestamp":"2022-05-11T00:27:59.723Z"}

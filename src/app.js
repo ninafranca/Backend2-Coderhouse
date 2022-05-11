@@ -88,12 +88,9 @@ app.get("/user-info", passportCall("jwt"), (req, res) => {
 app.get("/logged", passportCall("jwt"), (req, res) => {
     let user = req.user.payload.toObject();
     let role = req.user.payload.toObject().role.toUpperCase();
-    console.log(role);
     if(role === "ADMIN") {
-        console.log("logged: ", user);
         res.render("LoggedAdmin", {user});
     } else {
-        console.log("logged: ", user);
         res.render("Logged", {user});
     }
 })
@@ -127,9 +124,7 @@ app.get("/carrito/:id_user", passportCall("jwt"), (req, res) => {
         cartsService.getCartByUserId(id).then(result => {
             if(result.status === "success") {
                 const productsId = result.payload.products;
-                console.log(productsId);
                 const cartId = result.payload._id;
-                console.log("cartId ", cartId);
                 let list = []
                 productsId.map(p => productsService.getById(p).then(result => {
                     if (result.status === "success") {

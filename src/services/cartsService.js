@@ -88,15 +88,11 @@ export default class CartsService extends GenericQueries {
 
     async deleteCartById(cartId) {
         try {
-            console.log(0);
             let cart = await this.dao.models[Carts.model].findById(cartId);
-            console.log(1);
             if (!cart) {
-                console.log(2);
                 logger.error(error.message);
                 return {status: "error", message: "El carrito no existe"};
             } else {
-                console.log(3);
                 await this.dao.models[Carts.model].findByIdAndDelete(cartId);
                 return {status: "success", message: "El carrito se ha borrado exitosamente"};
             }
